@@ -1,0 +1,67 @@
+<section class="features" id="features">
+  <!-- Background Shapes -->
+  <div class="features__bg-shapes">
+    <div class="shape shape--1"></div>
+    <div class="shape shape--2"></div>
+    <div class="shape shape--3"></div>
+  </div>
+
+  <div class="features__container">
+    <!-- Header -->
+    <div class="features__header">
+      <h2 class="features__title">Die ultimative <span class="text-gradient">Lern-App</span></h2>
+      <p class="features__subtitle">
+        Entdecke alle Funktionen, die mind.slam zur perfekten Begleitung für dein Studium machen.
+      </p>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="features__grid">
+      <!-- Left Features -->
+      <div class="features__column features__column--left">
+        @for (feature of featuresLeft; track feature.title; let i = $index) {
+          <div class="feature-card feature-card--left" #featureCard [style.animation-delay]="(i * 0.2) + 's'">
+            <div class="feature-card__icon">
+              {{ feature.icon }}
+            </div>
+            <div class="feature-card__content">
+              <h3 class="feature-card__title">{{ feature.title }}</h3>
+              <p class="feature-card__description">{{ feature.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Center Phone -->
+      <div class="features__phone">
+        <div class="phone-mockup phone-mockup--features">
+          <div class="phone-mockup__frame">
+            <div class="phone-mockup__button phone-mockup__button--power"></div>
+            <div class="phone-mockup__button phone-mockup__button--volume-up"></div>
+            <div class="phone-mockup__button phone-mockup__button--volume-down"></div>
+            <div class="phone-mockup__button phone-mockup__button--action"></div>
+            <div class="phone-mockup__screen">
+              <img [src]="featuredScreenshot" alt="mind.slam App" class="phone-mockup__screenshot active">
+            </div>
+          </div>
+          <div class="phone-mockup__shadow"></div>
+        </div>
+      </div>
+
+      <!-- Right Features -->
+      <div class="features__column features__column--right">
+        @for (feature of featuresRight; track feature.title; let i = $index) {
+          <div class="feature-card feature-card--right" #featureCard [style.animation-delay]="(i * 0.2 + 0.1) + 's'">
+            <div class="feature-card__icon">
+              {{ feature.icon }}
+            </div>
+            <div class="feature-card__content">
+              <h3 class="feature-card__title">{{ feature.title }}</h3>
+              <p class="feature-card__description">{{ feature.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,92 @@
+// mind.slam Color Palette
+// ========================
+
+// Primary Colors
+$primary-green: #7CCD7C;
+$primary-green-dark: #35D07E;
+
+// Secondary Colors
+$secondary-blue: #194F82;
+$secondary-blue-dark: #0B67BC;
+
+// Tertiary Colors
+$tertiary-gold: #FFD700;
+
+// Text Colors
+$text-primary: #161C24;
+$text-secondary: #636F81;
+$text-muted: #919BAB;
+$text-light: #FFFFFF;
+$text-light-secondary: #919BAB;
+
+// Background Colors
+$bg-light: #F0F5F9;
+$bg-white: #FFFFFF;
+$bg-dark: #161C24;
+$bg-dark-secondary: #212B36;
+
+// Status Colors
+$success: #27AE52;
+$warning: #FC964D;
+$error: #BC0B0E;
+
+// Gradients
+$gradient-hero: linear-gradient(135deg, $secondary-blue 0%, $secondary-blue-dark 50%, $primary-green-dark 100%);
+$gradient-button: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 100%);
+
+// Typography
+$font-headline: 'Outfit', sans-serif;
+$font-body: 'Manrope', sans-serif;
+
+// Font Sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 2rem;      // 32px
+$font-size-4xl: 2.5rem;    // 40px
+$font-size-5xl: 3rem;      // 48px
+$font-size-6xl: 3.5rem;    // 56px
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+$spacing-4xl: 6rem;
+
+// Border Radius
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-lg: 1rem;
+$radius-xl: 1.5rem;
+$radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+$shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.2);
+
+// Transitions
+$transition-fast: 0.15s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Z-Index
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-fixed: 300;
+$z-modal: 400;
+$z-tooltip: 500;

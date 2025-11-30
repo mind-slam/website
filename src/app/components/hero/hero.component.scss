@@ -1,0 +1,417 @@
+@import '../../../styles/variables';
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 80px;
+
+  // Animated Background
+  &__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  &__gradient {
+    position: absolute;
+    inset: 0;
+    // Hellerer, freundlicherer Gradient
+    background: linear-gradient(
+      135deg,
+      #2a6db5 0%,        // Helleres Blau
+      #3578bf 25%,       // Mittleres Blau
+      #4a9a7c 60%,       // Blau-Grün Übergang
+      #6bc08a 85%,       // Helles Grün
+      $primary-green 100% // Mind.slam Grün
+    );
+    background-size: 300% 300%;
+    animation: gradientShift 20s ease infinite;
+  }
+
+  // Particles
+  &__particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba($text-light, 0.1);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+
+    @for $i from 1 through 12 {
+      &--#{$i} {
+        left: random(100) * 1%;
+        top: random(100) * 1%;
+        width: (random(15) + 5) * 1px;
+        height: (random(15) + 5) * 1px;
+        animation-delay: random(5) * -1s;
+        animation-duration: (random(10) + 5) * 1s;
+        opacity: random(5) * 0.1 + 0.1;
+      }
+    }
+  }
+
+  // Floating Elements
+  &__floating-elements {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .floating-element {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.6;
+    animation: float 6s ease-in-out infinite;
+
+    &--1 {
+      top: 15%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    &--2 {
+      top: 25%;
+      right: 15%;
+      animation-delay: -1s;
+      font-size: 2.5rem;
+    }
+
+    &--3 {
+      bottom: 30%;
+      left: 5%;
+      animation-delay: -2s;
+    }
+
+    &--4 {
+      top: 60%;
+      right: 8%;
+      animation-delay: -3s;
+    }
+
+    &--5 {
+      bottom: 15%;
+      right: 20%;
+      animation-delay: -4s;
+      font-size: 1.8rem;
+    }
+  }
+
+  // Container
+  &__container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-3xl;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $spacing-xl $spacing-lg;
+
+    @media (min-width: $breakpoint-lg) {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: $spacing-4xl;
+    }
+  }
+
+  // Content
+  &__content {
+    text-align: center;
+    max-width: 600px;
+
+    @media (min-width: $breakpoint-lg) {
+      text-align: left;
+      flex: 1;
+    }
+  }
+
+  &__title {
+    color: $text-light;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-4xl;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: $font-size-6xl;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, $primary-green 0%, $tertiary-gold 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    color: rgba($text-light, 0.9);
+    font-size: $font-size-lg;
+    line-height: 1.7;
+    margin-bottom: $spacing-xl;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  // Store Buttons
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    @media (min-width: $breakpoint-md) {
+      flex-direction: row;
+    }
+  }
+
+  // Phone Section
+  &__phone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  // Indicators
+  &__indicators {
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba($text-light, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all $transition-base;
+
+    &:hover {
+      background: rgba($text-light, 0.5);
+    }
+
+    &.active {
+      background: $primary-green;
+      transform: scale(1.2);
+    }
+  }
+
+  // Scroll Indicator
+  &__scroll-indicator {
+    position: absolute;
+    bottom: $spacing-xl;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    color: rgba($text-light, 0.6);
+    font-size: $font-size-sm;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .scroll-mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid rgba($text-light, 0.6);
+    border-radius: 12px;
+    position: relative;
+
+    &__wheel {
+      width: 4px;
+      height: 8px;
+      background: rgba($text-light, 0.6);
+      border-radius: 2px;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scrollWheel 2s ease-in-out infinite;
+    }
+  }
+}
+
+// Store Button Styles
+.store-button {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  background: rgba($bg-dark, 0.9);
+  color: $text-light;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-lg;
+  transition: all $transition-base;
+  border: 1px solid rgba($text-light, 0.1);
+
+  &:hover {
+    background: $bg-dark;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  &__icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    opacity: 0.8;
+  }
+
+  &__store {
+    font-family: $font-headline;
+    font-weight: 600;
+    font-size: $font-size-base;
+  }
+}
+
+// iPhone 16 Mockup - Clean design without notch overlay
+.phone-mockup {
+  position: relative;
+  width: 280px;
+
+  @media (min-width: $breakpoint-lg) {
+    width: 320px;
+  }
+
+  &__frame {
+    position: relative;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-radius: 55px;
+    padding: 10px;
+    box-shadow:
+      // Inner highlight
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      // Titanium frame effect
+      0 0 0 1px #3a3a3a,
+      0 0 0 3px #1a1a1a,
+      0 0 0 4px #2a2a2a,
+      // Drop shadow
+      0 30px 60px rgba(0, 0, 0, 0.5),
+      0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  // Side Buttons
+  &__button {
+    position: absolute;
+    background: linear-gradient(90deg, #2a2a2a, #3a3a3a, #2a2a2a);
+    border-radius: 2px;
+
+    // Power button (right side)
+    &--power {
+      right: -3px;
+      top: 140px;
+      width: 3px;
+      height: 80px;
+    }
+
+    // Volume Up (left side)
+    &--volume-up {
+      left: -3px;
+      top: 120px;
+      width: 3px;
+      height: 40px;
+    }
+
+    // Volume Down (left side)
+    &--volume-down {
+      left: -3px;
+      top: 170px;
+      width: 3px;
+      height: 40px;
+    }
+
+    // Action button (left side, above volume)
+    &--action {
+      left: -3px;
+      top: 85px;
+      width: 3px;
+      height: 25px;
+    }
+  }
+
+  &__screen {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 19.5;
+    background: #000;
+    border-radius: 47px;
+    overflow: hidden;
+    // Subtle inner border for screen
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  &__screenshot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  &__reflection {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 40%
+    );
+    border-radius: 55px;
+    pointer-events: none;
+  }
+
+  &__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(
+      circle,
+      rgba($primary-green, 0.2) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: -1;
+    animation: pulse 4s ease-in-out infinite;
+  }
+}
+
+// Additional Animations
+@keyframes scrollWheel {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) translateY(10px);
+    opacity: 0.3;
+  }
+}

@@ -1,0 +1,120 @@
+@import '../../../styles/variables';
+
+.testimonials {
+  position: relative;
+  padding: $spacing-4xl 0;
+  background: linear-gradient(135deg, rgba($secondary-blue, 0.08) 0%, rgba($secondary-blue, 0.12) 100%);
+  overflow: hidden;
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+  }
+
+  // Testimonials Grid
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+
+    @media (min-width: $breakpoint-sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+// Testimonial Card
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: $spacing-xl;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+  }
+
+  &__image-wrapper {
+    margin-bottom: $spacing-lg;
+  }
+
+  &__image-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8e8e8, #d0d0d0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 4px 15px rgba(0, 0, 0, 0.1),
+      inset 0 -3px 10px rgba(0, 0, 0, 0.05);
+    transition: transform $transition-base, box-shadow $transition-base;
+    overflow: hidden;
+  }
+
+  &:hover &__image-placeholder {
+    transform: scale(1.05);
+    box-shadow:
+      0 8px 25px rgba(0, 0, 0, 0.15),
+      inset 0 -3px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  &__initials {
+    font-family: $font-headline;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #a0a0a0;
+    text-transform: uppercase;
+  }
+
+  &__image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__quote-icon {
+    color: $secondary-blue;
+    margin-bottom: $spacing-md;
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__name {
+    font-family: $font-headline;
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $secondary-blue;
+    margin-bottom: $spacing-md;
+  }
+
+  &__quote {
+    color: $text-secondary;
+    font-size: $font-size-base;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 280px;
+  }
+}

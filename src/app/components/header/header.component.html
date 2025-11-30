@@ -1,0 +1,49 @@
+<header class="header" [class.scrolled]="isScrolled">
+  <div class="header__container">
+    <!-- Logo -->
+    <a href="#" class="header__logo">
+      <!-- Weißes Logo für farbigen Hintergrund -->
+      <img src="mind.slam_Logo_Mark_white.png" alt="mind.slam Logo" class="header__logo-icon header__logo-icon--white">
+      <!-- Farbiges Logo für weißen Hintergrund nach Scroll -->
+      <img src="mind.slam_App-Icon_v1.0.png" alt="mind.slam Logo" class="header__logo-icon header__logo-icon--color">
+      <span class="header__logo-text">mind.slam</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="header__nav">
+      @for (item of navItems; track item.label) {
+        <a [href]="item.href" class="header__nav-link">{{ item.label }}</a>
+      }
+    </nav>
+
+    <!-- CTA Button -->
+    <a href="#download" class="btn btn-primary header__cta">
+      App herunterladen
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button
+      class="header__mobile-toggle"
+      (click)="toggleMobileMenu()"
+      [class.active]="isMobileMenuOpen"
+      aria-label="Menü öffnen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="header__mobile-menu" [class.open]="isMobileMenuOpen">
+    <nav class="header__mobile-nav">
+      @for (item of navItems; track item.label) {
+        <a [href]="item.href" class="header__mobile-link" (click)="closeMobileMenu()">
+          {{ item.label }}
+        </a>
+      }
+      <a href="#download" class="btn btn-primary" (click)="closeMobileMenu()">
+        App herunterladen
+      </a>
+    </nav>
+  </div>
+</header>

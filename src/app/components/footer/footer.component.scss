@@ -1,0 +1,210 @@
+@import '../../../styles/variables';
+
+.footer {
+  background: $bg-white;
+  padding: 60px 0 40px;
+  border-top: 4px solid;
+  border-image: linear-gradient(90deg, $secondary-blue, $primary-green) 1;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  // Logo Section
+  &__top {
+    margin-bottom: 24px;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__logo-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+
+  &__logo-text {
+    font-family: $font-headline;
+    font-size: 28px;
+    font-weight: 700;
+    color: $text-primary;
+
+    .text-gradient {
+      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  // Divider
+  &__divider {
+    height: 1px;
+    background: linear-gradient(90deg, rgba($primary-green, 0.3), rgba($secondary-blue, 0.3), transparent);
+    margin-bottom: 40px;
+  }
+
+  // Main Grid - 4 Columns
+  &__main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Columns
+  &__column {
+    &--headquarter {
+      padding-right: 20px;
+    }
+  }
+
+  &__heading {
+    font-family: $font-headline;
+    font-size: 14px;
+    font-weight: 700;
+    color: $text-primary;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 20px 0;
+  }
+
+  // Contact Info
+  &__contact {
+    color: $text-secondary;
+    font-size: 16px;
+    line-height: 1.8;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__contact-link {
+    color: $text-secondary;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $primary-green;
+    }
+  }
+
+  // Links Lists
+  &__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: $text-secondary;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $primary-green;
+      }
+    }
+  }
+
+  // Social Icons Row
+  &__social-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  &__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: $text-primary;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      color: $primary-green;
+      transform: scale(1.15);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Legal Links
+  &__legal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+
+    a {
+      color: $text-primary;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $primary-green;
+      }
+    }
+  }
+
+  // Bottom Section
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba($text-primary, 0.1);
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+  }
+
+  &__copyright {
+    color: $text-muted;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &__made {
+    color: $text-muted;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &__heart {
+    color: #e25555;
+  }
+}

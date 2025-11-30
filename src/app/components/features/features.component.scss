@@ -1,0 +1,280 @@
+@import '../../../styles/variables';
+
+.features {
+  position: relative;
+  padding: $spacing-4xl 0;
+  background: $bg-light;
+  overflow: hidden;
+
+  // Background Shapes
+  &__bg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+
+    &--1 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, rgba($primary-green, 0.1), transparent);
+      top: -100px;
+      right: -100px;
+    }
+
+    &--2 {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, rgba($secondary-blue, 0.08), transparent);
+      bottom: -50px;
+      left: -50px;
+    }
+
+    &--3 {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, rgba($tertiary-gold, 0.1), transparent);
+      top: 50%;
+      left: 10%;
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+  }
+
+  // Header
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-4xl;
+  }
+
+  &__title {
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+
+    .text-gradient {
+      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  // Features Grid
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-3xl;
+
+    @media (min-width: $breakpoint-lg) {
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: $spacing-2xl;
+    }
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2xl;
+    flex: 1;
+    max-width: 350px;
+
+    &--left {
+      @media (min-width: $breakpoint-lg) {
+        align-items: flex-end;
+        text-align: right;
+
+        .feature-card {
+          flex-direction: row-reverse;
+        }
+
+        .feature-card__content {
+          text-align: right;
+        }
+      }
+    }
+
+    &--right {
+      @media (min-width: $breakpoint-lg) {
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+  }
+
+  // Center Phone
+  &__phone {
+    order: -1;
+
+    @media (min-width: $breakpoint-lg) {
+      order: 0;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// Feature Card
+.feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-lg;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // Fallback für Intersection Observer
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+  }
+
+  &__icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $bg-white;
+    border-radius: $radius-xl;
+    font-size: 1.75rem;
+    box-shadow: $shadow-md;
+    flex-shrink: 0;
+    transition: transform $transition-base, box-shadow $transition-base;
+  }
+
+  &:hover &__icon {
+    transform: scale(1.1);
+    box-shadow: $shadow-lg;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__title {
+    font-family: $font-headline;
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__description {
+    color: $text-secondary;
+    font-size: $font-size-base;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+// Phone Mockup für Features Section
+.phone-mockup--features {
+  width: 260px;
+
+  @media (min-width: $breakpoint-lg) {
+    width: 300px;
+  }
+
+  .phone-mockup__frame {
+    position: relative;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+    border-radius: 50px;
+    padding: 10px;
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      0 0 0 1px #3a3a3a,
+      0 0 0 3px #1a1a1a,
+      0 0 0 4px #2a2a2a,
+      0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .phone-mockup__button {
+    position: absolute;
+    background: linear-gradient(90deg, #2a2a2a, #3a3a3a, #2a2a2a);
+    border-radius: 2px;
+
+    &--power {
+      right: -3px;
+      top: 120px;
+      width: 3px;
+      height: 70px;
+    }
+
+    &--volume-up {
+      left: -3px;
+      top: 100px;
+      width: 3px;
+      height: 35px;
+    }
+
+    &--volume-down {
+      left: -3px;
+      top: 145px;
+      width: 3px;
+      height: 35px;
+    }
+
+    &--action {
+      left: -3px;
+      top: 70px;
+      width: 3px;
+      height: 22px;
+    }
+  }
+
+  .phone-mockup__screen {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 19.5;
+    background: #000;
+    border-radius: 42px;
+    overflow: hidden;
+  }
+
+  .phone-mockup__screenshot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  .phone-mockup__shadow {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 30px;
+    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.2) 0%, transparent 70%);
+  }
+}

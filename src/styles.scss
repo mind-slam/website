@@ -1,0 +1,210 @@
+// Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+
+// Variables
+@import 'styles/variables';
+
+// Reset & Base Styles
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-body;
+  font-size: $font-size-base;
+  line-height: 1.6;
+  color: $text-primary;
+  background-color: $bg-white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-headline;
+  font-weight: 700;
+  line-height: 1.2;
+  color: $text-primary;
+}
+
+h1 {
+  font-size: $font-size-5xl;
+
+  @media (min-width: $breakpoint-lg) {
+    font-size: $font-size-6xl;
+  }
+}
+
+h2 {
+  font-size: $font-size-3xl;
+
+  @media (min-width: $breakpoint-lg) {
+    font-size: $font-size-4xl;
+  }
+}
+
+h3 {
+  font-size: $font-size-2xl;
+}
+
+p {
+  margin-bottom: $spacing-md;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color $transition-fast;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+// Utility Classes
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.text-gradient {
+  background: $gradient-button;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Button Styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-xl;
+  font-family: $font-headline;
+  font-weight: 600;
+  font-size: $font-size-base;
+  border-radius: $radius-full;
+  transition: all $transition-base;
+
+  &-primary {
+    background: $gradient-button;
+    color: $text-light;
+    box-shadow: $shadow-md;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+  }
+
+  &-secondary {
+    background: transparent;
+    color: $text-primary;
+    border: 2px solid $primary-green;
+
+    &:hover {
+      background: $primary-green;
+      color: $text-light;
+    }
+  }
+
+  &-store {
+    background: $bg-dark;
+    color: $text-light;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $radius-lg;
+
+    &:hover {
+      background: lighten($bg-dark, 10%);
+      transform: translateY(-2px);
+    }
+
+    img {
+      height: 40px;
+    }
+  }
+}
+
+// Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Floating animation class
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}

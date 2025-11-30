@@ -1,0 +1,211 @@
+@import '../../../styles/variables';
+
+.team {
+  position: relative;
+  padding: $spacing-4xl 0;
+  background: $bg-white;
+  overflow: hidden;
+
+  // Background Shapes
+  &__bg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.4;
+
+    &--1 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, rgba($primary-green, 0.08), transparent);
+      top: -200px;
+      left: -150px;
+    }
+
+    &--2 {
+      width: 350px;
+      height: 350px;
+      background: linear-gradient(135deg, rgba($secondary-blue, 0.06), transparent);
+      bottom: -100px;
+      right: -100px;
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+  }
+
+  // Header
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-4xl;
+  }
+
+  &__title {
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+
+    .text-gradient {
+      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  // Team Grid
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+// Team Card
+.team-card {
+  background: $bg-white;
+  border-radius: $radius-xl;
+  padding: $spacing-2xl;
+  text-align: center;
+  box-shadow: $shadow-md;
+  border: 1px solid rgba($text-primary, 0.05);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow $transition-base;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+  }
+
+  &:hover {
+    box-shadow: $shadow-xl;
+    transform: translateY(-5px);
+
+    .team-card__image-placeholder {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba($primary-green, 0.3);
+    }
+  }
+
+  &__image-wrapper {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__image-placeholder {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $secondary-blue, $primary-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba($secondary-blue, 0.3);
+    transition: transform $transition-base, box-shadow $transition-base;
+  }
+
+  &__initials {
+    font-family: $font-headline;
+    font-size: 3rem;
+    font-weight: 700;
+    color: $bg-white;
+    text-transform: uppercase;
+  }
+
+  &__image {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba($secondary-blue, 0.3);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__name {
+    font-family: $font-headline;
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__role {
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $primary-green;
+    margin-bottom: $spacing-md;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__description {
+    color: $text-secondary;
+    font-size: $font-size-base;
+    line-height: 1.7;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__social {
+    display: flex;
+    gap: $spacing-sm;
+  }
+
+  &__social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $bg-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-secondary;
+    transition: background $transition-base, color $transition-base, transform $transition-base;
+
+    &:hover {
+      background: $secondary-blue;
+      color: $bg-white;
+      transform: scale(1.1);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
