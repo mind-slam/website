@@ -56,6 +56,19 @@
 
     <!-- iPhone 16 Mockup -->
     <div class="hero__phone fade-in-up" style="animation-delay: 0.6s">
+      <!-- Chalk Arrow Label -->
+      <div class="hero__chalk-label" [attr.data-position]="screenshots[currentScreenshotIndex].position">
+        <div class="hero__chalk-content">
+          <span class="hero__chalk-text">{{ screenshots[currentScreenshotIndex].label }}</span>
+          <svg class="hero__chalk-arrow" viewBox="0 0 80 40" fill="none">
+            <!-- Horizontaler handgezeichneter Pfeil nach rechts -->
+            <path d="M5 20 Q20 18, 35 20 Q50 22, 60 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <!-- Pfeilspitze -->
+            <path d="M55 12 L68 20 L55 28" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+      </div>
+
       <div class="phone-mockup">
         <!-- iPhone 16 Frame (clean, no notch overlay) -->
         <div class="phone-mockup__frame">
@@ -67,10 +80,10 @@
 
           <!-- Screen with Screenshots -->
           <div class="phone-mockup__screen">
-            @for (screenshot of screenshots; track screenshot; let i = $index) {
+            @for (screenshot of screenshots; track screenshot.image; let i = $index) {
               <img
-                [src]="screenshot"
-                [alt]="'mind.slam Screenshot ' + (i + 1)"
+                [src]="screenshot.image"
+                [alt]="screenshot.label"
                 class="phone-mockup__screenshot"
                 [class.active]="i === currentScreenshotIndex"
               >
@@ -87,12 +100,12 @@
 
       <!-- Screenshot Indicators -->
       <div class="hero__indicators">
-        @for (screenshot of screenshots; track screenshot; let i = $index) {
+        @for (screenshot of screenshots; track screenshot.image; let i = $index) {
           <button
             class="indicator"
             [class.active]="i === currentScreenshotIndex"
             (click)="goToScreenshot(i)"
-            [attr.aria-label]="'Screenshot ' + (i + 1)">
+            [attr.aria-label]="screenshot.label">
           </button>
         }
       </div>

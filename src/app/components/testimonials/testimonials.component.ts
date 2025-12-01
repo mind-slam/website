@@ -20,22 +20,22 @@ export class TestimonialsComponent implements OnInit {
   testimonials: Testimonial[] = [
     {
       name: 'Laura M.',
-      image: 'placeholder-1.jpg',
+      image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face',
       quote: 'Mit mind.slam macht Lernen endlich Spaß! Die Quiz-Duelle mit meinen Kommilitonen motivieren mich, am Ball zu bleiben.'
     },
     {
       name: 'Tobias K.',
-      image: 'placeholder-2.jpg',
+      image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=face',
       quote: 'Die KI-generierten Quizfragen aus meinen Vorlesungsskripten sind ein Game-Changer. So effizient habe ich noch nie gelernt!'
     },
     {
       name: 'Sophie H.',
-      image: 'placeholder-3.jpg',
+      image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop&crop=face',
       quote: 'Der Arena-Modus ist super spannend! Es fühlt sich gar nicht wie Lernen an, obwohl ich so viel dabei mitnehme.'
     },
     {
       name: 'Max B.',
-      image: 'placeholder-4.jpg',
+      image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face',
       quote: 'Endlich eine Lern-App, die versteht, wie wir Studenten ticken. Das Klassenzimmer-Feature ist genial für Lerngruppen!'
     }
   ];

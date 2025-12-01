@@ -143,12 +143,19 @@
   }
 
   &__image {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center top;
     box-shadow: 0 4px 20px rgba($secondary-blue, 0.3);
+    transition: transform $transition-base, box-shadow $transition-base;
+  }
+
+  &:hover &__image {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba($primary-green, 0.3);
   }
 
   &__content {

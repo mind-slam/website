@@ -19,9 +19,7 @@
       @for (member of teamMembers; track member.name; let i = $index) {
         <div class="team-card" #teamCard [style.animation-delay]="(i * 0.15) + 's'">
           <div class="team-card__image-wrapper">
-            <div class="team-card__image-placeholder">
-              <span class="team-card__initials">{{ member.name.charAt(0) }}</span>
-            </div>
+            <img [src]="member.image" [alt]="member.name" class="team-card__image">
           </div>
           <div class="team-card__content">
             <h3 class="team-card__name">{{ member.name }}</h3>

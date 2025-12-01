@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,13 +10,13 @@ import { CommonModule } from '@angular/common';
 })
 export class HeroComponent implements OnInit, OnDestroy {
   screenshots = [
-    'duell_arena.PNG',
-    'choose_lecture_dashboard.PNG',
-    'classroom_for_duells.PNG',
-    'learn_duell_loaded.PNG',
-    'choose_topic_before_duell.PNG',
-    'join_lecture.PNG',
-    'upload_script_to_classroom.PNG'
+    { image: 'duell_arena.PNG', label: 'Duell Arena', position: 'top-left' },
+    { image: 'choose_lecture_dashboard.PNG', label: 'Vorlesungen wählen', position: 'bottom-left' },
+    { image: 'classroom_for_duells.PNG', label: 'Klassenzimmer', position: 'top-left' },
+    { image: 'learn_duell_loaded.PNG', label: 'Quiz spielen', position: 'bottom-left' },
+    { image: 'choose_topic_before_duell.PNG', label: 'Thema wählen', position: 'top-left' },
+    { image: 'join_lecture.PNG', label: 'Vorlesung beitreten', position: 'bottom-left' },
+    { image: 'upload_script_to_classroom.PNG', label: 'Skript hochladen', position: 'top-left' }
   ];
 
   currentScreenshotIndex = 0;
@@ -24,6 +24,8 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   appStoreUrl = 'https://apps.apple.com/de/app/mind-slam/id6744414622';
   playStoreUrl = 'https://play.google.com/store/apps/details?id=app.mindslam&utm_source=emea_Med';
+
+  constructor(private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.startSlideshow();
@@ -34,9 +36,15 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   private startSlideshow(): void {
-    this.intervalId = setInterval(() => {
-      this.nextScreenshot();
-    }, 3500);
+    // Run inside NgZone to ensure change detection
+    this.ngZone.runOutsideAngular(() => {
+      this.intervalId = setInterval(() => {
+        this.ngZone.run(() => {
+          this.nextScreenshot();
+          this.cdr.detectChanges();
+        });
+      }, 3000);
+    });
   }
 
   private stopSlideshow(): void {

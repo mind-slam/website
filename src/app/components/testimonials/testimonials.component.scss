@@ -90,6 +90,17 @@
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
+    box-shadow:
+      0 4px 15px rgba(0, 0, 0, 0.1),
+      inset 0 -3px 10px rgba(0, 0, 0, 0.05);
+    transition: transform $transition-base, box-shadow $transition-base;
+  }
+
+  &:hover &__image {
+    transform: scale(1.05);
+    box-shadow:
+      0 8px 25px rgba(0, 0, 0, 0.15),
+      inset 0 -3px 10px rgba(0, 0, 0, 0.05);
   }
 
   &__quote-icon {

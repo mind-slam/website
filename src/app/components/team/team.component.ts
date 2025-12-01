@@ -24,21 +24,21 @@ export class TeamComponent implements OnInit {
       name: 'Maximilian',
       role: 'Founder & Visionär',
       description: 'Die treibende Kraft hinter mind.slam. Maximilian hat die Vision, das Lernen für Studenten revolutionär zu verändern.',
-      image: 'placeholder-max.jpg',
+      image: 'team_fotos/maximilian_mintchev.png',
       linkedin: '#'
     },
     {
       name: 'Nick Heidmann',
       role: 'Co-Founder',
       description: 'Finance & Strategy. Nick sorgt dafür, dass mind.slam auf einem soliden finanziellen Fundament steht und strategisch wächst.',
-      image: 'placeholder-nick-h.jpg',
+      image: 'team_fotos/nick_heidmann.png',
       linkedin: '#'
     },
     {
       name: 'Nick Volkmann',
       role: 'Co-Founder',
       description: 'AI & Platform Content Creation & Management. Nick entwickelt die KI-Systeme und sorgt für hochwertige Lerninhalte.',
-      image: 'placeholder-nick-v.jpg',
+      image: 'team_fotos/nick_volkmann.png',
       linkedin: '#'
     }
   ];

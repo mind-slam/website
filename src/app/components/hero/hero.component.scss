@@ -177,10 +177,121 @@
 
   // Phone Section
   &__phone {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: $spacing-lg;
+  }
+
+  // Chalk Label - Kreide-Stil
+  &__chalk-label {
+    position: absolute;
+    z-index: 10;
+    transition: all 0.5s ease;
+
+    // Positionen - Text + Pfeil zeigen auf das Handy
+    // Rechte Seite: Pfeil links, dann Text (Pfeil zeigt nach links zum Handy)
+    // Linke Seite: Text, dann Pfeil rechts (Pfeil zeigt nach rechts zum Handy)
+    &[data-position="top-right"] {
+      top: 30px;
+      right: 0;
+      transform: translateX(100%);
+
+      .hero__chalk-content {
+        flex-direction: row-reverse; // Text rechts, Pfeil links
+      }
+      .hero__chalk-arrow {
+        transform: scaleX(-1); // Pfeil zeigt nach links
+      }
+    }
+
+    &[data-position="top-left"] {
+      top: 30px;
+      left: 0;
+      transform: translateX(-100%);
+
+      .hero__chalk-content {
+        flex-direction: row; // Text links, Pfeil rechts
+      }
+      // Pfeil zeigt nach rechts (Standard)
+    }
+
+    &[data-position="bottom-right"] {
+      bottom: 180px;
+      right: 0;
+      transform: translateX(100%);
+
+      .hero__chalk-content {
+        flex-direction: row-reverse; // Text rechts, Pfeil links
+      }
+      .hero__chalk-arrow {
+        transform: scaleX(-1) scaleY(-1); // Pfeil zeigt nach links-oben
+      }
+    }
+
+    &[data-position="bottom-left"] {
+      bottom: 180px;
+      left: 0;
+      transform: translateX(-100%);
+
+      .hero__chalk-content {
+        flex-direction: row; // Text links, Pfeil rechts
+      }
+      .hero__chalk-arrow {
+        transform: scaleY(-1); // Pfeil zeigt nach rechts-oben
+      }
+    }
+
+    @media (max-width: $breakpoint-lg) {
+      &[data-position="top-right"],
+      &[data-position="top-left"],
+      &[data-position="bottom-right"],
+      &[data-position="bottom-left"] {
+        top: -100px;
+        bottom: auto;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) !important;
+
+        .hero__chalk-content {
+          flex-direction: column;
+        }
+        .hero__chalk-arrow {
+          transform: rotate(90deg) !important;
+        }
+      }
+    }
+  }
+
+  &__chalk-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__chalk-text {
+    font-family: 'Caveat', 'Comic Sans MS', cursive;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    white-space: nowrap;
+    // Kreide-Effekt
+    text-shadow:
+      0 0 2px rgba(255, 255, 255, 0.6),
+      0 0 4px rgba(255, 255, 255, 0.3),
+      2px 2px 3px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+  }
+
+  &__chalk-arrow {
+    width: 70px;
+    height: 45px;
+    color: rgba(255, 255, 255, 0.9);
+    // Kreide-Effekt für SVG
+    filter:
+      drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))
+      drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
   }
 
   // Indicators
@@ -367,7 +478,7 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 0.8s ease;
+    transition: opacity 0.4s ease;
 
     &.active {
       opacity: 1;
@@ -415,3 +526,4 @@
     opacity: 0.3;
   }
 }
+

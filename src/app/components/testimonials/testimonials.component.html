@@ -6,9 +6,12 @@
         <div class="testimonial-card" #testimonialCard [style.animation-delay]="(i * 0.15) + 's'">
           <!-- Profile Image -->
           <div class="testimonial-card__image-wrapper">
-            <div class="testimonial-card__image-placeholder">
-              <span class="testimonial-card__initials">{{ testimonial.name.charAt(0) }}</span>
-            </div>
+            <img
+              [src]="testimonial.image"
+              [alt]="testimonial.name"
+              class="testimonial-card__image"
+              loading="lazy"
+            >
           </div>
 
           <!-- Quote Icon -->

@@ -1,0 +1,268 @@
+@import '../../../styles/variables';
+
+.billboard {
+  position: relative;
+  padding: $spacing-4xl 0;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  overflow: hidden;
+  min-height: 700px;
+
+  &__container {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-3xl;
+    align-items: center;
+  }
+
+  // Billboard Frame
+  &__frame-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__frame {
+    background: #2a2a3a;
+    border: 8px solid #3a3a4a;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 100px rgba($secondary-blue, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.05);
+    max-width: 450px;
+    width: 100%;
+    transform: perspective(1000px) rotateY(-5deg);
+    transition: transform 0.5s ease;
+
+    &:hover {
+      transform: perspective(1000px) rotateY(0deg) scale(1.02);
+    }
+  }
+
+  &__poster {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &__legs {
+    display: flex;
+    gap: 200px;
+    margin-top: -5px;
+  }
+
+  &__leg {
+    width: 12px;
+    height: 80px;
+    background: linear-gradient(180deg, #3a3a4a 0%, #2a2a3a 100%);
+    border-radius: 0 0 4px 4px;
+  }
+
+  // Content
+  &__content {
+    color: white;
+    padding: $spacing-2xl;
+  }
+
+  &__title {
+    font-family: $font-headline;
+    margin-bottom: $spacing-xl;
+    line-height: 1.2;
+  }
+
+  &__title-small {
+    display: block;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  &__title-large {
+    display: block;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 700;
+    font-style: italic;
+    background: linear-gradient(90deg, $primary-green, $secondary-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: $spacing-sm 0;
+  }
+
+  &__description {
+    font-size: $font-size-lg;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    margin-bottom: $spacing-2xl;
+    max-width: 500px;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-md;
+    padding: $spacing-md $spacing-xl;
+    background: linear-gradient(135deg, $primary-green, $secondary-blue);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 40px rgba($primary-green, 0.4);
+    }
+  }
+
+  &__cta-text {
+    font-family: $font-headline;
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: white;
+  }
+
+  &__arrow {
+    width: 24px;
+    height: 24px;
+    color: white;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // Background Elements
+  &__bg-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba($secondary-blue, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba($primary-green, 0.1) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &__bg-dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+// City Lights Effect
+.billboard::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(0deg, rgba(255, 200, 100, 0.05) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+// Responsive
+@media (max-width: $breakpoint-lg) {
+  .billboard {
+    &__container {
+      grid-template-columns: 1fr;
+      gap: $spacing-2xl;
+    }
+
+    &__frame-wrapper {
+      order: 1;
+    }
+
+    &__content {
+      order: 2;
+      text-align: center;
+      padding: $spacing-lg;
+    }
+
+    &__description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &__cta {
+      justify-content: center;
+    }
+
+    &__frame {
+      transform: none;
+      max-width: 350px;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+
+    &__legs {
+      gap: 150px;
+    }
+
+    &__leg {
+      height: 60px;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .billboard {
+    min-height: auto;
+    padding: $spacing-3xl 0;
+
+    &__frame {
+      max-width: 280px;
+      padding: 8px;
+      border-width: 6px;
+    }
+
+    &__poster {
+      // Image scales naturally
+    }
+
+    &__legs {
+      gap: 120px;
+    }
+
+    &__leg {
+      width: 10px;
+      height: 50px;
+    }
+
+    &__title-large {
+      font-size: 2.5rem;
+    }
+
+    &__cta {
+      padding: $spacing-sm $spacing-lg;
+    }
+
+    &__cta-text {
+      font-size: $font-size-base;
+    }
+  }
+}
