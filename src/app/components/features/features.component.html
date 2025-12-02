@@ -1,40 +1,187 @@
 <section class="features" id="features">
-  <!-- Background Shapes -->
-  <div class="features__bg-shapes">
-    <div class="shape shape--1"></div>
-    <div class="shape shape--2"></div>
-    <div class="shape shape--3"></div>
+  <!-- Background -->
+  <div class="features__bg">
+    <div class="features__bg-gradient"></div>
+    <div class="features__bg-pattern"></div>
+    <div class="features__bg-shapes">
+      <div class="shape shape--1"></div>
+      <div class="shape shape--2"></div>
+    </div>
   </div>
 
   <div class="features__container">
     <!-- Header -->
     <div class="features__header">
-      <h2 class="features__title">Die ultimative <span class="text-gradient">Lern-App</span></h2>
+      <div class="features__badge">
+        <span class="features__badge-icon">🎮</span>
+        <span class="features__badge-text">Level up your learning</span>
+      </div>
+      <h2 class="features__title">
+        Vergiss langweiliges <span class="features__title-strike">Auswendiglernen</span><br>
+        <span class="text-gradient">Zock dich zum Einser!</span>
+      </h2>
       <p class="features__subtitle">
-        Entdecke alle Funktionen, die mind.slam zur perfekten Begleitung für dein Studium machen.
+        mind.slam macht aus deiner Prüfungsvorbereitung ein Game.
+        <strong>Fordere Freunde heraus, steig im Ranking auf</strong> und merk dir alles –
+        ohne stundenlang Karteikarten zu wälzen.
       </p>
     </div>
 
-    <!-- Features Grid -->
-    <div class="features__grid">
-      <!-- Left Features -->
-      <div class="features__column features__column--left">
-        @for (feature of featuresLeft; track feature.title; let i = $index) {
-          <div class="feature-card feature-card--left" #featureCard [style.animation-delay]="(i * 0.2) + 's'">
-            <div class="feature-card__icon">
-              {{ feature.icon }}
+    <!-- Game Modes Section -->
+    <div class="features__modes">
+      <h3 class="features__modes-title">Wähle deinen Spielmodus</h3>
+
+      <div class="features__modes-grid">
+        <!-- Mode 1: Duell -->
+        <div class="mode-card" #featureCard>
+          <div class="mode-card__badge">PvP</div>
+          <div class="mode-card__icon-wrapper">
+            <div class="mode-card__icon">⚔️</div>
+            <div class="mode-card__icon-glow"></div>
+          </div>
+          <h4 class="mode-card__title">1v1 Duell</h4>
+          <p class="mode-card__description">
+            Fordere deine Kommilitonen zu einem Quiz-Battle heraus.
+            Wer mehr Fragen richtig hat, gewinnt!
+          </p>
+          <div class="mode-card__stats">
+            <div class="mode-card__stat">
+              <span class="mode-card__stat-value">5</span>
+              <span class="mode-card__stat-label">Runden</span>
             </div>
-            <div class="feature-card__content">
-              <h3 class="feature-card__title">{{ feature.title }}</h3>
-              <p class="feature-card__description">{{ feature.description }}</p>
+            <div class="mode-card__stat">
+              <span class="mode-card__stat-value">20s</span>
+              <span class="mode-card__stat-label">pro Frage</span>
             </div>
           </div>
-        }
+          <div class="mode-card__cta">
+            <span>Duell starten</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Mode 2: Arena -->
+        <div class="mode-card mode-card--featured" #featureCard>
+          <div class="mode-card__badge mode-card__badge--hot">🔥 HOT</div>
+          <div class="mode-card__icon-wrapper">
+            <div class="mode-card__icon">🏆</div>
+            <div class="mode-card__icon-glow mode-card__icon-glow--gold"></div>
+          </div>
+          <h4 class="mode-card__title">Arena Battle</h4>
+          <p class="mode-card__description">
+            Tritt gegen alle an! Kämpfe dich durch die Rangliste und
+            werde der Champion deiner Vorlesung.
+          </p>
+          <div class="mode-card__stats">
+            <div class="mode-card__stat">
+              <span class="mode-card__stat-value">∞</span>
+              <span class="mode-card__stat-label">Spieler</span>
+            </div>
+            <div class="mode-card__stat">
+              <span class="mode-card__stat-value">Live</span>
+              <span class="mode-card__stat-label">Ranking</span>
+            </div>
+          </div>
+          <div class="mode-card__cta">
+            <span>Arena betreten</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Mode 3: Klassenzimmer -->
+        <div class="mode-card" #featureCard>
+          <div class="mode-card__badge">Co-op</div>
+          <div class="mode-card__icon-wrapper">
+            <div class="mode-card__icon">🎓</div>
+            <div class="mode-card__icon-glow mode-card__icon-glow--blue"></div>
+          </div>
+          <h4 class="mode-card__title">Klassenzimmer</h4>
+          <p class="mode-card__description">
+            Lern mit deinem Squad! Erstelle ein Klassenzimmer,
+            lade Skripte hoch und battlet euch gemeinsam durch.
+          </p>
+          <div class="mode-card__stats">
+            <div class="mode-card__stat">
+              <span class="mode-card__stat-value">50+</span>
+              <span class="mode-card__stat-label">Mitglieder</span>
+            </div>
+            <div class="mode-card__stat">
+              <span class="mode-card__stat-value">Team</span>
+              <span class="mode-card__stat-label">Ranking</span>
+            </div>
+          </div>
+          <div class="mode-card__cta">
+            <span>Raum erstellen</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Power-Ups Section -->
+    <div class="features__powerups">
+      <div class="features__powerups-content">
+        <h3 class="features__powerups-title">
+          <span class="features__powerups-emoji">🚀</span>
+          Deine Geheimwaffen
+        </h3>
+        <p class="features__powerups-text">
+          Vergiss stundenlanges Büffeln. Mit diesen Features lernst du smarter, nicht harder.
+        </p>
+
+        <div class="powerup-list">
+          <div class="powerup-item" #featureCard>
+            <div class="powerup-item__icon">🤖</div>
+            <div class="powerup-item__content">
+              <h4 class="powerup-item__title">KI-Quizgenerator</h4>
+              <p class="powerup-item__text">
+                Upload dein Skript → Bekomme instant Quizfragen. Die KI checkt, was wichtig ist.
+              </p>
+            </div>
+          </div>
+
+          <div class="powerup-item" #featureCard>
+            <div class="powerup-item__icon">📊</div>
+            <div class="powerup-item__content">
+              <h4 class="powerup-item__title">Schwächen-Tracker</h4>
+              <p class="powerup-item__text">
+                Wir merken uns, wo du hängst und fragen genau das nochmal ab. Lücken = geschlossen.
+              </p>
+            </div>
+          </div>
+
+          <div class="powerup-item" #featureCard>
+            <div class="powerup-item__icon">⚡</div>
+            <div class="powerup-item__content">
+              <h4 class="powerup-item__title">Speed-Bonus</h4>
+              <p class="powerup-item__text">
+                Schneller antworten = mehr Punkte. Train dein Wissen bis es sitzt wie Netflix-Quotes.
+              </p>
+            </div>
+          </div>
+
+          <div class="powerup-item" #featureCard>
+            <div class="powerup-item__icon">🎯</div>
+            <div class="powerup-item__content">
+              <h4 class="powerup-item__title">Daily Challenges</h4>
+              <p class="powerup-item__text">
+                Jeden Tag neue Challenges, XP sammeln und Streaks halten. Dein Gehirn wird's dir danken.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Center Phone -->
+      <!-- Phone Preview -->
       <div class="features__phone">
         <div class="phone-mockup phone-mockup--features">
+          <div class="phone-mockup__ring"></div>
           <div class="phone-mockup__frame">
             <div class="phone-mockup__button phone-mockup__button--power"></div>
             <div class="phone-mockup__button phone-mockup__button--volume-up"></div>
@@ -44,23 +191,39 @@
               <img [src]="featuredScreenshot" alt="mind.slam App" class="phone-mockup__screenshot active">
             </div>
           </div>
-          <div class="phone-mockup__shadow"></div>
+          <div class="phone-mockup__glow"></div>
         </div>
       </div>
+    </div>
 
-      <!-- Right Features -->
-      <div class="features__column features__column--right">
-        @for (feature of featuresRight; track feature.title; let i = $index) {
-          <div class="feature-card feature-card--right" #featureCard [style.animation-delay]="(i * 0.2 + 0.1) + 's'">
-            <div class="feature-card__icon">
-              {{ feature.icon }}
-            </div>
-            <div class="feature-card__content">
-              <h3 class="feature-card__title">{{ feature.title }}</h3>
-              <p class="feature-card__description">{{ feature.description }}</p>
-            </div>
-          </div>
-        }
+    <!-- Social Proof -->
+    <div class="features__social">
+      <div class="features__social-item">
+        <span class="features__social-number">1.2M+</span>
+        <span class="features__social-label">Quiz-Duelle gespielt</span>
+      </div>
+      <div class="features__social-divider"></div>
+      <div class="features__social-item">
+        <span class="features__social-number">89%</span>
+        <span class="features__social-label">bessere Noten</span>
+      </div>
+      <div class="features__social-divider"></div>
+      <div class="features__social-item">
+        <span class="features__social-number">4.8★</span>
+        <span class="features__social-label">App Store Rating</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="features__cta">
+      <p class="features__cta-text">Ready to play? 🎮</p>
+      <div class="features__cta-buttons">
+        <a href="#" class="features__cta-button features__cta-button--primary">
+          <span>Jetzt loslegen – it's free!</span>
+        </a>
+        <a href="#" class="features__cta-button features__cta-button--secondary">
+          <span>Mehr erfahren</span>
+        </a>
       </div>
     </div>
   </div>
