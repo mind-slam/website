@@ -16,8 +16,7 @@ export class HeaderComponent {
   navItems = [
     { label: 'Features', href: '#features' },
     { label: 'Für Studenten', href: '#students' },
-    { label: 'Für Dozenten', href: '#dozenten' },
-    { label: 'Download', href: '#download' }
+    { label: 'Für Dozenten', href: '#dozenten' }
   ];
 
   @HostListener('window:scroll')
