@@ -2,20 +2,31 @@
   <!-- Animated Background -->
   <div class="hero__background">
     <div class="hero__gradient"></div>
+
+    <!-- Glowing Orbs -->
+    <div class="hero__orbs">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+      <div class="orb orb--3"></div>
+    </div>
+
+    <!-- Enhanced Particles -->
     <div class="hero__particles">
-      @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track i) {
+      @for (i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; track i) {
         <div class="particle particle--{{ i }}"></div>
       }
     </div>
   </div>
 
-  <!-- Floating Elements -->
+  <!-- Floating Elements - More emojis with glow -->
   <div class="hero__floating-elements">
     <div class="floating-element floating-element--1">🎯</div>
     <div class="floating-element floating-element--2">⚡</div>
     <div class="floating-element floating-element--3">🏆</div>
     <div class="floating-element floating-element--4">📚</div>
     <div class="floating-element floating-element--5">🎮</div>
+    <div class="floating-element floating-element--6">💡</div>
+    <div class="floating-element floating-element--7">🚀</div>
   </div>
 
   <div class="hero__container">
@@ -70,29 +81,31 @@
       </div>
 
       <div class="phone-mockup">
-        <!-- iPhone 16 Frame (clean, no notch overlay) -->
-        <div class="phone-mockup__frame">
-          <!-- Side Buttons -->
-          <div class="phone-mockup__button phone-mockup__button--power"></div>
-          <div class="phone-mockup__button phone-mockup__button--volume-up"></div>
-          <div class="phone-mockup__button phone-mockup__button--volume-down"></div>
-          <div class="phone-mockup__button phone-mockup__button--action"></div>
+        <div class="phone-mockup__wrapper">
+          <!-- iPhone 16 Frame (clean, no notch overlay) -->
+          <div class="phone-mockup__frame">
+            <!-- Side Buttons -->
+            <div class="phone-mockup__button phone-mockup__button--power"></div>
+            <div class="phone-mockup__button phone-mockup__button--volume-up"></div>
+            <div class="phone-mockup__button phone-mockup__button--volume-down"></div>
+            <div class="phone-mockup__button phone-mockup__button--action"></div>
 
-          <!-- Screen with Screenshots -->
-          <div class="phone-mockup__screen">
-            @for (screenshot of screenshots; track screenshot.image; let i = $index) {
-              <img
-                [src]="screenshot.image"
-                [alt]="screenshot.label"
-                class="phone-mockup__screenshot"
-                [class.active]="i === currentScreenshotIndex"
-              >
-            }
+            <!-- Screen with Screenshots -->
+            <div class="phone-mockup__screen">
+              @for (screenshot of screenshots; track screenshot.image; let i = $index) {
+                <img
+                  [src]="screenshot.image"
+                  [alt]="screenshot.label"
+                  class="phone-mockup__screenshot"
+                  [class.active]="i === currentScreenshotIndex"
+                >
+              }
+            </div>
           </div>
-        </div>
 
-        <!-- Reflection Effect -->
-        <div class="phone-mockup__reflection"></div>
+          <!-- Reflection Effect -->
+          <div class="phone-mockup__reflection"></div>
+        </div>
 
         <!-- Glow Effect -->
         <div class="phone-mockup__glow"></div>
