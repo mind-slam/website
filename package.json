@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng deploy --base-href=/website/"
+    "deploy": "ng deploy --base-href=/"
   },
   "prettier": {
     "printWidth": 100,

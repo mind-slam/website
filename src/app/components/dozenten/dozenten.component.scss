@@ -1,0 +1,258 @@
+@import '../../../styles/variables';
+
+.dozenten {
+  position: relative;
+  padding: $spacing-4xl 0;
+  background: linear-gradient(180deg, $bg-white 0%, $bg-light 100%);
+  overflow: hidden;
+
+  // Background decoration
+  &__bg-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+
+    .decoration {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.6;
+
+      &--1 {
+        width: 500px;
+        height: 500px;
+        background: linear-gradient(135deg, rgba($secondary-blue, 0.08), transparent);
+        top: -200px;
+        left: -200px;
+      }
+
+      &--2 {
+        width: 400px;
+        height: 400px;
+        background: linear-gradient(135deg, rgba($primary-green, 0.06), transparent);
+        bottom: -150px;
+        right: -150px;
+      }
+
+      &--3 {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(135deg, rgba($tertiary-gold, 0.1), transparent);
+        top: 40%;
+        right: 10%;
+      }
+    }
+  }
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-lg;
+  }
+
+  // Header
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-4xl;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    background: linear-gradient(135deg, rgba($secondary-blue, 0.1), rgba($primary-green, 0.1));
+    border: 1px solid rgba($secondary-blue, 0.2);
+    border-radius: $radius-full;
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $secondary-blue;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__title {
+    font-family: $font-headline;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: $text-primary;
+    margin: 0 0 $spacing-md;
+
+    .highlight {
+      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  // Benefits Grid
+  &__benefits {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+    margin-bottom: $spacing-4xl;
+
+    @media (min-width: $breakpoint-sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  // Stats Section
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+    max-width: 800px;
+    margin: 0 auto $spacing-3xl;
+
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  // CTA Section
+  &__cta {
+    text-align: center;
+    background: linear-gradient(135deg, $secondary-blue, $primary-green);
+    border-radius: $radius-xl;
+    padding: $spacing-3xl $spacing-xl;
+    color: white;
+    box-shadow: $shadow-lg;
+  }
+
+  &__cta-title {
+    font-family: $font-headline;
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    margin: 0 0 $spacing-md;
+  }
+
+  &__cta-text {
+    font-size: $font-size-lg;
+    opacity: 0.9;
+    margin: 0 0 $spacing-xl;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    background: white;
+    color: $secondary-blue;
+    font-family: $font-headline;
+    font-size: $font-size-lg;
+    font-weight: 700;
+    padding: $spacing-md $spacing-2xl;
+    border-radius: $radius-full;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all $transition-base;
+    box-shadow: $shadow-md;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+// Benefit Card - Gradient Style
+.benefit-card {
+  position: relative;
+  background: linear-gradient(135deg, $secondary-blue, $primary-green);
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+  transition: all $transition-base;
+  opacity: 0;
+  transform: translateY(30px);
+  box-shadow: $shadow-lg;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: $shadow-xl;
+  }
+
+  &__title {
+    font-family: $font-headline;
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 $spacing-sm;
+  }
+
+  &__description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: $font-size-base;
+    line-height: 1.7;
+    margin: 0;
+  }
+}
+
+// Stat Card - Modern Glass Style
+.stat-card {
+  position: relative;
+  text-align: center;
+  padding: $spacing-xl $spacing-lg;
+  background: $bg-white;
+  border-radius: $radius-xl;
+  border: 1px solid rgba($primary-green, 0.2);
+  box-shadow: $shadow-md;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+    border-color: rgba($primary-green, 0.4);
+  }
+
+  &__value {
+    font-family: $font-headline;
+    font-size: $font-size-4xl;
+    font-weight: 800;
+    background: linear-gradient(135deg, $secondary-blue, $primary-green);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__label {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    font-weight: 500;
+  }
+}
