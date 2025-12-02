@@ -4,9 +4,12 @@ import { CommonModule } from '@angular/common';
 interface TeamMember {
   name: string;
   role: string;
+  focus: string;
   description: string;
   image: string;
+  skills: string[];
   linkedin?: string;
+  email?: string;
 }
 
 @Component({
@@ -21,25 +24,34 @@ export class TeamComponent implements OnInit {
 
   teamMembers: TeamMember[] = [
     {
-      name: 'Maximilian',
-      role: 'Founder & Visionär',
-      description: 'Die treibende Kraft hinter mind.slam. Maximilian hat die Vision, das Lernen für Studenten revolutionär zu verändern.',
+      name: 'Maximilian Mintchev',
+      role: 'Founder & CEO',
+      focus: 'Product & Tech',
+      description: 'Die treibende Kraft hinter mind.slam. Max entwickelt die Vision und führt das technische Team. Als Student kennt er die Herausforderungen des Lernens aus erster Hand.',
       image: 'team_fotos/maximilian_mintchev.png',
-      linkedin: '#'
+      skills: ['Flutter', 'AI/ML', 'Product'],
+      linkedin: 'https://linkedin.com/in/',
+      email: 'max@mind-slam.de'
     },
     {
       name: 'Nick Heidmann',
-      role: 'Co-Founder',
-      description: 'Finance & Strategy. Nick sorgt dafür, dass mind.slam auf einem soliden finanziellen Fundament steht und strategisch wächst.',
+      role: 'Co-Founder & CFO',
+      focus: 'Finance & Strategy',
+      description: 'Nick sorgt für das solide Fundament. Er verantwortet Finanzen, Strategie und Partnerschaften. Sein analytischer Blick treibt das Wachstum voran.',
       image: 'team_fotos/nick_heidmann.png',
-      linkedin: '#'
+      skills: ['Finance', 'Strategy', 'Partnerships'],
+      linkedin: 'https://linkedin.com/in/',
+      email: 'nick.h@mind-slam.de'
     },
     {
       name: 'Nick Volkmann',
-      role: 'Co-Founder',
-      description: 'AI & Platform Content Creation & Management. Nick entwickelt die KI-Systeme und sorgt für hochwertige Lerninhalte.',
+      role: 'Co-Founder & CTO',
+      focus: 'AI & Content',
+      description: 'Nick ist das Gehirn hinter unserer KI. Er entwickelt die Algorithmen für die automatische Fragengeneration und sorgt für hochwertige Lerninhalte.',
       image: 'team_fotos/nick_volkmann.png',
-      linkedin: '#'
+      skills: ['AI/ML', 'RAG', 'Content'],
+      linkedin: 'https://linkedin.com/in/',
+      email: 'nick.v@mind-slam.de'
     }
   ];
 
@@ -58,7 +70,7 @@ export class TeamComponent implements OnInit {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
     setTimeout(() => {
