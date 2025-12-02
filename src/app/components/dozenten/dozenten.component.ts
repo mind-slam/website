@@ -84,41 +84,37 @@ export class DozentenComponent implements AfterViewInit {
   benefits = [
     {
       icon: '📊',
-      title: 'Lernfortschritt verfolgen',
-      description: 'Sehen Sie auf einen Blick, wie gut Ihre Studierenden den Stoff verstanden haben. Identifizieren Sie Wissenslücken frühzeitig.'
+      title: 'Echtzeit-Insights',
+      description: 'Sehen Sie live, welche Themen sitzen und wo nachgebessert werden muss – ohne Extra-Klausuren oder Umfragen.'
+    },
+    {
+      icon: '🤖',
+      title: 'KI erstellt Ihre Quizze',
+      description: 'Laden Sie Ihr Skript hoch und erhalten Sie in Sekunden prüfungsrelevante Fragen. Null Aufwand für Sie.'
     },
     {
       icon: '🎯',
-      title: 'Gezieltes Feedback',
-      description: 'Erkennen Sie, welche Themen mehr Erklärung brauchen. Die Statistiken zeigen genau, wo Studierende Schwierigkeiten haben.'
+      title: 'Studierende lernen freiwillig',
+      description: 'Durch Gamification und Wettbewerb lernen Ihre Studierenden regelmäßig – nicht erst kurz vor der Prüfung.'
     },
     {
-      icon: '⚡',
-      title: 'Aktivere Vorlesungen',
-      description: 'Nutzen Sie Live-Quizze in der Vorlesung. Steigern Sie die Aufmerksamkeit und Beteiligung Ihrer Studierenden.'
-    },
-    {
-      icon: '📚',
-      title: 'Automatische Fragengenerierung',
-      description: 'Die KI erstellt Quizfragen aus Ihren Skripten. Sparen Sie Zeit bei der Erstellung von Übungsmaterial.'
-    },
-    {
-      icon: '🏆',
-      title: 'Motivation durch Gamification',
-      description: 'Studierende lernen regelmäßiger durch Quiz-Duelle. Die spielerische Komponente erhöht die Prüfungsvorbereitung.'
+      icon: '📈',
+      title: 'Bessere Prüfungsergebnisse',
+      description: 'Aktives Wiederholen statt passives Lesen. Spaced Repetition sorgt dafür, dass der Stoff wirklich hängen bleibt.'
     },
     {
       icon: '🔒',
-      title: 'Volle Kontrolle',
-      description: 'Erstellen Sie geschlossene Klassenzimmer für Ihre Kurse. Bestimmen Sie, wer Zugang zu Ihren Materialien hat.'
+      title: 'Geschlossene Kursräume',
+      description: 'Ihre Materialien bleiben privat. Nur eingeschriebene Studierende haben Zugang zu Ihren Klassenzimmern.'
+    },
+    {
+      icon: '⏱️',
+      title: 'Spart Ihnen Zeit',
+      description: 'Keine manuellen Übungsblätter mehr. Die Plattform übernimmt Erstellung, Auswertung und Feedback.'
     }
   ];
 
-  stats = [
-    { value: '40%', label: 'bessere Prüfungsergebnisse' },
-    { value: '3x', label: 'höhere Lernmotivation' },
-    { value: '85%', label: 'aktive Kursteilnahme' }
-  ];
+  stats: { value: string; label: string }[] = [];
 
   ngAfterViewInit(): void {
     const observer = new IntersectionObserver(
