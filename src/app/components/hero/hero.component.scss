@@ -182,6 +182,11 @@
     flex-direction: column;
     align-items: center;
     gap: $spacing-lg;
+    margin-top: $spacing-4xl; // Extra spacing for chalk label on mobile
+
+    @media (min-width: $breakpoint-lg) {
+      margin-top: 0;
+    }
   }
 
   // Chalk Label - Kreide-Stil
