@@ -48,12 +48,77 @@
       <p class="dozenten__cta-text">
         Starten Sie kostenlos und erleben Sie, wie mind.slam Ihre Vorlesungen bereichert.
       </p>
-      <a href="mailto:info@mind-slam.com?subject=mind.slam für Dozierende" class="dozenten__cta-button">
+      <button (click)="openModal()" class="dozenten__cta-button">
         <span>Kontakt aufnehmen</span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
-      </a>
+      </button>
     </div>
   </div>
+
+  <!-- Contact Modal -->
+  @if (isModalOpen) {
+    <div class="contact-modal" (click)="closeModal()">
+      <div class="contact-modal__content" (click)="$event.stopPropagation()">
+        <button class="contact-modal__close" (click)="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <h3 class="contact-modal__title">Kontakt aufnehmen</h3>
+        <p class="contact-modal__subtitle">Wir freuen uns auf Ihre Nachricht!</p>
+
+        @if (submitSuccess) {
+          <div class="contact-modal__success">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <p>Nachricht erfolgreich gesendet!</p>
+          </div>
+        } @else {
+          <form (ngSubmit)="submitForm()" class="contact-modal__form">
+            <div class="contact-modal__field">
+              <label for="name">Name</label>
+              <input type="text" id="name" [(ngModel)]="contactForm.name" name="name" required placeholder="Ihr Name">
+            </div>
+
+            <div class="contact-modal__field">
+              <label for="email">E-Mail</label>
+              <input type="email" id="email" [(ngModel)]="contactForm.email" name="email" required placeholder="ihre.email@beispiel.de">
+            </div>
+
+            <div class="contact-modal__field">
+              <label for="subject">Betreff</label>
+              <input type="text" id="subject" [(ngModel)]="contactForm.subject" name="subject" required placeholder="Betreff">
+            </div>
+
+            <div class="contact-modal__field">
+              <label for="message">Nachricht</label>
+              <textarea id="message" [(ngModel)]="contactForm.message" name="message" required rows="5" placeholder="Ihre Nachricht..."></textarea>
+            </div>
+
+            @if (submitError) {
+              <div class="contact-modal__error">
+                Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.
+              </div>
+            }
+
+            <button type="submit" class="contact-modal__submit" [disabled]="isSubmitting">
+              @if (isSubmitting) {
+                <span>Wird gesendet...</span>
+              } @else {
+                <span>Nachricht senden</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+              }
+            </button>
+          </form>
+        }
+      </div>
+    </div>
+  }
 </section>
