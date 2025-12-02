@@ -1,33 +1,117 @@
 <section class="testimonials" id="testimonials">
+  <!-- Background Elements -->
+  <div class="testimonials__bg">
+    <div class="testimonials__bg-gradient"></div>
+    <div class="testimonials__bg-circles">
+      <div class="circle circle--1"></div>
+      <div class="circle circle--2"></div>
+      <div class="circle circle--3"></div>
+    </div>
+  </div>
+
   <div class="testimonials__container">
+    <!-- Header -->
+    <div class="testimonials__header">
+      <span class="testimonials__badge">Testimonials</span>
+      <h2 class="testimonials__title">
+        Was Studierende über <span class="text-gradient">mind.slam</span> sagen
+      </h2>
+      <p class="testimonials__subtitle">
+        Tausende Studierende nutzen bereits mind.slam zum Lernen. Hier sind ihre Erfahrungen.
+      </p>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="testimonials__stats">
+      <div class="stat">
+        <span class="stat__number">4.8</span>
+        <div class="stat__stars">
+          @for (star of [1,2,3,4,5]; track star) {
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          }
+        </div>
+        <span class="stat__label">App Store Rating</span>
+      </div>
+      <div class="stat__divider"></div>
+      <div class="stat">
+        <span class="stat__number">10K+</span>
+        <span class="stat__label">Aktive Nutzer</span>
+      </div>
+      <div class="stat__divider"></div>
+      <div class="stat">
+        <span class="stat__number">50+</span>
+        <span class="stat__label">Universitäten</span>
+      </div>
+    </div>
+
     <!-- Testimonials Grid -->
     <div class="testimonials__grid">
       @for (testimonial of testimonials; track testimonial.name; let i = $index) {
-        <div class="testimonial-card" #testimonialCard [style.animation-delay]="(i * 0.15) + 's'">
-          <!-- Profile Image -->
-          <div class="testimonial-card__image-wrapper">
-            <img
-              [src]="testimonial.image"
-              [alt]="testimonial.name"
-              class="testimonial-card__image"
-              loading="lazy"
-            >
+        <div
+          class="testimonial-card"
+          #testimonialCard
+          [style.animation-delay]="(i * 0.1) + 's'"
+          [class.featured]="i === 0"
+        >
+          <!-- Card Glow -->
+          <div class="testimonial-card__glow"></div>
+
+          <!-- Card Content -->
+          <div class="testimonial-card__content">
+            <!-- Header with Image and Info -->
+            <div class="testimonial-card__header">
+              <div class="testimonial-card__avatar">
+                <img
+                  [src]="testimonial.image"
+                  [alt]="testimonial.name"
+                  class="testimonial-card__image"
+                  loading="lazy"
+                >
+                <div class="testimonial-card__avatar-ring"></div>
+              </div>
+              <div class="testimonial-card__info">
+                <h3 class="testimonial-card__name">{{ testimonial.name }}</h3>
+                <p class="testimonial-card__uni">{{ testimonial.university }}</p>
+              </div>
+              <div class="testimonial-card__rating">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                }
+              </div>
+            </div>
+
+            <!-- Quote -->
+            <div class="testimonial-card__quote-wrapper">
+              <svg class="testimonial-card__quote-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/>
+              </svg>
+              <p class="testimonial-card__quote">{{ testimonial.quote }}</p>
+            </div>
+
+            <!-- Tags -->
+            <div class="testimonial-card__tags">
+              @for (tag of testimonial.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
           </div>
-
-          <!-- Quote Icon -->
-          <div class="testimonial-card__quote-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.143-.686.238-1.028.467-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.944-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/>
-            </svg>
-          </div>
-
-          <!-- Name -->
-          <h3 class="testimonial-card__name">{{ testimonial.name }}</h3>
-
-          <!-- Quote -->
-          <p class="testimonial-card__quote">{{ testimonial.quote }}</p>
         </div>
       }
+    </div>
+
+    <!-- CTA -->
+    <div class="testimonials__cta">
+      <p class="testimonials__cta-text">Werde Teil der Community!</p>
+      <a href="#" class="testimonials__cta-button">
+        <span>Jetzt kostenlos starten</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
     </div>
   </div>
 </section>

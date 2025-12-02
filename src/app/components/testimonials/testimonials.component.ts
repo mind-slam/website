@@ -4,7 +4,9 @@ import { CommonModule } from '@angular/common';
 interface Testimonial {
   name: string;
   image: string;
+  university: string;
   quote: string;
+  tags: string[];
 }
 
 @Component({
@@ -21,22 +23,44 @@ export class TestimonialsComponent implements OnInit {
     {
       name: 'Laura M.',
       image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face',
-      quote: 'Mit mind.slam macht Lernen endlich Spaß! Die Quiz-Duelle mit meinen Kommilitonen motivieren mich, am Ball zu bleiben.'
+      university: 'TU München • Informatik',
+      quote: 'Mit mind.slam macht Lernen endlich Spaß! Die Quiz-Duelle mit meinen Kommilitonen motivieren mich, am Ball zu bleiben. Hab meine Note in Algorithmen von 3,0 auf 1,7 verbessert!',
+      tags: ['Quiz-Duelle', 'Motivation']
     },
     {
       name: 'Tobias K.',
       image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=face',
-      quote: 'Die KI-generierten Quizfragen aus meinen Vorlesungsskripten sind ein Game-Changer. So effizient habe ich noch nie gelernt!'
+      university: 'LMU München • BWL',
+      quote: 'Die KI-generierten Quizfragen aus meinen Vorlesungsskripten sind ein Game-Changer. So effizient habe ich noch nie gelernt! Upload, Quiz, bestanden.',
+      tags: ['KI-Fragen', 'Effizienz']
     },
     {
       name: 'Sophie H.',
       image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop&crop=face',
-      quote: 'Der Arena-Modus ist super spannend! Es fühlt sich gar nicht wie Lernen an, obwohl ich so viel dabei mitnehme.'
+      university: 'Uni Heidelberg • Medizin',
+      quote: 'Der Arena-Modus ist super spannend! Es fühlt sich gar nicht wie Lernen an, obwohl ich so viel dabei mitnehme. Perfekt für Anatomie!',
+      tags: ['Arena-Modus', 'Gamification']
     },
     {
       name: 'Max B.',
       image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face',
-      quote: 'Endlich eine Lern-App, die versteht, wie wir Studenten ticken. Das Klassenzimmer-Feature ist genial für Lerngruppen!'
+      university: 'RWTH Aachen • Maschinenbau',
+      quote: 'Endlich eine Lern-App, die versteht, wie wir Studenten ticken. Das Klassenzimmer-Feature ist genial für unsere Lerngruppe vor der Klausur!',
+      tags: ['Klassenzimmer', 'Lerngruppen']
+    },
+    {
+      name: 'Anna S.',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+      university: 'FU Berlin • Psychologie',
+      quote: 'Ich nutze mind.slam täglich in der U-Bahn. Die kurzen Quiz-Sessions passen perfekt in meinen Alltag. Statistik ist jetzt mein Lieblingsfach!',
+      tags: ['Mobil lernen', 'Alltag']
+    },
+    {
+      name: 'Felix R.',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+      university: 'Uni Köln • Jura',
+      quote: 'Die Wiederholungsfunktion ist Gold wert! mind.slam merkt sich, welche Fragen ich falsch beantwortet habe und fragt sie immer wieder ab.',
+      tags: ['Spaced Repetition', 'Jura']
     }
   ];
 
@@ -55,7 +79,7 @@ export class TestimonialsComponent implements OnInit {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     setTimeout(() => {

@@ -105,8 +105,33 @@
     font-size: $font-size-lg;
     color: rgba(255, 255, 255, 0.7);
     line-height: 1.7;
-    margin-bottom: $spacing-2xl;
+    margin-bottom: $spacing-lg;
     max-width: 500px;
+  }
+
+  &__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 $spacing-2xl 0;
+    max-width: 500px;
+
+    li {
+      position: relative;
+      padding-left: $spacing-xl;
+      margin-bottom: $spacing-md;
+      font-size: $font-size-base;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: $primary-green;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+    }
   }
 
   &__cta {
@@ -204,6 +229,12 @@
     &__description {
       margin-left: auto;
       margin-right: auto;
+    }
+
+    &__benefits {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
     }
 
     &__cta {
