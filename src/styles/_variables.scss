@@ -1,13 +1,16 @@
 // mind.slam Color Palette
 // ========================
+// Grün ist die DOMINANTE Farbe, Blau ist Akzentfarbe
 
-// Primary Colors
+// Primary Colors (GRÜN = Hauptfarbe)
 $primary-green: #7CCD7C;
-$primary-green-dark: #35D07E;
+$primary-green-dark: #5CB85C;
+$primary-green-light: #9FE09F;
 
-// Secondary Colors
+// Secondary Colors (BLAU = Akzentfarbe)
 $secondary-blue: #194F82;
-$secondary-blue-dark: #0B67BC;
+$secondary-blue-dark: #0B3D66;
+$secondary-blue-light: #2B6AA8;
 
 // Tertiary Colors
 $tertiary-gold: #FFD700;
@@ -30,9 +33,11 @@ $success: #27AE52;
 $warning: #FC964D;
 $error: #BC0B0E;
 
-// Gradients
-$gradient-hero: linear-gradient(135deg, $secondary-blue 0%, $secondary-blue-dark 50%, $primary-green-dark 100%);
+// Gradients (Grün dominiert)
+$gradient-hero: linear-gradient(135deg, $primary-green 0%, mix($primary-green, $secondary-blue, 70%) 50%, $secondary-blue 100%);
 $gradient-button: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 100%);
+$gradient-accent: linear-gradient(135deg, $primary-green 0%, $secondary-blue 100%);
+$gradient-green-dominant: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 60%, mix($primary-green, $secondary-blue, 50%) 100%);
 
 // Typography
 $font-headline: 'Outfit', sans-serif;

@@ -125,13 +125,96 @@
             Du hast Lust, mit uns das Lernen zu revolutionieren? Wir suchen immer nach motivierten Talenten.
           </p>
         </div>
-        <a href="mailto:team@mind-slam.de" class="team__join-button">
+        <button (click)="openModal()" class="team__join-button">
           <span>Bewirb dich</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
-        </a>
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- Application Modal -->
+  @if (isModalOpen) {
+    <div class="application-modal" (click)="closeModal()">
+      <div class="application-modal__content" (click)="$event.stopPropagation()">
+        <button class="application-modal__close" (click)="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <div class="application-modal__header">
+          <span class="application-modal__icon">🚀</span>
+          <h3 class="application-modal__title">Bewirb dich bei mind.slam</h3>
+          <p class="application-modal__subtitle">Werde Teil unserer Mission!</p>
+        </div>
+
+        @if (submitSuccess) {
+          <div class="application-modal__success">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <p>Bewerbung erfolgreich gesendet!</p>
+            <span>Wir melden uns bei dir.</span>
+          </div>
+        } @else {
+          <form (ngSubmit)="submitApplication()" class="application-modal__form">
+            <div class="application-modal__field">
+              <label for="app-name">Name *</label>
+              <input type="text" id="app-name" [(ngModel)]="applicationForm.name" name="name" required placeholder="Dein vollständiger Name">
+            </div>
+
+            <div class="application-modal__field">
+              <label for="app-email">E-Mail *</label>
+              <input type="email" id="app-email" [(ngModel)]="applicationForm.email" name="email" required placeholder="deine.email@beispiel.de">
+            </div>
+
+            <div class="application-modal__field">
+              <label for="app-position">Position / Bereich</label>
+              <select id="app-position" [(ngModel)]="applicationForm.position" name="position">
+                <option value="">Wähle einen Bereich...</option>
+                <option value="Entwicklung (Flutter/Mobile)">Entwicklung (Flutter/Mobile)</option>
+                <option value="Entwicklung (Backend/AI)">Entwicklung (Backend/AI)</option>
+                <option value="Entwicklung (Web/Frontend)">Entwicklung (Web/Frontend)</option>
+                <option value="Design (UI/UX)">Design (UI/UX)</option>
+                <option value="Marketing & Growth">Marketing & Growth</option>
+                <option value="Content & Redaktion">Content & Redaktion</option>
+                <option value="Sonstiges">Sonstiges</option>
+              </select>
+            </div>
+
+            <div class="application-modal__field">
+              <label for="app-motivation">Warum mind.slam? *</label>
+              <textarea id="app-motivation" [(ngModel)]="applicationForm.motivation" name="motivation" required rows="4" placeholder="Erzähl uns, warum du Teil des Teams werden möchtest..."></textarea>
+            </div>
+
+            <div class="application-modal__field">
+              <label for="app-linkedin">LinkedIn Profil (optional)</label>
+              <input type="url" id="app-linkedin" [(ngModel)]="applicationForm.linkedin" name="linkedin" placeholder="https://linkedin.com/in/dein-profil">
+            </div>
+
+            @if (submitError) {
+              <div class="application-modal__error">
+                Ein Fehler ist aufgetreten. Bitte versuche es erneut.
+              </div>
+            }
+
+            <button type="submit" class="application-modal__submit" [disabled]="isSubmitting">
+              @if (isSubmitting) {
+                <span>Wird gesendet...</span>
+              } @else {
+                <span>Bewerbung absenden</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+              }
+            </button>
+          </form>
+        }
+      </div>
+    </div>
+  }
 </section>

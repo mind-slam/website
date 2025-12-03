@@ -21,7 +21,8 @@
       &--1 {
         width: 500px;
         height: 500px;
-        background: linear-gradient(135deg, rgba($secondary-blue, 0.08), transparent);
+        // Grün dominiert
+        background: linear-gradient(135deg, rgba($primary-green, 0.1), transparent);
         top: -200px;
         left: -200px;
       }
@@ -29,7 +30,7 @@
       &--2 {
         width: 400px;
         height: 400px;
-        background: linear-gradient(135deg, rgba($primary-green, 0.06), transparent);
+        background: linear-gradient(135deg, rgba($primary-green, 0.08), transparent);
         bottom: -150px;
         right: -150px;
       }
@@ -37,7 +38,7 @@
       &--3 {
         width: 200px;
         height: 200px;
-        background: linear-gradient(135deg, rgba($tertiary-gold, 0.1), transparent);
+        background: linear-gradient(135deg, rgba($secondary-blue, 0.08), transparent);
         top: 40%;
         right: 10%;
       }
@@ -62,13 +63,14 @@
     display: inline-flex;
     align-items: center;
     gap: $spacing-sm;
-    background: linear-gradient(135deg, rgba($secondary-blue, 0.1), rgba($primary-green, 0.1));
-    border: 1px solid rgba($secondary-blue, 0.2);
+    // Grün dominiert
+    background: linear-gradient(135deg, rgba($primary-green, 0.12), rgba($secondary-blue, 0.08));
+    border: 1px solid rgba($primary-green, 0.25);
     border-radius: $radius-full;
     padding: $spacing-sm $spacing-lg;
     font-size: $font-size-sm;
     font-weight: 600;
-    color: $secondary-blue;
+    color: $primary-green;
     margin-bottom: $spacing-lg;
   }
 
@@ -80,7 +82,8 @@
     margin: 0 0 $spacing-md;
 
     .highlight {
-      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+      // Grün dominiert
+      background: linear-gradient(90deg, $primary-green 0%, $primary-green-dark 60%, $secondary-blue 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -128,7 +131,8 @@
   // CTA Section
   &__cta {
     text-align: center;
-    background: linear-gradient(135deg, $secondary-blue, $primary-green);
+    // Grün-dominierter Gradient
+    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 60%, mix($primary-green, $secondary-blue, 50%) 100%);
     border-radius: $radius-xl;
     padding: $spacing-3xl $spacing-xl;
     color: white;
@@ -157,7 +161,7 @@
     align-items: center;
     gap: $spacing-sm;
     background: white;
-    color: $secondary-blue;
+    color: $primary-green;
     font-family: $font-headline;
     font-size: $font-size-lg;
     font-weight: 700;
@@ -172,6 +176,7 @@
     &:hover {
       transform: translateY(-2px);
       box-shadow: $shadow-lg;
+      color: darken($primary-green, 10%);
     }
 
     svg {
@@ -181,10 +186,10 @@
   }
 }
 
-// Benefit Card - Gradient Style
+// Benefit Card - Gradient Style (Grün dominiert)
 .benefit-card {
   position: relative;
-  background: linear-gradient(135deg, $secondary-blue, $primary-green);
+  background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 60%, mix($primary-green, $secondary-blue, 50%) 100%);
   border-radius: $radius-xl;
   padding: $spacing-xl;
   transition: all $transition-base;
@@ -244,7 +249,8 @@
     font-family: $font-headline;
     font-size: $font-size-4xl;
     font-weight: 800;
-    background: linear-gradient(135deg, $secondary-blue, $primary-green);
+    // Grün dominiert
+    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 70%, $secondary-blue 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -383,7 +389,8 @@
     align-items: center;
     justify-content: center;
     gap: $spacing-sm;
-    background: linear-gradient(135deg, $secondary-blue, $primary-green);
+    // Grün-dominierter Button
+    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 70%, mix($primary-green, $secondary-blue, 50%) 100%);
     color: white;
     font-family: $font-headline;
     font-size: $font-size-lg;
