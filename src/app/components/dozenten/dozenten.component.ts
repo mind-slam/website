@@ -83,34 +83,34 @@ export class DozentenComponent implements AfterViewInit {
 
   benefits = [
     {
+      icon: '📄',
+      title: 'PDF hochladen – fertig',
+      description: 'Laden Sie Ihr Vorlesungsskript als PDF hoch. Unsere KI generiert automatisch Quizfragen daraus – nach Themen sortiert.'
+    },
+    {
+      icon: '🎓',
+      title: 'Eigenes Klassenzimmer',
+      description: 'Erstellen Sie ein Klassenzimmer für Ihre Vorlesung. Studierende treten bei und spielen mit den Fragen aus Ihrem Skript.'
+    },
+    {
       icon: '📊',
-      title: 'Echtzeit-Insights',
-      description: 'Sehen Sie live, welche Themen sitzen und wo nachgebessert werden muss – ohne Extra-Klausuren oder Umfragen.'
+      title: 'Statistiken pro Student',
+      description: 'Sehen Sie, wie viele Quizze jeder Studierende gespielt hat, ihre Trefferquote und Punkte – alles im Dashboard.'
     },
     {
-      icon: '🤖',
-      title: 'KI erstellt Ihre Quizze',
-      description: 'Laden Sie Ihr Skript hoch und erhalten Sie in Sekunden prüfungsrelevante Fragen. Null Aufwand für Sie.'
-    },
-    {
-      icon: '🎯',
-      title: 'Studierende lernen freiwillig',
-      description: 'Durch Gamification und Wettbewerb lernen Ihre Studierenden regelmäßig – nicht erst kurz vor der Prüfung.'
-    },
-    {
-      icon: '📈',
-      title: 'Bessere Prüfungsergebnisse',
-      description: 'Aktives Wiederholen statt passives Lesen. Spaced Repetition sorgt dafür, dass der Stoff wirklich hängen bleibt.'
+      icon: '⚔️',
+      title: 'Duelle im Klassenzimmer',
+      description: 'Studierende fordern sich gegenseitig zu Quiz-Duellen heraus. Sie sehen aktive, wartende und beendete Duelle.'
     },
     {
       icon: '🔒',
-      title: 'Geschlossene Kursräume',
-      description: 'Ihre Materialien bleiben privat. Nur eingeschriebene Studierende haben Zugang zu Ihren Klassenzimmern.'
+      title: 'Geschlossener Kursraum',
+      description: 'Ihr Klassenzimmer ist privat. Nur Studierende, die beitreten, haben Zugang zu Ihren Materialien und Fragen.'
     },
     {
-      icon: '⏱️',
-      title: 'Spart Ihnen Zeit',
-      description: 'Keine manuellen Übungsblätter mehr. Die Plattform übernimmt Erstellung, Auswertung und Feedback.'
+      icon: '🧠',
+      title: 'Spaced Repetition inklusive',
+      description: 'Im Einzelspieler-Modus lernen Studierende mit wissenschaftlich fundierter Wiederholung – der Stoff bleibt hängen.'
     }
   ];
 
