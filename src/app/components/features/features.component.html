@@ -29,20 +29,20 @@
 
     <!-- Game Modes Section -->
     <div class="features__modes">
-      <h3 class="features__modes-title">Wähle deinen Spielmodus</h3>
+      <h3 class="features__modes-title">Wähle deinen Gegner</h3>
 
       <div class="features__modes-grid">
-        <!-- Mode 1: Duell -->
-        <div class="mode-card" #featureCard>
-          <div class="mode-card__badge">PvP</div>
+        <!-- Mode 1: 1v1 Duell -->
+        <div class="mode-card mode-card--featured" #featureCard>
+          <div class="mode-card__badge mode-card__badge--hot">🔥 HOT</div>
           <div class="mode-card__icon-wrapper">
             <div class="mode-card__icon">⚔️</div>
-            <div class="mode-card__icon-glow"></div>
+            <div class="mode-card__icon-glow mode-card__icon-glow--gold"></div>
           </div>
           <h4 class="mode-card__title">1v1 Duell</h4>
           <p class="mode-card__description">
-            Fordere deine Kommilitonen zu einem Quiz-Battle heraus.
-            Wer mehr Fragen richtig hat, gewinnt!
+            Das ultimative Showdown: Du gegen deinen Kumpel.
+            5 Runden, 20 Sekunden pro Frage – wer zuerst zuckt, verliert.
           </p>
           <div class="mode-card__stats">
             <div class="mode-card__stat">
@@ -62,30 +62,30 @@
           </div>
         </div>
 
-        <!-- Mode 2: Arena -->
-        <div class="mode-card mode-card--featured" #featureCard>
-          <div class="mode-card__badge mode-card__badge--hot">🔥 HOT</div>
+        <!-- Mode 2: Random Matchmaking -->
+        <div class="mode-card" #featureCard>
+          <div class="mode-card__badge">PvP</div>
           <div class="mode-card__icon-wrapper">
-            <div class="mode-card__icon">🏆</div>
-            <div class="mode-card__icon-glow mode-card__icon-glow--gold"></div>
+            <div class="mode-card__icon">🎲</div>
+            <div class="mode-card__icon-glow"></div>
           </div>
-          <h4 class="mode-card__title">Arena Battle</h4>
+          <h4 class="mode-card__title">Zufalls-Match</h4>
           <p class="mode-card__description">
-            Tritt gegen alle an! Kämpfe dich durch die Rangliste und
-            werde der Champion deiner Vorlesung.
+            Keine Freunde online? Kein Problem. Wir matchen dich mit
+            einem zufälligen Gegner aus deinem Kurs. Trau dich!
           </p>
           <div class="mode-card__stats">
             <div class="mode-card__stat">
-              <span class="mode-card__stat-value">∞</span>
-              <span class="mode-card__stat-label">Spieler</span>
+              <span class="mode-card__stat-value">Instant</span>
+              <span class="mode-card__stat-label">Match</span>
             </div>
             <div class="mode-card__stat">
-              <span class="mode-card__stat-value">Live</span>
-              <span class="mode-card__stat-label">Ranking</span>
+              <span class="mode-card__stat-value">Ranked</span>
+              <span class="mode-card__stat-label">Modus</span>
             </div>
           </div>
           <div class="mode-card__cta">
-            <span>Arena betreten</span>
+            <span>Match finden</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -94,28 +94,28 @@
 
         <!-- Mode 3: Klassenzimmer -->
         <div class="mode-card" #featureCard>
-          <div class="mode-card__badge">Co-op</div>
+          <div class="mode-card__badge">Vorlesung</div>
           <div class="mode-card__icon-wrapper">
             <div class="mode-card__icon">🎓</div>
             <div class="mode-card__icon-glow mode-card__icon-glow--blue"></div>
           </div>
           <h4 class="mode-card__title">Klassenzimmer</h4>
           <p class="mode-card__description">
-            Lern mit deinem Squad! Erstelle ein Klassenzimmer,
-            lade Skripte hoch und battlet euch gemeinsam durch.
+            Dein ganzer Kurs in einem Raum. Tritt gegen alle Kommilitonen
+            aus deiner Vorlesung an und klettere die Rangliste hoch!
           </p>
           <div class="mode-card__stats">
             <div class="mode-card__stat">
-              <span class="mode-card__stat-value">50+</span>
-              <span class="mode-card__stat-label">Mitglieder</span>
+              <span class="mode-card__stat-value">100+</span>
+              <span class="mode-card__stat-label">Spieler</span>
             </div>
             <div class="mode-card__stat">
-              <span class="mode-card__stat-value">Team</span>
+              <span class="mode-card__stat-value">Live</span>
               <span class="mode-card__stat-label">Ranking</span>
             </div>
           </div>
           <div class="mode-card__cta">
-            <span>Raum erstellen</span>
+            <span>Kurs beitreten</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -141,37 +141,37 @@
             <div class="powerup-item__content">
               <h4 class="powerup-item__title">KI-Quizgenerator</h4>
               <p class="powerup-item__text">
-                Upload dein Skript → Bekomme instant Quizfragen. Die KI checkt, was wichtig ist.
+                Upload dein Skript → Bekomme instant Quizfragen. Die KI checkt, was prüfungsrelevant ist.
               </p>
             </div>
           </div>
 
           <div class="powerup-item" #featureCard>
-            <div class="powerup-item__icon">📊</div>
+            <div class="powerup-item__icon">🧠</div>
             <div class="powerup-item__content">
-              <h4 class="powerup-item__title">Schwächen-Tracker</h4>
+              <h4 class="powerup-item__title">Spaced Repetition</h4>
               <p class="powerup-item__text">
-                Wir merken uns, wo du hängst und fragen genau das nochmal ab. Lücken = geschlossen.
+                Wissenschaftlich fundiert: Wir zeigen dir Fragen genau dann wieder, wenn du sie fast vergessen hast.
               </p>
             </div>
           </div>
 
           <div class="powerup-item" #featureCard>
-            <div class="powerup-item__icon">⚡</div>
+            <div class="powerup-item__icon">🏆</div>
             <div class="powerup-item__content">
-              <h4 class="powerup-item__title">Speed-Bonus</h4>
+              <h4 class="powerup-item__title">Kurs-Rangliste</h4>
               <p class="powerup-item__text">
-                Schneller antworten = mehr Punkte. Train dein Wissen bis es sitzt wie Netflix-Quotes.
+                Miss dich mit deinem ganzen Kurs. Wer ist der Beste in Mathe 2? Zeit, es herauszufinden.
               </p>
             </div>
           </div>
 
           <div class="powerup-item" #featureCard>
-            <div class="powerup-item__icon">🎯</div>
+            <div class="powerup-item__icon">📈</div>
             <div class="powerup-item__content">
-              <h4 class="powerup-item__title">Daily Challenges</h4>
+              <h4 class="powerup-item__title">Progress Tracking</h4>
               <p class="powerup-item__text">
-                Jeden Tag neue Challenges, XP sammeln und Streaks halten. Dein Gehirn wird's dir danken.
+                Sieh genau, welche Themen sitzen und wo du noch nachschärfen musst. Keine bösen Überraschungen.
               </p>
             </div>
           </div>
@@ -199,17 +199,17 @@
     <!-- Social Proof -->
     <div class="features__social">
       <div class="features__social-item">
-        <span class="features__social-number">1.2M+</span>
+        <span class="features__social-number">10k+</span>
         <span class="features__social-label">Quiz-Duelle gespielt</span>
       </div>
       <div class="features__social-divider"></div>
       <div class="features__social-item">
-        <span class="features__social-number">89%</span>
-        <span class="features__social-label">bessere Noten</span>
+        <span class="features__social-number">10k+</span>
+        <span class="features__social-label">generierte Fragen</span>
       </div>
       <div class="features__social-divider"></div>
       <div class="features__social-item">
-        <span class="features__social-number">4.8★</span>
+        <span class="features__social-number">5★</span>
         <span class="features__social-label">App Store Rating</span>
       </div>
     </div>

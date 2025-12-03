@@ -83,42 +83,38 @@ export class DozentenComponent implements AfterViewInit {
 
   benefits = [
     {
+      icon: '📄',
+      title: 'PDF hochladen – fertig',
+      description: 'Laden Sie Ihr Vorlesungsskript als PDF hoch. Unsere KI generiert automatisch Quizfragen daraus – nach Themen sortiert.'
+    },
+    {
+      icon: '🎓',
+      title: 'Eigenes Klassenzimmer',
+      description: 'Erstellen Sie ein Klassenzimmer für Ihre Vorlesung. Studierende treten bei und spielen mit den Fragen aus Ihrem Skript.'
+    },
+    {
       icon: '📊',
-      title: 'Lernfortschritt verfolgen',
-      description: 'Sehen Sie auf einen Blick, wie gut Ihre Studierenden den Stoff verstanden haben. Identifizieren Sie Wissenslücken frühzeitig.'
+      title: 'Statistiken pro Student',
+      description: 'Sehen Sie, wie viele Quizze jeder Studierende gespielt hat, ihre Trefferquote und Punkte – alles im Dashboard.'
     },
     {
-      icon: '🎯',
-      title: 'Gezieltes Feedback',
-      description: 'Erkennen Sie, welche Themen mehr Erklärung brauchen. Die Statistiken zeigen genau, wo Studierende Schwierigkeiten haben.'
-    },
-    {
-      icon: '⚡',
-      title: 'Aktivere Vorlesungen',
-      description: 'Nutzen Sie Live-Quizze in der Vorlesung. Steigern Sie die Aufmerksamkeit und Beteiligung Ihrer Studierenden.'
-    },
-    {
-      icon: '📚',
-      title: 'Automatische Fragengenerierung',
-      description: 'Die KI erstellt Quizfragen aus Ihren Skripten. Sparen Sie Zeit bei der Erstellung von Übungsmaterial.'
-    },
-    {
-      icon: '🏆',
-      title: 'Motivation durch Gamification',
-      description: 'Studierende lernen regelmäßiger durch Quiz-Duelle. Die spielerische Komponente erhöht die Prüfungsvorbereitung.'
+      icon: '⚔️',
+      title: 'Duelle im Klassenzimmer',
+      description: 'Studierende fordern sich gegenseitig zu Quiz-Duellen heraus. Sie sehen aktive, wartende und beendete Duelle.'
     },
     {
       icon: '🔒',
-      title: 'Volle Kontrolle',
-      description: 'Erstellen Sie geschlossene Klassenzimmer für Ihre Kurse. Bestimmen Sie, wer Zugang zu Ihren Materialien hat.'
+      title: 'Geschlossener Kursraum',
+      description: 'Ihr Klassenzimmer ist privat. Nur Studierende, die beitreten, haben Zugang zu Ihren Materialien und Fragen.'
+    },
+    {
+      icon: '🧠',
+      title: 'Spaced Repetition inklusive',
+      description: 'Im Einzelspieler-Modus lernen Studierende mit wissenschaftlich fundierter Wiederholung – der Stoff bleibt hängen.'
     }
   ];
 
-  stats = [
-    { value: '40%', label: 'bessere Prüfungsergebnisse' },
-    { value: '3x', label: 'höhere Lernmotivation' },
-    { value: '85%', label: 'aktive Kursteilnahme' }
-  ];
+  stats: { value: string; label: string }[] = [];
 
   ngAfterViewInit(): void {
     const observer = new IntersectionObserver(

@@ -3,10 +3,10 @@
 .dozenten {
   position: relative;
   padding: $spacing-4xl 0;
-  background: linear-gradient(180deg, $bg-white 0%, $bg-light 100%);
+  background: $bg-light;
   overflow: hidden;
 
-  // Background decoration
+  // Subtle background decoration
   &__bg-decoration {
     position: absolute;
     inset: 0;
@@ -16,13 +16,12 @@
     .decoration {
       position: absolute;
       border-radius: 50%;
-      opacity: 0.6;
+      opacity: 0.5;
 
       &--1 {
         width: 500px;
         height: 500px;
-        // Grün dominiert
-        background: linear-gradient(135deg, rgba($primary-green, 0.1), transparent);
+        background: linear-gradient(135deg, rgba($secondary-blue, 0.08), transparent);
         top: -200px;
         left: -200px;
       }
@@ -30,7 +29,7 @@
       &--2 {
         width: 400px;
         height: 400px;
-        background: linear-gradient(135deg, rgba($primary-green, 0.08), transparent);
+        background: linear-gradient(135deg, rgba($primary-green, 0.06), transparent);
         bottom: -150px;
         right: -150px;
       }
@@ -38,7 +37,7 @@
       &--3 {
         width: 200px;
         height: 200px;
-        background: linear-gradient(135deg, rgba($secondary-blue, 0.08), transparent);
+        background: linear-gradient(135deg, rgba($tertiary-gold, 0.1), transparent);
         top: 40%;
         right: 10%;
       }
@@ -56,22 +55,22 @@
   // Header
   &__header {
     text-align: center;
-    margin-bottom: $spacing-4xl;
+    margin-bottom: $spacing-3xl;
   }
 
   &__badge {
     display: inline-flex;
     align-items: center;
     gap: $spacing-sm;
-    // Grün dominiert
-    background: linear-gradient(135deg, rgba($primary-green, 0.12), rgba($secondary-blue, 0.08));
-    border: 1px solid rgba($primary-green, 0.25);
+    background: linear-gradient(135deg, rgba($secondary-blue, 0.1), rgba($primary-green, 0.1));
+    border: 1px solid rgba($secondary-blue, 0.2);
     border-radius: $radius-full;
     padding: $spacing-sm $spacing-lg;
     font-size: $font-size-sm;
     font-weight: 600;
     color: $primary-green;
     margin-bottom: $spacing-lg;
+    box-shadow: $shadow-sm;
   }
 
   &__title {
@@ -82,8 +81,7 @@
     margin: 0 0 $spacing-md;
 
     .highlight {
-      // Grün dominiert
-      background: linear-gradient(90deg, $primary-green 0%, $primary-green-dark 60%, $secondary-blue 100%);
+      background: linear-gradient(90deg, $secondary-blue, $primary-green);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -102,8 +100,8 @@
   &__benefits {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $spacing-xl;
-    margin-bottom: $spacing-4xl;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-3xl;
 
     @media (min-width: $breakpoint-sm) {
       grid-template-columns: repeat(2, 1fr);
@@ -114,29 +112,27 @@
     }
   }
 
-  // Stats Section
-  &__stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: $spacing-lg;
-    max-width: 800px;
-    margin: 0 auto $spacing-3xl;
-
-    @media (max-width: $breakpoint-sm) {
-      grid-template-columns: 1fr;
-      gap: $spacing-md;
-    }
-  }
-
   // CTA Section
   &__cta {
     text-align: center;
-    // Grün-dominierter Gradient
-    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 60%, mix($primary-green, $secondary-blue, 50%) 100%);
+    background: $bg-white;
+    border: 1px solid rgba($secondary-blue, 0.1);
     border-radius: $radius-xl;
     padding: $spacing-3xl $spacing-xl;
-    color: white;
     box-shadow: $shadow-lg;
+    position: relative;
+    overflow: hidden;
+
+    // Accent line
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+    }
   }
 
   &__cta-title {
@@ -144,12 +140,12 @@
     font-size: $font-size-2xl;
     font-weight: 700;
     margin: 0 0 $spacing-md;
-    color: white;
+    color: $text-primary;
   }
 
   &__cta-text {
     font-size: $font-size-lg;
-    opacity: 0.9;
+    color: $text-secondary;
     margin: 0 0 $spacing-xl;
     max-width: 500px;
     margin-left: auto;
@@ -160,8 +156,8 @@
     display: inline-flex;
     align-items: center;
     gap: $spacing-sm;
-    background: white;
-    color: $primary-green;
+    background: $secondary-blue;
+    color: white;
     font-family: $font-headline;
     font-size: $font-size-lg;
     font-weight: 700;
@@ -171,12 +167,12 @@
     cursor: pointer;
     text-decoration: none;
     transition: all $transition-base;
-    box-shadow: $shadow-md;
+    box-shadow: 0 4px 15px rgba($secondary-blue, 0.3);
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: $shadow-lg;
-      color: darken($primary-green, 10%);
+      box-shadow: 0 6px 25px rgba($secondary-blue, 0.4);
+      background: darken($secondary-blue, 5%);
     }
 
     svg {
@@ -186,16 +182,17 @@
   }
 }
 
-// Benefit Card - Gradient Style (Grün dominiert)
+// Benefit Card - Clean white cards
 .benefit-card {
   position: relative;
-  background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 60%, mix($primary-green, $secondary-blue, 50%) 100%);
+  background: $bg-white;
+  border: 1px solid rgba($secondary-blue, 0.08);
   border-radius: $radius-xl;
   padding: $spacing-xl;
   transition: all $transition-base;
   opacity: 0;
   transform: translateY(30px);
-  box-shadow: $shadow-lg;
+  box-shadow: $shadow-sm;
 
   &.visible {
     opacity: 1;
@@ -209,58 +206,35 @@
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: $shadow-xl;
+    box-shadow: $shadow-lg;
+    border-color: rgba($secondary-blue, 0.15);
+  }
+
+  &__icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba($secondary-blue, 0.1), rgba($primary-green, 0.1));
+    border-radius: $radius-lg;
+    font-size: 1.75rem;
+    margin-bottom: $spacing-md;
   }
 
   &__title {
     font-family: $font-headline;
     font-size: $font-size-xl;
     font-weight: 700;
-    color: #fff;
+    color: $text-primary;
     margin: 0 0 $spacing-sm;
   }
 
   &__description {
-    color: rgba(255, 255, 255, 0.9);
+    color: $text-secondary;
     font-size: $font-size-base;
     line-height: 1.7;
     margin: 0;
-  }
-}
-
-// Stat Card - Modern Glass Style
-.stat-card {
-  position: relative;
-  text-align: center;
-  padding: $spacing-xl $spacing-lg;
-  background: $bg-white;
-  border-radius: $radius-xl;
-  border: 1px solid rgba($primary-green, 0.2);
-  box-shadow: $shadow-md;
-  transition: all $transition-base;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: $shadow-lg;
-    border-color: rgba($primary-green, 0.4);
-  }
-
-  &__value {
-    font-family: $font-headline;
-    font-size: $font-size-4xl;
-    font-weight: 800;
-    // Grün dominiert
-    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 70%, $secondary-blue 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: $spacing-xs;
-  }
-
-  &__label {
-    color: $text-secondary;
-    font-size: $font-size-sm;
-    font-weight: 500;
   }
 }
 
@@ -389,8 +363,7 @@
     align-items: center;
     justify-content: center;
     gap: $spacing-sm;
-    // Grün-dominierter Button
-    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 70%, mix($primary-green, $secondary-blue, 50%) 100%);
+    background: $secondary-blue;
     color: white;
     font-family: $font-headline;
     font-size: $font-size-lg;
@@ -404,7 +377,7 @@
 
     &:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: $shadow-lg;
+      box-shadow: 0 6px 20px rgba($secondary-blue, 0.3);
     }
 
     &:disabled {
