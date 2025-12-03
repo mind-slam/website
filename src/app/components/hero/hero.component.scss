@@ -18,14 +18,14 @@
   &__gradient {
     position: absolute;
     inset: 0;
-    // Hellerer, freundlicherer Gradient
+    // Grün-dominierter Gradient mit Mind-Slam Farben
     background: linear-gradient(
       135deg,
-      #2a6db5 0%,        // Helleres Blau
-      #3578bf 25%,       // Mittleres Blau
-      #4a9a7c 60%,       // Blau-Grün Übergang
-      #6bc08a 85%,       // Helles Grün
-      $primary-green 100% // Mind.slam Grün
+      $primary-green 0%,           // Mind.slam Grün (dominant)
+      lighten($primary-green, 5%) 20%,
+      mix($primary-green, $secondary-blue, 70%) 45%, // Mehr Grün im Mix
+      mix($primary-green, $secondary-blue, 40%) 70%,
+      $secondary-blue 100%         // Mind.slam Blau (Akzent)
     );
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
@@ -58,7 +58,7 @@
     &--2 {
       width: 350px;
       height: 350px;
-      background: radial-gradient(circle, rgba($primary-green, 0.5) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba($primary-green, 0.6) 0%, transparent 70%);
       bottom: 10%;
       right: -5%;
       animation-delay: -5s;
@@ -67,7 +67,7 @@
     &--3 {
       width: 250px;
       height: 250px;
-      background: radial-gradient(circle, rgba(#60a5fa, 0.4) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba($secondary-blue, 0.4) 0%, transparent 70%);
       top: 50%;
       left: 30%;
       animation-delay: -10s;

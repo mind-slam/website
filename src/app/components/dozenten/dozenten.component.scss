@@ -21,7 +21,7 @@
       &--1 {
         width: 500px;
         height: 500px;
-        background: radial-gradient(circle, rgba($secondary-blue, 0.06) 0%, transparent 70%);
+        background: linear-gradient(135deg, rgba($secondary-blue, 0.08), transparent);
         top: -200px;
         left: -200px;
       }
@@ -29,15 +29,15 @@
       &--2 {
         width: 400px;
         height: 400px;
-        background: radial-gradient(circle, rgba($primary-green, 0.05) 0%, transparent 70%);
+        background: linear-gradient(135deg, rgba($primary-green, 0.06), transparent);
         bottom: -150px;
         right: -150px;
       }
 
       &--3 {
-        width: 250px;
-        height: 250px;
-        background: radial-gradient(circle, rgba($secondary-blue, 0.04) 0%, transparent 70%);
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(135deg, rgba($tertiary-gold, 0.1), transparent);
         top: 40%;
         right: 10%;
       }
@@ -62,13 +62,13 @@
     display: inline-flex;
     align-items: center;
     gap: $spacing-sm;
-    background: $bg-white;
-    border: 1px solid rgba($secondary-blue, 0.15);
+    background: linear-gradient(135deg, rgba($secondary-blue, 0.1), rgba($primary-green, 0.1));
+    border: 1px solid rgba($secondary-blue, 0.2);
     border-radius: $radius-full;
     padding: $spacing-sm $spacing-lg;
     font-size: $font-size-sm;
     font-weight: 600;
-    color: $secondary-blue;
+    color: $primary-green;
     margin-bottom: $spacing-lg;
     box-shadow: $shadow-sm;
   }
@@ -81,7 +81,10 @@
     margin: 0 0 $spacing-md;
 
     .highlight {
-      color: $secondary-blue;
+      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   }
 

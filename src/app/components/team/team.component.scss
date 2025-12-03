@@ -3,7 +3,14 @@
 .team {
   position: relative;
   padding: $spacing-4xl 0;
-  background: $bg-light;
+  // Grün-dominierter Hintergrund mit Mind-Slam Farben
+  background: linear-gradient(
+    135deg,
+    darken($primary-green, 15%) 0%,      // Dunkles Grün
+    darken($primary-green, 8%) 25%,       // Grün
+    mix($primary-green, $secondary-blue, 60%) 55%, // Grün-dominierter Mix
+    $secondary-blue 100%                   // Blau als Akzent
+  );
   overflow: hidden;
 
   // Subtle background decoration
@@ -11,6 +18,33 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
+    z-index: 0;
+  }
+
+  &__bg-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba($primary-green, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba($primary-green, 0.15) 0%, transparent 45%),
+      radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+  }
+
+  &__bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  &__bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.6;
+    animation: blobFloat 20s ease-in-out infinite;
     overflow: hidden;
 
     .decoration {
@@ -18,21 +52,22 @@
       border-radius: 50%;
       opacity: 0.5;
 
-      &--1 {
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba($secondary-blue, 0.06) 0%, transparent 70%);
-        top: -150px;
-        right: -150px;
-      }
+    &--1 {
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, rgba($primary-green, 0.4), rgba(lighten($primary-green, 20%), 0.3));
+      top: -150px;
+      left: -150px;
+      animation-delay: 0s;
+    }
 
-      &--2 {
-        width: 350px;
-        height: 350px;
-        background: radial-gradient(circle, rgba($primary-green, 0.05) 0%, transparent 70%);
-        bottom: -100px;
-        left: -100px;
-      }
+    &--2 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, rgba(lighten($secondary-blue, 10%), 0.4), rgba($primary-green, 0.3));
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -10s;
     }
   }
 
@@ -336,7 +371,295 @@
       background: $secondary-blue;
       border-color: $secondary-blue;
       color: white;
-      transform: translateY(-2px);
     }
+
+    &--email:hover {
+      background: linear-gradient(135deg, $primary-green, $secondary-blue);
+      border-color: $primary-green;
+      color: white;
+    }
+  }
+
+  // Overlay
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba($primary-green, 0.1), rgba($secondary-blue, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  &:hover &__overlay {
+    opacity: 1;
+  }
+}
+
+// Animations
+@keyframes blobFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .team-card {
+    opacity: 1;
+    transform: none;
+  }
+
+  .team__bg-blob,
+  .team-card__image-ring,
+  .team-card__status-dot {
+    animation: none;
+  }
+}
+
+// Application Modal
+.application-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-modal;
+  padding: $spacing-lg;
+  animation: fadeIn 0.2s ease;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  &__content {
+    background: $bg-white;
+    border-radius: $radius-xl;
+    padding: $spacing-2xl;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.3s ease;
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: $spacing-md;
+    right: $spacing-md;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: $spacing-sm;
+    color: $text-secondary;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+
+    &:hover {
+      color: $text-primary;
+      background: rgba($primary-green, 0.1);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__title {
+    font-family: $font-headline;
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 $spacing-xs;
+  }
+
+  &__subtitle {
+    color: $text-secondary;
+    font-size: $font-size-base;
+    margin: 0;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    label {
+      font-size: $font-size-sm;
+      font-weight: 600;
+      color: $text-primary;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: $spacing-md;
+      border: 1px solid rgba($primary-green, 0.2);
+      border-radius: $radius-md;
+      font-family: $font-body;
+      font-size: $font-size-base;
+      transition: all 0.2s ease;
+      background: $bg-white;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-green;
+        box-shadow: 0 0 0 3px rgba($primary-green, 0.15);
+      }
+
+      &::placeholder {
+        color: $text-muted;
+      }
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right $spacing-md center;
+      padding-right: $spacing-2xl;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 70%, mix($primary-green, $secondary-blue, 50%) 100%);
+    color: white;
+    font-family: $font-headline;
+    font-size: $font-size-lg;
+    font-weight: 700;
+    padding: $spacing-md $spacing-xl;
+    border: none;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: $spacing-md;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba($primary-green, 0.4);
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__success {
+    text-align: center;
+    padding: $spacing-2xl;
+
+    svg {
+      width: 64px;
+      height: 64px;
+      color: $primary-green;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      font-size: $font-size-xl;
+      font-weight: 700;
+      color: $primary-green;
+      margin: 0 0 $spacing-xs;
+    }
+
+    span {
+      font-size: $font-size-base;
+      color: $text-secondary;
+    }
+  }
+
+  &__error {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #dc3545;
+    padding: $spacing-md;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    text-align: center;
   }
 }

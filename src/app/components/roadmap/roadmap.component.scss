@@ -3,7 +3,8 @@
 .roadmap {
   position: relative;
   padding: $spacing-4xl 0;
-  background: linear-gradient(180deg, $bg-white 0%, $bg-white 60%, rgba($secondary-blue, 0.15) 100%);
+  // Grün-dominierter Hintergrund
+  background: linear-gradient(180deg, $bg-white 0%, rgba($primary-green, 0.05) 50%, rgba($primary-green, 0.12) 100%);
   overflow: hidden;
   min-height: 700px;
 
@@ -22,9 +23,10 @@
   }
 
   &__intro {
-    color: $secondary-blue;
+    color: $primary-green;
     font-size: $font-size-lg;
     margin-bottom: $spacing-sm;
+    font-weight: 600;
   }
 
   &__title {
@@ -35,7 +37,8 @@
     font-style: italic;
 
     .text-gradient {
-      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+      // Grün dominiert
+      background: linear-gradient(90deg, $primary-green 0%, $primary-green-dark 60%, $secondary-blue 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
