@@ -4,7 +4,8 @@
   background: $bg-white;
   padding: 60px 0 40px;
   border-top: 4px solid;
-  border-image: linear-gradient(90deg, $secondary-blue, $primary-green) 1;
+  // Grün-dominierter Gradient
+  border-image: linear-gradient(90deg, $primary-green 0%, $primary-green-dark 60%, $secondary-blue 100%) 1;
 
   &__container {
     max-width: 1200px;
@@ -36,7 +37,8 @@
     color: $text-primary;
 
     .text-gradient {
-      background: linear-gradient(90deg, $secondary-blue, $primary-green);
+      // Grün dominiert
+      background: linear-gradient(90deg, $primary-green 0%, $primary-green-dark 60%, $secondary-blue 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
