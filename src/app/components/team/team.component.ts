@@ -103,7 +103,7 @@ export class TeamComponent implements OnInit {
       focus: 'Product & Tech',
       description: 'Die treibende Kraft hinter mind.slam. Max entwickelt die Vision und führt das technische Team. Als Student kennt er die Herausforderungen des Lernens aus erster Hand.',
       image: 'team_fotos/maximilian_mintchev.png',
-      skills: ['Flutter', 'AI/ML', 'Product'],
+      skills: ['Business Relations', 'AI/ML', 'Product'],
       linkedin: 'https://linkedin.com/in/',
       email: 'max@mind-slam.de'
     },
