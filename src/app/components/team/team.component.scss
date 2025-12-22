@@ -69,13 +69,14 @@
         animation-delay: 0s;
       }
 
-    &--2 {
-      width: 500px;
-      height: 500px;
-      background: linear-gradient(135deg, rgba(lighten($secondary-blue, 10%), 0.4), rgba($primary-green, 0.3));
-      bottom: -150px;
-      right: -150px;
-      animation-delay: -10s;
+      &--2 {
+        width: 500px;
+        height: 500px;
+        background: linear-gradient(135deg, rgba(lighten($secondary-blue, 10%), 0.4), rgba($primary-green, 0.3));
+        bottom: -150px;
+        right: -150px;
+        animation-delay: -10s;
+      }
     }
   }
 
