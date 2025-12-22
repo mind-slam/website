@@ -24,7 +24,7 @@ export class TestimonialsComponent implements OnInit {
       name: 'Laura M.',
       image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face',
       university: 'TU Dresden • Informatik',
-      quote: 'Mit mind.slam macht Lernen endlich Spaß! Die Quiz-Duelle mit meinen Kommilitonen motivieren mich, am Ball zu bleiben. Hab meine Note in Algorithmen von 3,0 auf 1,7 verbessert!',
+      quote: 'Mit DiggiDuell macht Lernen endlich Spaß! Die Quiz-Duelle mit meinen Kommilitonen motivieren mich, am Ball zu bleiben. Hab meine Note in Algorithmen von 3,0 auf 1,7 verbessert!',
       tags: ['Quiz-Duelle', 'Motivation']
     },
     {
@@ -52,14 +52,14 @@ export class TestimonialsComponent implements OnInit {
       name: 'Anna S.',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
       university: 'TU Dresden • Psychologie',
-      quote: 'Ich nutze mind.slam täglich in der Straßenbahn. Die kurzen Quiz-Sessions passen perfekt in meinen Alltag. Statistik ist jetzt mein Lieblingsfach!',
+      quote: 'Ich nutze DiggiDuell täglich in der Straßenbahn. Die kurzen Quiz-Sessions passen perfekt in meinen Alltag. Statistik ist jetzt mein Lieblingsfach!',
       tags: ['Mobil lernen', 'Alltag']
     },
     {
       name: 'Felix R.',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
       university: 'TU Dresden • Rechtswissenschaft',
-      quote: 'Die Wiederholungsfunktion ist Gold wert! mind.slam merkt sich, welche Fragen ich falsch beantwortet habe und fragt sie immer wieder ab.',
+      quote: 'Die Wiederholungsfunktion ist Gold wert! DiggiDuell merkt sich, welche Fragen ich falsch beantwortet habe und fragt sie immer wieder ab.',
       tags: ['Spaced Repetition', 'Jura']
     }
   ];

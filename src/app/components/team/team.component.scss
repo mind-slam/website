@@ -6,56 +6,31 @@
   // Grün-dominierter Hintergrund mit Mind-Slam Farben
   background: linear-gradient(
     135deg,
-    darken($primary-green, 15%) 0%,      // Dunkles Grün
-    darken($primary-green, 8%) 25%,       // Grün
-    mix($primary-green, $secondary-blue, 60%) 55%, // Grün-dominierter Mix
-    $secondary-blue 100%                   // Blau als Akzent
+    darken($primary-green, 12%) 0%,
+    $primary-green 30%,
+    mix($primary-green, $secondary-blue, 50%) 60%,
+    $secondary-blue 100%
   );
   overflow: hidden;
 
-  // Subtle background decoration
+  // Animated background shapes
   &__bg-decoration {
     position: absolute;
     inset: 0;
     pointer-events: none;
     z-index: 0;
-  }
-
-  &__bg-gradient {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 30%, rgba($primary-green, 0.3) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 70%, rgba($primary-green, 0.15) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
-  }
-
-  &__bg-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  &__bg-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.6;
-    animation: blobFloat 20s ease-in-out infinite;
     overflow: hidden;
 
     .decoration {
       position: absolute;
       border-radius: 50%;
-      opacity: 0.5;
+      background: rgba(255, 255, 255, 0.08);
+      animation: floatShape 15s ease-in-out infinite;
 
       &--1 {
         width: 600px;
         height: 600px;
-        background: linear-gradient(135deg, rgba($primary-green, 0.4), rgba($primary-green, 0.3));
+        background: linear-gradient(135deg, rgba($primary-green, 0.4), rgba(lighten($primary-green, 20%), 0.3));
         top: -150px;
         left: -150px;
         animation-delay: 0s;
@@ -64,7 +39,7 @@
       &--2 {
         width: 500px;
         height: 500px;
-        background: linear-gradient(135deg, rgba($secondary-blue, 0.4), rgba($primary-green, 0.3));
+        background: linear-gradient(135deg, rgba(lighten($secondary-blue, 10%), 0.4), rgba($primary-green, 0.3));
         bottom: -150px;
         right: -150px;
         animation-delay: -10s;
@@ -80,7 +55,7 @@
     padding: 0 $spacing-lg;
   }
 
-  // Header
+  // Header - WEISSE Schriften auf Gradient
   &__header {
     text-align: center;
     margin-bottom: $spacing-3xl;
@@ -90,22 +65,22 @@
     display: inline-flex;
     align-items: center;
     gap: $spacing-sm;
-    background: $bg-white;
-    border: 1px solid rgba($secondary-blue, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: $radius-full;
     padding: $spacing-sm $spacing-lg;
     font-size: $font-size-sm;
     font-weight: 600;
-    color: $secondary-blue;
+    color: white;
     margin-bottom: $spacing-lg;
-    box-shadow: $shadow-sm;
   }
 
   &__title {
     font-family: $font-headline;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
-    color: $text-primary;
+    color: white;
     margin: 0 0 $spacing-md;
   }
 
@@ -115,13 +90,15 @@
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.7;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   }
 
   // Grid
   &__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $spacing-lg;
+    gap: $spacing-xl;
     margin-bottom: $spacing-3xl;
 
     @media (min-width: $breakpoint-sm) {
@@ -133,7 +110,7 @@
     }
   }
 
-  // Join CTA
+  // Join CTA - Glasmorphism
   &__join {
     max-width: 800px;
     margin: 0 auto;
@@ -144,15 +121,16 @@
     align-items: center;
     gap: $spacing-xl;
     padding: $spacing-xl $spacing-2xl;
-    background: $bg-white;
-    border: 1px solid rgba($secondary-blue, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: $radius-xl;
-    box-shadow: $shadow-lg;
     transition: all $transition-base;
 
     &:hover {
-      transform: translateY(-3px);
-      box-shadow: $shadow-xl;
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
     }
 
     @media (max-width: $breakpoint-md) {
@@ -163,14 +141,15 @@
   }
 
   &__join-icon {
-    width: 60px;
-    height: 60px;
+    width: 64px;
+    height: 64px;
     flex-shrink: 0;
-    background: linear-gradient(135deg, $primary-green, $secondary-blue);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 
     svg {
       width: 28px;
@@ -187,13 +166,13 @@
     font-family: $font-headline;
     font-size: $font-size-xl;
     font-weight: 700;
-    color: $text-primary;
+    color: white;
     margin: 0 0 $spacing-xs 0;
   }
 
   &__join-text {
     font-size: $font-size-base;
-    color: $text-secondary;
+    color: rgba(255, 255, 255, 0.8);
     margin: 0;
     line-height: 1.6;
   }
@@ -203,16 +182,18 @@
     align-items: center;
     gap: $spacing-sm;
     padding: $spacing-md $spacing-xl;
-    background: $secondary-blue;
-    color: white;
+    background: white;
+    color: $secondary-blue;
+    border: none;
     border-radius: $radius-full;
     font-family: $font-headline;
-    font-weight: 600;
+    font-weight: 700;
     font-size: $font-size-base;
     text-decoration: none;
+    cursor: pointer;
     transition: all $transition-base;
     white-space: nowrap;
-    box-shadow: 0 4px 15px rgba($secondary-blue, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
     svg {
       width: 18px;
@@ -221,9 +202,8 @@
     }
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba($secondary-blue, 0.4);
-      background: darken($secondary-blue, 5%);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
 
       svg {
         transform: translateX(4px);
@@ -232,18 +212,29 @@
   }
 }
 
-// Team Card - Clean white cards
+// Team Card - Glasmorphism mit weißen Karten
 .team-card {
   position: relative;
-  background: $bg-white;
-  border: 1px solid rgba($secondary-blue, 0.08);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: $radius-xl;
-  padding: $spacing-xl;
+  padding: $spacing-2xl $spacing-xl;
   text-align: center;
-  transition: all $transition-base;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
-  transform: translateY(30px);
-  box-shadow: $shadow-sm;
+  transform: translateY(40px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+
+  // Accent line at top
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $primary-green, $secondary-blue);
+  }
 
   &.visible {
     opacity: 1;
@@ -256,35 +247,40 @@
   }
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: $shadow-lg;
-    border-color: rgba($secondary-blue, 0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
   }
 
-  // Image
+  // Image - ZENTRIERT
   &__image-wrapper {
+    display: flex;
+    justify-content: center;
     margin-bottom: $spacing-lg;
+    position: relative;
   }
 
   &__image {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     object-fit: cover;
     object-position: center top;
-    border: 4px solid rgba($secondary-blue, 0.1);
+    border: 4px solid rgba($secondary-blue, 0.15);
     transition: all $transition-base;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 
   &:hover &__image {
-    border-color: rgba($secondary-blue, 0.25);
+    border-color: rgba($secondary-blue, 0.3);
     transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
   // Content
   &__content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: $spacing-xs;
   }
 
@@ -301,13 +297,14 @@
     font-weight: 600;
     color: $secondary-blue;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin: 0;
   }
 
   &__focus {
-    font-size: $font-size-sm;
-    color: $text-muted;
+    font-size: $font-size-base;
+    color: $text-primary;
+    font-weight: 500;
     margin: 0 0 $spacing-sm 0;
   }
 
@@ -317,7 +314,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: $spacing-xs;
-    margin: $spacing-sm 0;
+    margin: $spacing-md 0;
   }
 
   .skill-tag {
@@ -337,10 +334,11 @@
   }
 
   &__description {
-    font-size: $font-size-sm;
-    color: $text-secondary;
+    font-size: $font-size-base;
+    color: $text-primary;
     line-height: 1.7;
     margin: $spacing-sm 0;
+    max-width: 280px;
   }
 
   // Social
@@ -348,94 +346,46 @@
     display: flex;
     justify-content: center;
     gap: $spacing-sm;
-    margin-top: $spacing-md;
+    margin-top: $spacing-lg;
   }
 
   &__social-link {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: rgba($secondary-blue, 0.08);
-    border: 1px solid rgba($secondary-blue, 0.1);
+    background: linear-gradient(135deg, rgba($primary-green, 0.1), rgba($secondary-blue, 0.1));
+    border: 1px solid rgba($secondary-blue, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
     color: $text-secondary;
-    transition: all $transition-base;
+    transition: all 0.3s ease;
 
     svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
     }
 
     &:hover {
-      background: $secondary-blue;
-      border-color: $secondary-blue;
-      color: white;
-    }
-
-    &--email:hover {
       background: linear-gradient(135deg, $primary-green, $secondary-blue);
-      border-color: $primary-green;
+      border-color: transparent;
       color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba($primary-green, 0.3);
     }
-  }
-
-  // Overlay
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba($primary-green, 0.1), rgba($secondary-blue, 0.1));
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    border-radius: inherit;
-  }
-
-  &:hover &__overlay {
-    opacity: 1;
   }
 }
 
 // Animations
-@keyframes blobFloat {
+@keyframes floatShape {
   0%, 100% {
     transform: translate(0, 0) scale(1);
   }
   33% {
-    transform: translate(30px, -30px) scale(1.1);
+    transform: translate(20px, -20px) scale(1.05);
   }
   66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.2);
-  }
-}
-
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    transform: translate(-15px, 15px) scale(0.95);
   }
 }
 
@@ -446,9 +396,7 @@
     transform: none;
   }
 
-  .team__bg-blob,
-  .team-card__image-ring,
-  .team-card__status-dot {
+  .team__bg-decoration .decoration {
     animation: none;
   }
 }

@@ -1,0 +1,131 @@
+<section class="tiktok-section" id="tiktok-promo" #tiktokSection>
+  <div class="tiktok-section__container">
+    <div class="tiktok-section__header">
+      <h2 class="tiktok-section__title">
+        <span class="text-gradient">Alle zocken. Du büffelst.</span>
+      </h2>
+      <p class="tiktok-section__subtitle">
+        Wird Zeit, das zu ändern.
+      </p>
+    </div>
+
+    <div class="tiktok-carousel-wrapper">
+      <!-- Chalk Text -->
+      <div class="tiktok-chalk">
+        <span class="tiktok-chalk__text">Prokrastinieren? Muss nicht sein.</span>
+      </div>
+
+      <!-- Left Arrow -->
+      <button
+        class="tiktok-nav tiktok-nav--left"
+        [class.hidden]="currentVideoIndex === 0"
+        (click)="navigatePrev()"
+        aria-label="Vorheriges Video"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+
+      <!-- Right Arrow -->
+      <button
+        class="tiktok-nav tiktok-nav--right"
+        [class.hidden]="currentVideoIndex === videoStates.length - 1"
+        (click)="navigateNext()"
+        aria-label="Nächstes Video"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+
+      <div class="tiktok-carousel" #tiktokCarousel>
+      <div class="tiktok-phone" *ngFor="let state of videoStates; let i = index" [class.active]="currentVideoIndex === i">
+        <div class="tiktok-phone__notch"></div>
+        <div class="tiktok-screen" [class.loading]="!state.ready" (click)="onVideoClick(i)">
+          <div class="tiktok-loader" *ngIf="!state.ready">
+            <div class="tiktok-loader__spinner"></div>
+          </div>
+          <!-- Play Button Overlay -->
+          <div class="tiktok-play-overlay" *ngIf="!carouselStarted && currentVideoIndex === i && state.ready">
+            <div class="tiktok-play-button">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+          <video
+            #promoVideo
+            class="tiktok-video"
+            [class.ready]="state.ready"
+            muted
+            playsinline
+            preload="auto"
+          >
+            <source [src]="state.src" type="video/mp4">
+          </video>
+          <div class="tiktok-logo-overlay" [class.visible]="state.showLogo">
+            <img src="mind.slam_Logo_Mark_white.png" alt="Mind.Slam Logo">
+            <span class="tiktok-logo-overlay__text">DiggiDuell</span>
+            <span class="tiktok-logo-overlay__summary">{{ state.summary }}</span>
+          </div>
+          <div class="tiktok-ui">
+            <div class="tiktok-ui__bottom">
+              <div class="tiktok-ui__user">
+                <span class="tiktok-ui__username">&#64;diggiduell</span>
+                <span class="tiktok-ui__verified">✓</span>
+              </div>
+              <p class="tiktok-ui__caption">{{ state.caption }}</p>
+              <div class="tiktok-ui__music">
+                <span class="tiktok-ui__music-icon">♫</span>
+                <span class="tiktok-ui__music-text">Original Sound - DiggiDuell</span>
+              </div>
+            </div>
+            <div class="tiktok-ui__sidebar">
+              <div class="tiktok-ui__avatar">
+                <img src="mind.slam_Logo_Mark_white.png" alt="DiggiDuell">
+                <span class="tiktok-ui__follow">+</span>
+              </div>
+              <div class="tiktok-ui__action">
+                <span class="tiktok-ui__icon">❤️</span>
+                <span class="tiktok-ui__count">{{ state.likes }}</span>
+              </div>
+              <div class="tiktok-ui__action">
+                <span class="tiktok-ui__icon">💬</span>
+                <span class="tiktok-ui__count">{{ state.comments }}</span>
+              </div>
+              <div class="tiktok-ui__action">
+                <span class="tiktok-ui__icon">🔖</span>
+                <span class="tiktok-ui__count">{{ state.saves }}</span>
+              </div>
+              <div class="tiktok-ui__action">
+                <span class="tiktok-ui__icon">↗️</span>
+                <span class="tiktok-ui__count">Share</span>
+              </div>
+              <div class="tiktok-ui__disc">
+                <img src="mind.slam_Logo_Mark_white.png" alt="Music">
+              </div>
+            </div>
+          </div>
+          <div class="tiktok-ui__header">
+            <span class="tiktok-ui__header-item">Following</span>
+            <span class="tiktok-ui__header-item tiktok-ui__header-item--active">For You</span>
+          </div>
+        </div>
+        <div class="tiktok-phone__home-indicator"></div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Dot Indicators -->
+    <div class="tiktok-dots">
+      <button
+        *ngFor="let state of videoStates; let i = index"
+        class="tiktok-dots__dot"
+        [class.active]="currentVideoIndex === i"
+        (click)="scrollToVideoPublic(i)"
+        [attr.aria-label]="'Video ' + (i + 1)"
+      ></button>
+    </div>
+  </div>
+</section>
