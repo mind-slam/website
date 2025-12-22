@@ -34,14 +34,30 @@
         left: -100px;
         animation-delay: 0s;
       }
-
-      &--2 {
-        width: 300px;
-        height: 300px;
-        bottom: -80px;
-        right: -80px;
-        animation-delay: -5s;
+      &--1 {
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(135deg, rgba($primary-green, 0.4), rgba(lighten($primary-green, 20%), 0.3));
+        top: -150px;
+        left: -150px;
+        animation-delay: 0s;
       }
+      &--1 {
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(135deg, rgba($primary-green, 0.4), rgba(lighten($primary-green, 20%), 0.3));
+        top: -150px;
+        left: -150px;
+        animation-delay: 0s;
+      }
+
+    &--2 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, rgba(lighten($secondary-blue, 10%), 0.4), rgba($primary-green, 0.3));
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -10s;
     }
   }
 
@@ -80,15 +96,16 @@
     font-weight: 800;
     color: white;
     margin: 0 0 $spacing-md;
-    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   }
 
   &__subtitle {
-    color: rgba(255, 255, 255, 0.9);
+    color: $text-secondary;
     font-size: $font-size-lg;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.7;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   }
 
   // Grid
@@ -253,6 +270,25 @@
     display: flex;
     justify-content: center;
     margin-bottom: $spacing-lg;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+    // Subtle gradient ring behind image
+    &::before {
+      content: '';
+      position: absolute;
+      width: 132px;
+      height: 132px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, $primary-green, $secondary-blue);
+      border-radius: 50%;
+      z-index: 0;
+      opacity: 0.8;
+      transition: all $transition-base;
+    }
   }
 
   &__image {
@@ -261,16 +297,18 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: center top;
-    border: 4px solid transparent;
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(135deg, $primary-green, $secondary-blue) border-box;
-    transition: all 0.4s ease;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 4px solid rgba($secondary-blue, 0.1);
+    transition: all $transition-base;
   }
 
   &:hover &__image {
-    transform: scale(1.08);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    border-color: rgba($secondary-blue, 0.25);
+    transform: scale(1.05);
+  }
+
+  &:hover &__image-wrapper::before {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
   }
 
   // Content
@@ -291,19 +329,17 @@
 
   &__role {
     font-size: $font-size-sm;
-    font-weight: 700;
-    background: linear-gradient(135deg, $primary-green, $secondary-blue);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-weight: 600;
+    color: $secondary-blue;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin: 0;
   }
 
   &__focus {
-    font-size: $font-size-sm;
-    color: $text-muted;
+    font-size: $font-size-base;
+    color: $text-primary;
+    font-weight: 500;
     margin: 0 0 $spacing-sm 0;
   }
 
@@ -317,25 +353,24 @@
   }
 
   .skill-tag {
-    padding: $spacing-xs $spacing-md;
+    padding: $spacing-xs $spacing-sm;
     background: linear-gradient(135deg, rgba($primary-green, 0.1), rgba($secondary-blue, 0.1));
-    border: 1px solid rgba($primary-green, 0.2);
+    border: 1px solid rgba($secondary-blue, 0.1);
     border-radius: $radius-full;
     font-size: $font-size-xs;
-    font-weight: 600;
+    font-weight: 500;
     color: $text-secondary;
     transition: all $transition-base;
   }
 
   &:hover .skill-tag {
-    background: linear-gradient(135deg, rgba($primary-green, 0.2), rgba($secondary-blue, 0.2));
-    border-color: rgba($primary-green, 0.4);
-    color: $text-primary;
+    background: linear-gradient(135deg, rgba($primary-green, 0.15), rgba($secondary-blue, 0.15));
+    border-color: rgba($secondary-blue, 0.2);
   }
 
   &__description {
-    font-size: $font-size-sm;
-    color: $text-secondary;
+    font-size: $font-size-base;
+    color: $text-primary;
     line-height: 1.7;
     margin: $spacing-sm 0;
     max-width: 280px;
