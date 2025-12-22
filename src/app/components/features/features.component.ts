@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Feature {
@@ -14,7 +14,7 @@ interface Feature {
   templateUrl: './features.component.html',
   styleUrl: './features.component.scss'
 })
-export class FeaturesComponent implements OnInit {
+export class FeaturesComponent implements OnInit, AfterViewInit {
   @ViewChildren('featureCard') featureCards!: QueryList<ElementRef>;
 
   featuresLeft: Feature[] = [
@@ -43,12 +43,13 @@ export class FeaturesComponent implements OnInit {
     }
   ];
 
-  // Screenshot für das zentrale iPhone
   featuredScreenshot = 'duell_arena.PNG';
 
   ngOnInit(): void {
     this.setupScrollAnimation();
   }
+
+  ngAfterViewInit(): void {}
 
   private setupScrollAnimation(): void {
     if (typeof IntersectionObserver === 'undefined') return;
@@ -64,7 +65,6 @@ export class FeaturesComponent implements OnInit {
       { threshold: 0.2 }
     );
 
-    // Observe nach kurzer Verzögerung, damit ViewChildren bereit sind
     setTimeout(() => {
       this.featureCards?.forEach((card) => {
         observer.observe(card.nativeElement);
