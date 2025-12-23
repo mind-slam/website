@@ -606,15 +606,19 @@
 // Chalk Text on Blackboard
 .tiktok-chalk {
   position: absolute;
-  top: $spacing-lg;
+  top: $spacing-md;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
 
   &__text {
     font-family: $font-chalk;
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
-    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
     text-shadow:
       0 0 10px rgba(255, 255, 255, 0.3),
@@ -623,6 +627,14 @@
     letter-spacing: 1px;
     transform: rotate(-2deg);
     display: inline-block;
+
+    &--secondary {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.75);
+      transform: rotate(-1deg);
+      margin-top: -$spacing-xs;
+    }
   }
 }
 
