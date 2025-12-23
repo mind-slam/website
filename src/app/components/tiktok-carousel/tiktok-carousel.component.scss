@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   padding: $spacing-3xl 0 $spacing-4xl;
+  padding-top: calc(#{$spacing-3xl} + 80px); // Extra Platz für den Ringbuch-Übergang
   background: white;
 
   &__container {

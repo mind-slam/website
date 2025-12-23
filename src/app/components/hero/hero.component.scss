@@ -5,8 +5,10 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  overflow: visible; // Wichtig für den Übergang zur nächsten Sektion
   padding-top: 80px;
+  padding-bottom: 80px; // Platz für den Übergang
+  margin-bottom: -50px; // Übergang ragt in die nächste Sektion
 
   // Animated Background
   &__background {
@@ -715,6 +717,203 @@
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+// ============================================
+// RINGBUCH ÜBERGANG - Zwei Seiten verbunden
+// ============================================
+
+$binding-height: 140px; // Gesamthöhe des Übergangs
+$ring-gap: clamp(55px, 7vw, 95px);
+$ring-width: 22px;
+$ring-height: 44px;
+$hole-size: 12px;
+
+// Kariertes Muster
+@mixin grid-pattern($opacity: 0.12) {
+  background-image:
+    linear-gradient(rgba($secondary-blue, $opacity) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($secondary-blue, $opacity) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.hero__paper-edge {
+  position: absolute;
+  bottom: -#{$binding-height / 2};
+  left: 0;
+  right: 0;
+  height: $binding-height;
+  z-index: 10;
+  pointer-events: none;
+}
+
+// Obere karierte Seite (Hero-Seite)
+.grid-paper--top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: $bg-light;
+  @include grid-pattern;
+}
+
+// Untere karierte Seite (nächste Sektion)
+.grid-paper--bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: $bg-light;
+  @include grid-pattern;
+}
+
+// Bindung in der Mitte (Papierstreifen mit Löchern)
+.paper-strip {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 24px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    to bottom,
+    darken($bg-light, 3%) 0%,
+    $bg-light 50%,
+    darken(white, 2%) 100%
+  );
+  z-index: 2;
+  @include grid-pattern(0.08);
+  box-shadow:
+    0 -1px 2px rgba(0,0,0,0.05),
+    0 1px 2px rgba(0,0,0,0.05);
+}
+
+// Container für Löcher
+.paper-holes {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  gap: $ring-gap;
+  padding: 0 5%;
+  z-index: 3;
+}
+
+// Einzelnes Loch - Gestanztes Papier-Look
+.paper-hole {
+  width: $hole-size;
+  height: $hole-size;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+
+  // Hintergrund durch das Loch (Hero-Gradient sichtbar)
+  background: linear-gradient(
+    135deg,
+    mix($primary-green, $secondary-blue, 60%) 0%,
+    mix($primary-green, $secondary-blue, 40%) 100%
+  );
+
+  // Gestanzter Rand-Effekt
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.5),
+    inset 0 -1px 2px rgba(255,255,255,0.2),
+    inset 2px 0 3px rgba(0,0,0,0.2),
+    inset -2px 0 3px rgba(0,0,0,0.2);
+
+  // Weißer Papierrand um das Loch
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.9);
+    box-shadow:
+      0 0 1px rgba(0,0,0,0.1),
+      inset 0 0 2px rgba(0,0,0,0.05);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    width: 10px;
+    height: 10px;
+
+    &::before {
+      inset: -2px;
+      border-width: 2px;
+    }
+  }
+}
+
+// Spiralringe Container
+.spiral-rings {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  gap: $ring-gap;
+  padding: 0 5%;
+  pointer-events: none;
+
+  &--back {
+    z-index: 1;
+  }
+
+  &--front {
+    z-index: 4;
+  }
+}
+
+// Einzelner Spiralring - Echter Drahtring-Look
+.spiral-ring {
+  width: $ring-width;
+  height: $ring-height;
+  flex-shrink: 0;
+  position: relative;
+
+  // Ring als Border (Draht-Effekt)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #888;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background: transparent;
+  }
+
+  // Hinterer Halbbogen (oben, hinter dem Papier)
+  .spiral-rings--back &::before {
+    border-color: #666;
+    clip-path: polygon(0 0, 100% 0, 100% 55%, 0 55%);
+    filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.2));
+  }
+
+  // Vorderer Halbbogen (unten, vor dem Papier)
+  .spiral-rings--front &::before {
+    border-color: #999;
+    clip-path: polygon(0 45%, 100% 45%, 100% 100%, 0 100%);
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+  }
+
+  @media (max-width: $breakpoint-md) {
+    width: 16px;
+    height: 32px;
+
+    &::before {
+      border-width: 3px;
+    }
   }
 }
 
