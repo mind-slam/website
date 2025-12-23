@@ -1,229 +1,108 @@
 <section class="features" id="features">
-  <!-- Background -->
-  <div class="features__bg">
-    <div class="features__bg-gradient"></div>
-    <div class="features__bg-pattern"></div>
-    <div class="features__bg-shapes">
-      <div class="shape shape--1"></div>
-      <div class="shape shape--2"></div>
-    </div>
-  </div>
-
   <div class="features__container">
     <!-- Header -->
     <div class="features__header">
-      <div class="features__badge">
-        <span class="features__badge-icon">🎮</span>
-        <span class="features__badge-text">Level up your learning</span>
-      </div>
-      <h2 class="features__title">
-        Vergiss langweiliges <span class="features__title-strike">Auswendiglernen</span><br>
-        <span class="text-gradient">Zock dich mit deinen Diggis zu Bestnoten.</span>
-      </h2>
-      <p class="features__subtitle">
-        DiggiDuell macht aus deiner Prüfungsvorbereitung ein Game.
-        <strong>Fordere Freunde heraus, steig im Ranking auf</strong> und merk dir alles.
-      </p>
+      <span class="features__tag">Dein Weg zum Sieg</span>
+      <h2 class="features__title">So wirst du zum <span class="highlight">Campus-Champion</span></h2>
+      <p class="features__subtitle">Vergiss langweiliges Auswendiglernen. Bei uns lernst du durch Competition.</p>
     </div>
 
-    <!-- Game Modes Section -->
-    <div class="features__modes">
-      <h3 class="features__modes-title">Wähle deinen Gegner</h3>
-
-      <div class="features__modes-grid">
-        <!-- Mode 1: 1v1 Duell -->
-        <div class="mode-card mode-card--featured" #featureCard>
-          <div class="mode-card__badge mode-card__badge--hot">🔥 HOT</div>
-          <div class="mode-card__icon-wrapper">
-            <div class="mode-card__icon">⚔️</div>
-            <div class="mode-card__icon-glow mode-card__icon-glow--gold"></div>
-          </div>
-          <h4 class="mode-card__title">1v1 Duell</h4>
-          <p class="mode-card__description">
-            Das ultimative Showdown: Du gegen deinen Kumpel.
-            3 Runden, 5 Fragen pro Runde, 60 Sekunden pro Frage – wer zuerst zuckt, verliert.
-          </p>
-          <div class="mode-card__stats">
-            <div class="mode-card__stat">
-              <span class="mode-card__stat-value">3</span>
-              <span class="mode-card__stat-label">Runden</span>
-            </div>
-            <div class="mode-card__stat">
-              <span class="mode-card__stat-value">60s</span>
-              <span class="mode-card__stat-label">pro Frage</span>
-            </div>
-          </div>
-          <div class="mode-card__cta">
-            <span>Duell starten</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+    <!-- 3 Steps -->
+    <div class="features__steps">
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step__video-wrapper" (click)="toggleVideo($event)">
+          <video
+            class="step__video"
+            loop
+            muted
+            playsinline
+            poster="skriptupload_image_video_starter.png">
+            <source src="skript_upload_image_ideo.mp4" type="video/mp4">
+          </video>
+          <div class="step__play-btn" [class.hidden]="isVideoPlaying">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
             </svg>
           </div>
+          <div class="step__number">1</div>
         </div>
-
-        <!-- Mode 2: Random Matchmaking -->
-        <div class="mode-card" #featureCard>
-          <div class="mode-card__badge">PvP</div>
-          <div class="mode-card__icon-wrapper">
-            <div class="mode-card__icon">🎲</div>
-            <div class="mode-card__icon-glow"></div>
-          </div>
-          <h4 class="mode-card__title">Zufalls-Match</h4>
-          <p class="mode-card__description">
-            Keine Freunde online? Kein Problem. Wir matchen dich mit
-            einem zufälligen Gegner aus deinem Kurs. Trau dich!
+        <div class="step__content">
+          <h3 class="step__title">Skript hochladen</h3>
+          <p class="step__description">
+            Zieh dein PDF rein – fertig. Mathe, BWL, Jura... egal welches Fach.
           </p>
-          <div class="mode-card__stats">
-            <div class="mode-card__stat">
-              <span class="mode-card__stat-value">Instant</span>
-              <span class="mode-card__stat-label">Match</span>
-            </div>
-            <div class="mode-card__stat">
-              <span class="mode-card__stat-value">Ranked</span>
-              <span class="mode-card__stat-label">Modus</span>
-            </div>
-          </div>
-          <div class="mode-card__cta">
-            <span>Match finden</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </div>
         </div>
+      </div>
 
-        <!-- Mode 3: Klassenzimmer -->
-        <div class="mode-card" #featureCard>
-          <div class="mode-card__badge">Vorlesung</div>
-          <div class="mode-card__icon-wrapper">
-            <div class="mode-card__icon">🎓</div>
-            <div class="mode-card__icon-glow mode-card__icon-glow--blue"></div>
-          </div>
-          <h4 class="mode-card__title">Klassenzimmer</h4>
-          <p class="mode-card__description">
-            Dein ganzer Kurs in einem Raum. Tritt gegen alle Kommilitonen
-            aus deiner Vorlesung an und klettere die Rangliste hoch!
+      <!-- Connector Line -->
+      <div class="step__connector">
+        <svg viewBox="0 0 100 20" preserveAspectRatio="none">
+          <path d="M0 10 Q25 0, 50 10 T100 10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+        </svg>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step__image-wrapper">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop" alt="KI Analyse" class="step__image">
+          <div class="step__number">2</div>
+        </div>
+        <div class="step__content">
+          <h3 class="step__title">KI erstellt dein Quiz</h3>
+          <p class="step__description">
+            In Sekunden werden prüfungsrelevante Fragen aus deinem Stoff generiert.
           </p>
-          <div class="mode-card__stats">
-            <div class="mode-card__stat">
-              <span class="mode-card__stat-value">100+</span>
-              <span class="mode-card__stat-label">Spieler</span>
-            </div>
-            <div class="mode-card__stat">
-              <span class="mode-card__stat-value">Live</span>
-              <span class="mode-card__stat-label">Ranking</span>
-            </div>
-          </div>
-          <div class="mode-card__cta">
-            <span>Kurs beitreten</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </div>
+        </div>
+      </div>
+
+      <!-- Connector Line -->
+      <div class="step__connector">
+        <svg viewBox="0 0 100 20" preserveAspectRatio="none">
+          <path d="M0 10 Q25 0, 50 10 T100 10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+        </svg>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step__image-wrapper">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop" alt="Studierende im Duell" class="step__image">
+          <div class="step__number">3</div>
+        </div>
+        <div class="step__content">
+          <h3 class="step__title">Fordere deine Leute heraus</h3>
+          <p class="step__description">
+            1v1 Duelle gegen Kommilitonen. Wer mehr weiß, gewinnt. So einfach.
+          </p>
         </div>
       </div>
     </div>
 
-    <!-- Power-Ups Section -->
-    <div class="features__powerups">
-      <div class="features__powerups-content">
-        <h3 class="features__powerups-title">
-          <span class="features__powerups-emoji">🚀</span>
-          Deine Geheimwaffen
-        </h3>
-        <p class="features__powerups-text">
-          Vergiss stundenlanges Büffeln. Mit diesen Features lernst du smarter, nicht harder.
-        </p>
-
-        <div class="powerup-list">
-          <div class="powerup-item" #featureCard>
-            <div class="powerup-item__icon">🤖</div>
-            <div class="powerup-item__content">
-              <h4 class="powerup-item__title">KI-Quizgenerator</h4>
-              <p class="powerup-item__text">
-                Upload dein Skript → Bekomme instant Quizfragen. Die KI checkt, was prüfungsrelevant ist.
-              </p>
-            </div>
-          </div>
-
-          <div class="powerup-item" #featureCard>
-            <div class="powerup-item__icon">🧠</div>
-            <div class="powerup-item__content">
-              <h4 class="powerup-item__title">Spaced Repetition</h4>
-              <p class="powerup-item__text">
-                Wissenschaftlich fundiert: Wir zeigen dir Fragen genau dann wieder, wenn du sie fast vergessen hast.
-              </p>
-            </div>
-          </div>
-
-          <div class="powerup-item" #featureCard>
-            <div class="powerup-item__icon">🏆</div>
-            <div class="powerup-item__content">
-              <h4 class="powerup-item__title">Kurs-Rangliste</h4>
-              <p class="powerup-item__text">
-                Miss dich mit deinem ganzen Kurs. Wer ist der Beste in Mathe 2? Zeit, es herauszufinden.
-              </p>
-            </div>
-          </div>
-
-          <div class="powerup-item" #featureCard>
-            <div class="powerup-item__icon">📈</div>
-            <div class="powerup-item__content">
-              <h4 class="powerup-item__title">Progress Tracking</h4>
-              <p class="powerup-item__text">
-                Sieh genau, welche Themen sitzen und wo du noch nachschärfen musst. Keine bösen Überraschungen.
-              </p>
-            </div>
-          </div>
-        </div>
+    <!-- Stats Bar -->
+    <div class="features__stats">
+      <div class="stat-item">
+        <span class="stat-item__value">10K+</span>
+        <span class="stat-item__label">Duelle gespielt</span>
       </div>
-
-      <!-- Phone Preview -->
-      <div class="features__phone">
-        <div class="phone-mockup phone-mockup--features">
-          <div class="phone-mockup__ring"></div>
-          <div class="phone-mockup__frame">
-            <div class="phone-mockup__button phone-mockup__button--power"></div>
-            <div class="phone-mockup__button phone-mockup__button--volume-up"></div>
-            <div class="phone-mockup__button phone-mockup__button--volume-down"></div>
-            <div class="phone-mockup__button phone-mockup__button--action"></div>
-            <div class="phone-mockup__screen">
-              <img [src]="featuredScreenshot" alt="DiggiDuell App" class="phone-mockup__screenshot active">
-            </div>
-          </div>
-          <div class="phone-mockup__glow"></div>
-        </div>
+      <div class="stat-item">
+        <span class="stat-item__value">500+</span>
+        <span class="stat-item__label">Vorlesungen</span>
       </div>
-    </div>
-
-    <!-- Social Proof -->
-    <div class="features__social">
-      <div class="features__social-item">
-        <span class="features__social-number">10k+</span>
-        <span class="features__social-label">Quiz-Duelle gespielt</span>
-      </div>
-      <div class="features__social-divider"></div>
-      <div class="features__social-item">
-        <span class="features__social-number">10k+</span>
-        <span class="features__social-label">generierte Fragen</span>
-      </div>
-      <div class="features__social-divider"></div>
-      <div class="features__social-item">
-        <span class="features__social-number">5★</span>
-        <span class="features__social-label">App Store Rating</span>
+      <div class="stat-item">
+        <span class="stat-item__value">50+</span>
+        <span class="stat-item__label">Unis & Hochschulen</span>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="features__cta">
-      <p class="features__cta-text">Ready to play? 🎮</p>
-      <div class="features__cta-buttons">
-        <a href="#" class="features__cta-button features__cta-button--primary">
-          <span>Jetzt loslegen – it's free!</span>
-        </a>
-        <a href="#" class="features__cta-button features__cta-button--secondary">
-          <span>Mehr erfahren</span>
-        </a>
-      </div>
+      <a href="#" class="features__cta-button features__cta-button--primary">
+        Jetzt kostenlos starten
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <span class="features__cta-hint">Keine Kreditkarte nötig</span>
     </div>
   </div>
 </section>

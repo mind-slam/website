@@ -1,1072 +1,316 @@
 @import '../../../styles/variables';
 
 .features {
-  position: relative;
-  overflow: hidden;
-  padding: $spacing-4xl 0;
+  padding: 100px 0;
+  background: linear-gradient(180deg, #f8fafb 0%, #eef3f7 100%);
 
-  // Background
-  &__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  &__bg-gradient {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, #f8fafc 0%, #e8f5e9 40%, #d4edda 70%, #f0f9f0 100%);
-  }
-
-  &__bg-pattern {
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(circle at 20% 30%, rgba($primary-green, 0.12) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba($primary-green, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 50% 50%, rgba($secondary-blue, 0.05) 0%, transparent 40%);
-  }
-
-  &__bg-shapes {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .shape {
-    position: absolute;
-    border-radius: 50%;
-    animation: float 15s ease-in-out infinite;
-
-    &--1 {
-      width: 300px;
-      height: 300px;
-      background: linear-gradient(135deg, rgba($primary-green, 0.1), transparent);
-      top: -100px;
-      right: -50px;
-    }
-
-    &--2 {
-      width: 200px;
-      height: 200px;
-      background: linear-gradient(135deg, rgba($secondary-blue, 0.08), transparent);
-      bottom: 20%;
-      left: -50px;
-      animation-delay: -5s;
-    }
+  @media (min-width: $breakpoint-lg) {
+    padding: 140px 0;
   }
 
   &__container {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 $spacing-lg;
+    padding: 0 24px;
   }
 
   // Header
   &__header {
     text-align: center;
-    margin-bottom: $spacing-3xl;
+    margin-bottom: 70px;
+
+    @media (min-width: $breakpoint-lg) {
+      margin-bottom: 90px;
+    }
   }
 
-  &__badge {
-    display: inline-flex;
-    align-items: center;
-    gap: $spacing-sm;
-    padding: $spacing-xs $spacing-md;
-    background: linear-gradient(135deg, rgba($primary-green, 0.15), rgba($secondary-blue, 0.15));
-    border: 1px solid rgba($primary-green, 0.3);
-    border-radius: 50px;
-    margin-bottom: $spacing-lg;
-  }
-
-  &__badge-icon {
-    font-size: 1.2rem;
-  }
-
-  &__badge-text {
-    font-size: $font-size-sm;
-    font-weight: 600;
+  &__tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba($secondary-blue, 0.1);
     color: $secondary-blue;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
 
   &__title {
-    font-family: $font-headline;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: 2.2rem;
     font-weight: 700;
     color: $text-primary;
+    margin-bottom: 16px;
     line-height: 1.2;
-    margin-bottom: $spacing-lg;
 
-    .text-gradient {
-      background: linear-gradient(135deg, $primary-green, $primary-green-dark);
+    @media (min-width: $breakpoint-lg) {
+      font-size: 3rem;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, $primary-green, $secondary-blue);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
   }
 
-  &__title-strike {
-    position: relative;
-    color: $text-secondary;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 100%;
-      height: 3px;
-      background: $error;
-      transform: rotate(-2deg);
-    }
-  }
-
   &__subtitle {
-    font-size: $font-size-lg;
+    font-size: 1.15rem;
     color: $text-secondary;
-    line-height: 1.8;
-    max-width: 700px;
+    max-width: 500px;
     margin: 0 auto;
-
-    strong {
-      color: $text-primary;
-    }
   }
 
-  // TikTok Carousel
-  &__tiktok-carousel {
-    display: flex;
-    gap: $spacing-xl;
-    margin: 0 auto $spacing-4xl;
-    padding: $spacing-xl calc(50% - 140px);
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-
-    // Hide scrollbar
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    @media (min-width: $breakpoint-md) {
-      padding: $spacing-xl calc(50% - 160px);
-      gap: $spacing-2xl;
-    }
-  }
-
-  // Game Modes
-  &__modes {
-    margin-bottom: $spacing-4xl;
-  }
-
-  &__modes-title {
-    text-align: center;
-    font-family: $font-headline;
-    font-size: $font-size-2xl;
-    font-weight: 600;
-    color: $text-primary;
-    margin-bottom: $spacing-2xl;
-  }
-
-  &__modes-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: $spacing-xl;
-
-    @media (min-width: $breakpoint-md) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  // Power-ups Section
-  &__powerups {
+  // Steps
+  &__steps {
     display: flex;
     flex-direction: column;
-    gap: $spacing-3xl;
-    margin-bottom: $spacing-4xl;
+    align-items: center;
+    gap: 16px;
 
     @media (min-width: $breakpoint-lg) {
       flex-direction: row;
-      align-items: center;
+      justify-content: center;
+      align-items: stretch;
+      gap: 0;
     }
   }
 
-  &__powerups-content {
-    flex: 1;
-  }
-
-  &__powerups-title {
-    display: flex;
-    align-items: center;
-    gap: $spacing-sm;
-    font-family: $font-headline;
-    font-size: $font-size-2xl;
-    font-weight: 700;
-    color: $text-primary;
-    margin-bottom: $spacing-md;
-  }
-
-  &__powerups-emoji {
-    font-size: 2rem;
-  }
-
-  &__powerups-text {
-    font-size: $font-size-lg;
-    color: $text-secondary;
-    margin-bottom: $spacing-xl;
-    max-width: 500px;
-  }
-
-  &__phone {
-    flex-shrink: 0;
-
-    @media (min-width: $breakpoint-lg) {
-      margin-left: $spacing-2xl;
-    }
-  }
-
-  // Social Proof
-  &__social {
+  // Stats
+  &__stats {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: $spacing-xl;
-    padding: $spacing-xl;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: $radius-xl;
-    border: 1px solid rgba($primary-green, 0.1);
-    margin-bottom: $spacing-3xl;
+    gap: 40px;
+    margin-top: 80px;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 
-    @media (min-width: $breakpoint-md) {
-      gap: $spacing-3xl;
-    }
-  }
-
-  &__social-item {
-    text-align: center;
-  }
-
-  &__social-number {
-    display: block;
-    font-family: $font-headline;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 700;
-    // Grün dominiert
-    background: linear-gradient(135deg, $primary-green 0%, darken($primary-green, 10%) 50%, $secondary-blue 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  &__social-label {
-    font-size: $font-size-sm;
-    color: $text-secondary;
-  }
-
-  &__social-divider {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(180deg, transparent, rgba($secondary-blue, 0.2), transparent);
-
-    @media (max-width: $breakpoint-sm) {
-      display: none;
+    @media (min-width: $breakpoint-lg) {
+      gap: 80px;
     }
   }
 
   // CTA
   &__cta {
     text-align: center;
-  }
-
-  &__cta-text {
-    font-size: $font-size-xl;
-    color: $text-primary;
-    margin-bottom: $spacing-lg;
-  }
-
-  &__cta-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $spacing-md;
-
-    @media (min-width: $breakpoint-sm) {
-      flex-direction: row;
-      justify-content: center;
-    }
+    margin-top: 60px;
   }
 
   &__cta-button {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    padding: $spacing-md $spacing-2xl;
-    border-radius: 50px;
-    font-family: $font-headline;
+    gap: 10px;
+    padding: 18px 36px;
+    font-size: 1.1rem;
     font-weight: 600;
-    font-size: $font-size-base;
+    border-radius: 12px;
     text-decoration: none;
     transition: all 0.3s ease;
 
-    &--primary {
-      background: linear-gradient(135deg, $primary-green, $primary-green-dark);
-      color: white;
-      box-shadow: 0 4px 20px rgba($primary-green, 0.4);
-
-      &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 30px rgba($primary-green, 0.5);
-      }
-    }
-
-    &--secondary {
-      background: transparent;
-      color: $secondary-blue;
-      border: 2px solid $secondary-blue;
-
-      &:hover {
-        background: $secondary-blue;
-        color: white;
-      }
-    }
-  }
-}
-
-// Mode Card
-.mode-card {
-  position: relative;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-radius: $radius-xl;
-  padding: $spacing-xl;
-  text-align: center;
-  border: 1px solid rgba($text-primary, 0.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(30px);
-
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-
-  &--featured {
-    background: linear-gradient(135deg, rgba($primary-green, 0.05), rgba($tertiary-gold, 0.05));
-    border-color: rgba($tertiary-gold, 0.3);
-
-    @media (min-width: $breakpoint-md) {
-      transform: scale(1.05);
-      z-index: 1;
-
-      &.visible {
-        transform: scale(1.05) translateY(0);
-      }
-
-      &:hover {
-        transform: scale(1.05) translateY(-10px);
-      }
-    }
-  }
-
-  &__badge {
-    position: absolute;
-    top: $spacing-md;
-    right: $spacing-md;
-    padding: $spacing-xs $spacing-sm;
-    background: rgba($secondary-blue, 0.1);
-    border-radius: 50px;
-    font-size: $font-size-xs;
-    font-weight: 700;
-    color: $secondary-blue;
-    text-transform: uppercase;
-
-    &--hot {
-      background: linear-gradient(135deg, $tertiary-gold, #ff6b35);
-      color: white;
-    }
-  }
-
-  &__icon-wrapper {
-    position: relative;
-    display: inline-block;
-    margin-bottom: $spacing-lg;
-  }
-
-  &__icon {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    border-radius: 50%;
-    font-size: 2.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 1;
-  }
-
-  &__icon-glow {
-    position: absolute;
-    inset: -10px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba($primary-green, 0.3) 0%, transparent 70%);
-    animation: pulse 3s ease-in-out infinite;
-
-    &--gold {
-      background: radial-gradient(circle, rgba($tertiary-gold, 0.4) 0%, transparent 70%);
-    }
-
-    &--blue {
-      background: radial-gradient(circle, rgba($secondary-blue, 0.3) 0%, transparent 70%);
-    }
-  }
-
-  &__title {
-    font-family: $font-headline;
-    font-size: $font-size-xl;
-    font-weight: 700;
-    color: $text-primary;
-    margin-bottom: $spacing-sm;
-  }
-
-  &__description {
-    font-size: $font-size-base;
-    color: $text-secondary;
-    line-height: 1.6;
-    margin-bottom: $spacing-lg;
-  }
-
-  &__stats {
-    display: flex;
-    justify-content: center;
-    gap: $spacing-xl;
-    margin-bottom: $spacing-lg;
-    padding: $spacing-md;
-    background: rgba($bg-light, 0.5);
-    border-radius: $radius-lg;
-  }
-
-  &__stat {
-    text-align: center;
-  }
-
-  &__stat-value {
-    display: block;
-    font-family: $font-headline;
-    font-size: $font-size-xl;
-    font-weight: 700;
-    color: $primary-green;
-  }
-
-  &__stat-label {
-    font-size: $font-size-xs;
-    color: $text-secondary;
-    text-transform: uppercase;
-  }
-
-  &__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: $spacing-xs;
-    color: $primary-green;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
     svg {
-      width: 18px;
-      height: 18px;
-      transition: transform 0.3s ease;
+      width: 20px;
+      height: 20px;
     }
 
-    &:hover {
-      color: $primary-green-dark;
+    &--primary {
+      background: $primary-green;
+      color: $bg-dark;
 
-      svg {
-        transform: translateX(5px);
+      &:hover {
+        background: darken($primary-green, 5%);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 28px rgba($primary-green, 0.35);
       }
     }
   }
-}
 
-// Power-up Item
-.powerup-list {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-lg;
-}
-
-.powerup-item {
-  display: flex;
-  align-items: flex-start;
-  gap: $spacing-md;
-  padding: $spacing-lg;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: $radius-lg;
-  border: 1px solid rgba($text-primary, 0.05);
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateX(-30px);
-
-  &.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  &:hover {
-    background: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transform: translateX(10px);
-  }
-
-  &__icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba($primary-green, 0.1), rgba($secondary-blue, 0.1));
-    border-radius: $radius-lg;
-    font-size: 1.5rem;
-    flex-shrink: 0;
-  }
-
-  &__content {
-    flex: 1;
-  }
-
-  &__title {
-    font-family: $font-headline;
-    font-size: $font-size-lg;
-    font-weight: 600;
-    color: $text-primary;
-    margin-bottom: $spacing-xs;
-  }
-
-  &__text {
-    font-size: $font-size-base;
-    color: $text-secondary;
-    line-height: 1.6;
-    margin: 0;
+  &__cta-hint {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: $text-muted;
   }
 }
 
-// Phone Mockup
-.phone-mockup--features {
-  position: relative;
-  width: 260px;
+// Step Card
+.step {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   @media (min-width: $breakpoint-lg) {
-    width: 300px;
+    max-width: 400px;
   }
 
-  .phone-mockup__ring {
-    position: absolute;
-    inset: -20px;
-    border: 2px dashed rgba($primary-green, 0.2);
-    border-radius: 65px;
-    animation: spin 30s linear infinite;
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
   }
 
-  .phone-mockup__frame {
-    position: relative;
-    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-    border-radius: 50px;
-    padding: 10px;
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.1),
-      0 0 0 1px #3a3a3a,
-      0 0 0 3px #1a1a1a,
-      0 0 0 4px #2a2a2a,
-      0 20px 40px rgba(0, 0, 0, 0.3);
-  }
-
-  .phone-mockup__button {
-    position: absolute;
-    background: linear-gradient(90deg, #2a2a2a, #3a3a3a, #2a2a2a);
-    border-radius: 2px;
-
-    &--power {
-      right: -3px;
-      top: 120px;
-      width: 3px;
-      height: 70px;
-    }
-
-    &--volume-up {
-      left: -3px;
-      top: 100px;
-      width: 3px;
-      height: 35px;
-    }
-
-    &--volume-down {
-      left: -3px;
-      top: 145px;
-      width: 3px;
-      height: 35px;
-    }
-
-    &--action {
-      left: -3px;
-      top: 70px;
-      width: 3px;
-      height: 22px;
-    }
-  }
-
-  .phone-mockup__screen {
+  &__image-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 9 / 19.5;
-    background: #000;
-    border-radius: 42px;
+    height: 220px;
     overflow: hidden;
+
+    @media (min-width: $breakpoint-lg) {
+      height: 260px;
+    }
   }
 
-  .phone-mockup__screenshot {
-    position: absolute;
-    inset: 0;
+  &__video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: #0a0a0a;
+    cursor: pointer;
+
+    @media (min-width: $breakpoint-lg) {
+      height: 320px;
+    }
+  }
+
+  &__video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
-    &.active {
-      opacity: 1;
-    }
+    transition: transform 0.4s ease;
   }
 
-  .phone-mockup__glow {
+  &:hover &__video {
+    transform: scale(1.02);
+  }
+
+  &__play-btn {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(circle, rgba($primary-green, 0.15) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: -1;
-    animation: pulse 4s ease-in-out infinite;
-  }
-}
-
-// Animations
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.1);
-  }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-// TikTok Phone Component
-.tiktok-phone {
-  position: relative;
-  flex-shrink: 0;
-  width: 280px;
-  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-  border-radius: 45px;
-  padding: 8px;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 25px 80px rgba(0, 0, 0, 0.5),
-    0 10px 30px rgba(0, 0, 0, 0.3);
-  scroll-snap-align: center;
-  transform: scale(0.85);
-  opacity: 0.6;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-
-  &.active {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  @media (min-width: $breakpoint-md) {
-    width: 320px;
-  }
-
-  &__notch {
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 28px;
-    background: #000;
-    border-radius: 20px;
-    z-index: 20;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-      width: 8px;
-      height: 8px;
-      background: radial-gradient(circle, #1a3a2a 30%, #0a1a0a 100%);
-      border-radius: 50%;
-      box-shadow: 0 0 3px rgba(0, 255, 100, 0.3);
-    }
-  }
-
-  &__home-indicator {
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-    z-index: 20;
-  }
-}
-
-.tiktok-screen {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 9 / 19.5;
-  background: #000;
-  border-radius: 38px;
-  overflow: hidden;
-}
-
-.tiktok-loader {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-  z-index: 15;
-
-  &__spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-top-color: #fe2c55;
-    border-right-color: #25f4ee;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-}
-
-.tiktok-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-
-  &.ready {
-    opacity: 1;
-  }
-}
-
-.tiktok-play-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 15;
-  cursor: pointer;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.3);
-
-    .tiktok-play-button {
-      transform: scale(1.1);
-    }
-  }
-}
-
-.tiktok-play-button {
-  width: 70px;
-  height: 70px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
-
-  svg {
-    width: 32px;
-    height: 32px;
-    color: #fe2c55;
-    margin-left: 4px;
-  }
-}
-
-.tiktok-logo-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: $spacing-md;
-  background: rgba(0, 0, 0, 0.8);
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  z-index: 12;
-  pointer-events: none;
-
-  &.visible {
-    opacity: 1;
-  }
-
-  img {
-    width: 120px;
-    height: auto;
-    filter: drop-shadow(0 4px 30px rgba(255, 255, 255, 0.3));
-  }
-
-  &__text {
-    font-family: $font-headline;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 2px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  }
-}
-
-.tiktok-ui {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 10;
-
-  &__header {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    right: 0;
     display: flex;
-    justify-content: center;
-    gap: $spacing-lg;
-    z-index: 10;
-  }
-
-  &__header-item {
-    font-size: 15px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.6);
-
-    &--active {
-      color: white;
-      font-weight: 700;
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 30px;
-        height: 2px;
-        background: white;
-        border-radius: 1px;
-      }
-    }
-  }
-
-  &__bottom {
-    position: absolute;
-    bottom: 80px;
-    left: $spacing-md;
-    right: 70px;
-  }
-
-  &__user {
-    display: flex;
-    align-items: center;
-    gap: $spacing-xs;
-    margin-bottom: $spacing-xs;
-  }
-
-  &__username {
-    font-size: 15px;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  }
-
-  &__verified {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 14px;
-    height: 14px;
-    background: #20d5ec;
-    border-radius: 50%;
-    font-size: 9px;
-    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 2;
+
+    svg {
+      width: 28px;
+      height: 28px;
+      color: $secondary-blue;
+      margin-left: 4px;
+    }
+
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
-  &__caption {
-    font-size: 13px;
-    color: white;
-    line-height: 1.4;
-    margin: 0 0 $spacing-sm;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
   }
 
-  &__music {
-    display: flex;
-    align-items: center;
-    gap: $spacing-xs;
+  &:hover &__image {
+    transform: scale(1.05);
   }
 
-  &__music-icon {
-    font-size: 12px;
-  }
-
-  &__music-text {
-    font-size: 12px;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
-  }
-
-  &__sidebar {
+  &__number {
     position: absolute;
-    right: $spacing-sm;
-    bottom: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $spacing-lg;
-  }
-
-  &__avatar {
-    position: relative;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 44px;
     height: 44px;
-    border-radius: 50%;
-    border: 2px solid white;
-    overflow: hidden;
-    background: #000;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  &__follow {
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 18px;
-    height: 18px;
-    background: #fe2c55;
+    background: $secondary-blue;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    box-shadow: 0 4px 15px rgba($secondary-blue, 0.4);
+    border: 3px solid white;
+  }
+
+  &__content {
+    padding: 36px 24px 28px;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 1.2rem;
     font-weight: 700;
-    color: white;
+    color: $text-primary;
+    margin-bottom: 10px;
   }
 
-  &__action {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
+  &__description {
+    font-size: 0.95rem;
+    color: $text-secondary;
+    line-height: 1.6;
   }
 
-  &__icon {
-    font-size: 24px;
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
-  }
+  // Connector between steps
+  &__connector {
+    display: none;
+    width: 60px;
+    color: rgba($primary-green, 0.5);
+    flex-shrink: 0;
 
-  &__count {
-    font-size: 11px;
-    font-weight: 600;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  }
+    @media (min-width: $breakpoint-lg) {
+      display: flex;
+      align-items: center;
+      margin-top: 90px;
+    }
 
-  &__disc {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #1a1a1a, #333);
-    padding: 8px;
-    animation: spin 3s linear infinite;
-    box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.3);
-
-    img {
+    svg {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
+      height: 20px;
     }
   }
 }
 
-// Reduced motion
-@media (prefers-reduced-motion: reduce) {
-  .mode-card,
-  .powerup-item {
-    opacity: 1;
-    transform: none;
+// Stat Item
+.stat-item {
+  text-align: center;
+
+  &__value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $secondary-blue;
+    line-height: 1;
+    margin-bottom: 6px;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 2.2rem;
+    }
   }
 
-  .shape,
-  .phone-mockup__ring,
-  .phone-mockup__glow,
-  .mode-card__icon-glow {
-    animation: none;
+  &__label {
+    font-size: 0.9rem;
+    color: $text-secondary;
   }
 }
