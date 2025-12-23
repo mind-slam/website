@@ -6,593 +6,198 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: 80px;
 
-  // Animated Background
-  &__background {
+  // Background - Blau-Grüner Gradient
+  &__bg {
     position: absolute;
     inset: 0;
-    z-index: 0;
-  }
-
-  &__gradient {
-    position: absolute;
-    inset: 0;
-    // Grün-dominierter Gradient mit Mind-Slam Farben
     background: linear-gradient(
       135deg,
-      $primary-green 0%,           // Mind.slam Grün (dominant)
-      lighten($primary-green, 5%) 20%,
-      mix($primary-green, $secondary-blue, 70%) 45%, // Mehr Grün im Mix
-      mix($primary-green, $secondary-blue, 40%) 70%,
-      $secondary-blue 100%         // Mind.slam Blau (Akzent)
+      $secondary-blue 0%,
+      mix($secondary-blue, $primary-green, 60%) 50%,
+      $primary-green 100%
     );
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-  }
-
-  // Glowing Orbs Background
-  &__orbs {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.4;
-    animation: orbFloat 20s ease-in-out infinite;
-
-    &--1 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba($tertiary-gold, 0.6) 0%, transparent 70%);
-      top: -10%;
-      left: -5%;
-      animation-delay: 0s;
-    }
-
-    &--2 {
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, rgba($primary-green, 0.6) 0%, transparent 70%);
-      bottom: 10%;
-      right: -5%;
-      animation-delay: -5s;
-    }
-
-    &--3 {
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba($secondary-blue, 0.4) 0%, transparent 70%);
-      top: 50%;
-      left: 30%;
-      animation-delay: -10s;
-    }
-  }
-
-  // Particles - Enhanced with glow
-  &__particles {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba($text-light, 0.8);
-    box-shadow: 0 0 10px rgba($text-light, 0.5), 0 0 20px rgba($text-light, 0.3);
-    animation: particleFloat 12s ease-in-out infinite;
-
-    @for $i from 1 through 20 {
-      &--#{$i} {
-        $size: random(6) + 3;
-        left: random(100) * 1%;
-        top: random(100) * 1%;
-        width: #{$size}px;
-        height: #{$size}px;
-        animation-delay: random(12) * -1s;
-        animation-duration: (random(8) + 10) * 1s;
-        opacity: random(4) * 0.1 + 0.2;
-      }
-    }
-  }
-
-  // Floating Elements - Enhanced with glow and pulse
-  &__floating-elements {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .floating-element {
-    position: absolute;
-    font-size: 2.5rem;
-    opacity: 0.8;
-    animation: floatRotate 8s ease-in-out infinite;
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
-    transition: transform 0.3s ease;
-
-    &--1 {
-      top: 12%;
-      left: 8%;
-      animation-delay: 0s;
-      animation-duration: 7s;
-    }
-
-    &--2 {
-      top: 20%;
-      right: 12%;
-      animation-delay: -1.5s;
-      font-size: 3rem;
-      animation-duration: 9s;
-    }
-
-    &--3 {
-      bottom: 35%;
-      left: 3%;
-      animation-delay: -3s;
-      animation-duration: 8s;
-    }
-
-    &--4 {
-      top: 55%;
-      right: 6%;
-      animation-delay: -4.5s;
-      font-size: 2.2rem;
-      animation-duration: 10s;
-    }
-
-    &--5 {
-      bottom: 12%;
-      right: 18%;
-      animation-delay: -6s;
-      font-size: 2rem;
-      animation-duration: 7.5s;
-    }
-
-    &--6 {
-      top: 40%;
-      left: 15%;
-      animation-delay: -2s;
-      font-size: 1.8rem;
-      animation-duration: 11s;
-    }
-
-    &--7 {
-      bottom: 25%;
-      right: 30%;
-      animation-delay: -7s;
-      font-size: 2.3rem;
-      animation-duration: 8.5s;
-    }
+    z-index: 0;
   }
 
   // Container
   &__container {
     position: relative;
-    z-index: 2;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 24px 60px;
+
+    @media (min-width: $breakpoint-lg) {
+      padding: 140px 48px 80px;
+    }
+  }
+
+  // Main Layout
+  &__main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $spacing-3xl;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: $spacing-xl $spacing-lg;
+    gap: 48px;
 
     @media (min-width: $breakpoint-lg) {
       flex-direction: row;
       justify-content: space-between;
-      gap: $spacing-4xl;
+      align-items: center;
+      gap: 80px;
     }
   }
 
-  // Content
-  &__content {
+  // Text Content
+  &__text {
+    flex: 1;
     text-align: center;
-    max-width: 600px;
 
     @media (min-width: $breakpoint-lg) {
       text-align: left;
-      flex: 1;
+      max-width: 560px;
     }
   }
 
-  &__title {
+  &__headline {
+    font-size: 2.5rem;
+    font-weight: 700;
     color: $text-light;
-    margin-bottom: $spacing-lg;
-    font-size: $font-size-4xl;
-
-    @media (min-width: $breakpoint-lg) {
-      font-size: $font-size-6xl;
-    }
-
-    .text-gradient {
-      background: linear-gradient(135deg, $primary-green 0%, $tertiary-gold 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-  }
-
-  &__subtitle {
-    color: rgba($text-light, 0.9);
-    font-size: $font-size-lg;
-    line-height: 1.7;
-    margin-bottom: $spacing-xl;
-
-    @media (min-width: $breakpoint-lg) {
-      font-size: $font-size-xl;
-    }
-  }
-
-  // Store Buttons
-  &__buttons {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-md;
+    line-height: 1.15;
+    margin-bottom: 24px;
 
     @media (min-width: $breakpoint-md) {
-      flex-direction: row;
+      font-size: 3rem;
     }
-  }
-
-  // Phone Section
-  &__phone {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $spacing-lg;
-    margin-top: $spacing-4xl; // Extra spacing for chalk label on mobile
 
     @media (min-width: $breakpoint-lg) {
-      margin-top: 0;
+      font-size: 3.5rem;
     }
   }
 
-  // Chalk Label - Kreide-Stil
-  &__chalk-label {
-    position: absolute;
-    z-index: 10;
-    transition: all 0.5s ease;
+  &__highlight {
+    background: linear-gradient(135deg, $primary-green, $tertiary-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-    // Positionen - Text + Pfeil zeigen auf das Handy
-    // Rechte Seite: Pfeil links, dann Text (Pfeil zeigt nach links zum Handy)
-    // Linke Seite: Text, dann Pfeil rechts (Pfeil zeigt nach rechts zum Handy)
-    &[data-position="top-right"] {
-      top: 30px;
-      right: 0;
-      transform: translateX(100%);
+  &__description {
+    font-size: 1.125rem;
+    color: rgba($text-light, 0.8);
+    line-height: 1.7;
+    margin-bottom: 40px;
 
-      .hero__chalk-content {
-        flex-direction: row-reverse; // Text rechts, Pfeil links
-      }
-      .hero__chalk-arrow {
-        transform: scaleX(-1); // Pfeil zeigt nach links
-      }
-    }
-
-    &[data-position="top-left"] {
-      top: 30px;
-      left: 0;
-      transform: translateX(-100%);
-
-      .hero__chalk-content {
-        flex-direction: row; // Text links, Pfeil rechts
-      }
-      // Pfeil zeigt nach rechts (Standard)
-    }
-
-    &[data-position="bottom-right"] {
-      bottom: 180px;
-      right: 0;
-      transform: translateX(100%);
-
-      .hero__chalk-content {
-        flex-direction: row-reverse; // Text rechts, Pfeil links
-      }
-      .hero__chalk-arrow {
-        transform: scaleX(-1) scaleY(-1); // Pfeil zeigt nach links-oben
-      }
-    }
-
-    &[data-position="bottom-left"] {
-      bottom: 180px;
-      left: 0;
-      transform: translateX(-100%);
-
-      .hero__chalk-content {
-        flex-direction: row; // Text links, Pfeil rechts
-      }
-      .hero__chalk-arrow {
-        transform: scaleY(-1); // Pfeil zeigt nach rechts-oben
-      }
-    }
-
-    @media (max-width: $breakpoint-lg) {
-      &[data-position="top-right"],
-      &[data-position="top-left"],
-      &[data-position="bottom-right"],
-      &[data-position="bottom-left"] {
-        top: -100px;
-        bottom: auto;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%) !important;
-
-        .hero__chalk-content {
-          flex-direction: column;
-        }
-        .hero__chalk-arrow {
-          transform: rotate(90deg) !important;
-        }
-      }
+    @media (min-width: $breakpoint-lg) {
+      font-size: 1.25rem;
     }
   }
 
-  &__chalk-content {
+  // Stats
+  &__stats {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 40px;
+
+    @media (min-width: $breakpoint-lg) {
+      justify-content: flex-start;
+      gap: 48px;
+    }
+  }
+
+  .stat {
+    text-align: center;
+
+    @media (min-width: $breakpoint-lg) {
+      text-align: left;
+    }
+
+    &__number {
+      display: block;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: $primary-green;
+      line-height: 1;
+      margin-bottom: 4px;
+
+      @media (min-width: $breakpoint-lg) {
+        font-size: 2rem;
+      }
+    }
+
+    &__label {
+      font-size: 0.875rem;
+      color: rgba($text-light, 0.6);
+    }
+  }
+
+  // CTA Buttons
+  &__cta {
+    display: flex;
+    flex-direction: column;
     gap: 12px;
-  }
 
-  &__chalk-text {
-    font-family: 'Caveat', 'Comic Sans MS', cursive;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.95);
-    white-space: nowrap;
-    // Kreide-Effekt
-    text-shadow:
-      0 0 2px rgba(255, 255, 255, 0.6),
-      0 0 4px rgba(255, 255, 255, 0.3),
-      2px 2px 3px rgba(0, 0, 0, 0.4);
-    letter-spacing: 1px;
-  }
-
-  &__chalk-arrow {
-    width: 70px;
-    height: 45px;
-    color: rgba(255, 255, 255, 0.9);
-    // Kreide-Effekt für SVG
-    filter:
-      drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))
-      drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
-  }
-
-  // Indicators
-  &__indicators {
-    display: flex;
-    gap: $spacing-sm;
-  }
-
-  .indicator {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba($text-light, 0.3);
-    border: none;
-    cursor: pointer;
-    transition: all $transition-base;
-
-    &:hover {
-      background: rgba($text-light, 0.5);
+    @media (min-width: $breakpoint-sm) {
+      flex-direction: row;
+      justify-content: center;
     }
 
-    &.active {
-      background: $primary-green;
-      transform: scale(1.2);
+    @media (min-width: $breakpoint-lg) {
+      justify-content: flex-start;
     }
   }
 
-  // Scroll Indicator
-  &__scroll-indicator {
-    position: absolute;
-    bottom: $spacing-xl;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $spacing-sm;
-    color: rgba($text-light, 0.6);
-    font-size: $font-size-sm;
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  .scroll-mouse {
-    width: 24px;
-    height: 40px;
-    border: 2px solid rgba($text-light, 0.6);
-    border-radius: 12px;
-    position: relative;
-
-    &__wheel {
-      width: 4px;
-      height: 8px;
-      background: rgba($text-light, 0.6);
-      border-radius: 2px;
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: scrollWheel 2s ease-in-out infinite;
-    }
-  }
-}
-
-// Store Button Styles
-.store-button {
-  display: flex;
-  align-items: center;
-  gap: $spacing-sm;
-  background: rgba($bg-dark, 0.9);
-  color: $text-light;
-  padding: $spacing-sm $spacing-lg;
-  border-radius: $radius-lg;
-  transition: all $transition-base;
-  border: 1px solid rgba($text-light, 0.1);
-
-  &:hover {
-    background: $bg-dark;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  }
-
-  &__icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  &__text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__label {
-    font-size: $font-size-xs;
-    opacity: 0.8;
-  }
-
-  &__store {
-    font-family: $font-headline;
-    font-weight: 600;
-    font-size: $font-size-base;
-  }
-}
-
-// iPhone 16 Mockup - Clean design with 3D effects
-.phone-mockup {
-  position: relative;
-  width: 280px;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-
-  @media (min-width: $breakpoint-lg) {
-    width: 320px;
-  }
-
-  &__wrapper {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    animation: phoneFloat 6s ease-in-out infinite;
-
-    &:hover {
-      transform: rotateY(-8deg) rotateX(5deg) translateY(-10px);
-    }
-  }
-
-  &__frame {
-    position: relative;
-    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-    border-radius: 55px;
-    padding: 10px;
-    box-shadow:
-      // Inner highlight
-      inset 0 1px 1px rgba(255, 255, 255, 0.1),
-      // Titanium frame effect
-      0 0 0 1px #3a3a3a,
-      0 0 0 3px #1a1a1a,
-      0 0 0 4px #2a2a2a,
-      // Enhanced drop shadow
-      0 40px 80px rgba(0, 0, 0, 0.5),
-      0 20px 40px rgba(0, 0, 0, 0.3),
-      0 0 100px rgba($primary-green, 0.15);
-    transition: box-shadow 0.4s ease;
-  }
-
-  &:hover &__frame {
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.1),
-      0 0 0 1px #3a3a3a,
-      0 0 0 3px #1a1a1a,
-      0 0 0 4px #2a2a2a,
-      0 50px 100px rgba(0, 0, 0, 0.6),
-      0 25px 50px rgba(0, 0, 0, 0.4),
-      0 0 120px rgba($primary-green, 0.25);
-  }
-
-  // Side Buttons
   &__button {
-    position: absolute;
-    background: linear-gradient(90deg, #2a2a2a, #3a3a3a, #2a2a2a);
-    border-radius: 2px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
 
-    // Power button (right side)
-    &--power {
-      right: -3px;
-      top: 140px;
-      width: 3px;
-      height: 80px;
+    svg {
+      width: 22px;
+      height: 22px;
     }
 
-    // Volume Up (left side)
-    &--volume-up {
-      left: -3px;
-      top: 120px;
-      width: 3px;
-      height: 40px;
+    &--primary {
+      background: $primary-green;
+      color: $bg-dark;
+
+      &:hover {
+        background: lighten($primary-green, 5%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba($primary-green, 0.3);
+      }
     }
 
-    // Volume Down (left side)
-    &--volume-down {
-      left: -3px;
-      top: 170px;
-      width: 3px;
-      height: 40px;
-    }
+    &--secondary {
+      background: rgba($text-light, 0.1);
+      color: $text-light;
+      border: 1px solid rgba($text-light, 0.2);
 
-    // Action button (left side, above volume)
-    &--action {
-      left: -3px;
-      top: 85px;
-      width: 3px;
-      height: 25px;
+      &:hover {
+        background: rgba($text-light, 0.15);
+        transform: translateY(-2px);
+      }
     }
   }
 
-  &__screen {
+  // Video Wrapper
+  &__video-wrapper {
+    flex-shrink: 0;
+  }
+
+  &__phone {
     position: relative;
-    width: 100%;
-    aspect-ratio: 9 / 19.5;
-    background: #000;
-    border-radius: 47px;
-    overflow: hidden;
-    // Subtle inner border for screen
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  }
-
-  &__screenshot {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-
-    &.active {
-      opacity: 1;
-    }
-  }
-
-  &__reflection {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.08) 0%,
-      transparent 40%
-    );
-    border-radius: 55px;
-    pointer-events: none;
+    cursor: pointer;
   }
 
   &__glow {
@@ -600,121 +205,136 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 150%;
-    height: 150%;
+    width: 120%;
+    height: 120%;
     background: radial-gradient(
       circle,
       rgba($primary-green, 0.2) 0%,
       transparent 70%
     );
-    pointer-events: none;
     z-index: -1;
-    animation: pulse 4s ease-in-out infinite;
+    animation: glowPulse 3s ease-in-out infinite;
   }
 }
 
-// Additional Animations
-@keyframes scrollWheel {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
+// Phone Component
+.phone {
+  width: 220px;
+  background: #000;
+  border-radius: 36px;
+  padding: 8px;
+  box-shadow:
+    0 0 0 2px #333,
+    0 25px 50px rgba(0, 0, 0, 0.5);
+
+  @media (min-width: $breakpoint-lg) {
+    width: 260px;
   }
-  50% {
-    transform: translateX(-50%) translateY(10px);
-    opacity: 0.3;
+
+  &__screen {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 19;
+    background: #111;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+  &__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+
+    .play-btn {
+      width: 60px;
+      height: 60px;
+      background: rgba($primary-green, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+
+      svg {
+        width: 28px;
+        height: 28px;
+        color: white;
+        margin-left: 4px;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__ui {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  &__ui-bottom {
+    padding-right: 50px;
+  }
+
+  &__username {
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+  }
+
+  &__caption {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  &__ui-side {
+    position: absolute;
+    right: 10px;
+    bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 11px;
+    color: white;
+
+    span:first-child {
+      font-size: 20px;
+    }
   }
 }
 
-@keyframes gradientShift {
+// Animations
+@keyframes glowPulse {
   0%, 100% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 100% 50%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  75% {
-    background-position: 0% 100%;
-  }
-}
-
-@keyframes orbFloat {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  25% {
-    transform: translate(30px, -20px) scale(1.05);
-  }
-  50% {
-    transform: translate(-20px, 30px) scale(0.95);
-  }
-  75% {
-    transform: translate(-30px, -30px) scale(1.02);
-  }
-}
-
-@keyframes particleFloat {
-  0%, 100% {
-    transform: translate(0, 0);
-    opacity: 0.3;
-  }
-  25% {
-    transform: translate(10px, -30px);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(-15px, -50px);
-    opacity: 0.4;
-  }
-  75% {
-    transform: translate(20px, -20px);
-    opacity: 0.5;
-  }
-}
-
-@keyframes floatRotate {
-  0%, 100% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  25% {
-    transform: translate(5px, -15px) rotate(5deg) scale(1.05);
-  }
-  50% {
-    transform: translate(-5px, -25px) rotate(-3deg) scale(1);
-  }
-  75% {
-    transform: translate(8px, -10px) rotate(3deg) scale(1.02);
-  }
-}
-
-@keyframes phoneFloat {
-  0%, 100% {
-    transform: translateY(0) rotateX(0deg) rotateY(0deg);
-  }
-  50% {
-    transform: translateY(-15px) rotateX(2deg) rotateY(-2deg);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.6;
+    opacity: 0.7;
     transform: translate(-50%, -50%) scale(1);
   }
   50% {
-    opacity: 0.8;
+    opacity: 1;
     transform: translate(-50%, -50%) scale(1.05);
   }
 }
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-

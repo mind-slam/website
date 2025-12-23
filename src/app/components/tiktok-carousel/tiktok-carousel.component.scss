@@ -38,8 +38,13 @@
   &__subtitle {
     font-size: $font-size-lg;
     color: $text-secondary;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
+
+    .text-highlight {
+      color: $primary-green;
+      font-weight: 600;
+    }
   }
 }
 
