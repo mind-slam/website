@@ -71,7 +71,7 @@
   }
 }
 
-// TikTok Phone Component
+// TikTok Phone Component - Base
 .tiktok-phone {
   position: relative;
   flex-shrink: 0;
@@ -132,6 +132,144 @@
     background: rgba(255, 255, 255, 0.3);
     border-radius: 2px;
     z-index: 20;
+  }
+
+  // Phone Model 1: iPhone 15 Pro (Dynamic Island) - Default
+  // Already styled above
+
+  // Phone Model 2: Samsung Galaxy S24 (Punch Hole Camera)
+  &:nth-child(2) {
+    background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+    border-radius: 38px;
+
+    .tiktok-phone__notch {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      top: 18px;
+      background: #000;
+
+      &::before {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px;
+        height: 6px;
+      }
+    }
+
+    .tiktok-screen {
+      border-radius: 30px;
+    }
+
+    .tiktok-phone__home-indicator {
+      display: none;
+    }
+  }
+
+  // Phone Model 3: Google Pixel 8 (Pill-shaped cutout)
+  &:nth-child(3) {
+    background: linear-gradient(145deg, #e8e8e8, #d0d0d0);
+    border-radius: 42px;
+
+    .tiktok-phone__notch {
+      width: 50px;
+      height: 18px;
+      border-radius: 12px;
+      top: 14px;
+      background: #000;
+
+      &::before {
+        left: 14px;
+        width: 6px;
+        height: 6px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 14px;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        background: radial-gradient(circle, #1a3a2a 30%, #0a1a0a 100%);
+        border-radius: 50%;
+      }
+    }
+
+    .tiktok-screen {
+      border-radius: 34px;
+    }
+
+    .tiktok-phone__home-indicator {
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Phone Model 4: OnePlus 12 (Corner Punch Hole)
+  &:nth-child(4) {
+    background: linear-gradient(145deg, #0f1419, #000);
+    border-radius: 40px;
+
+    .tiktok-phone__notch {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      top: 20px;
+      left: 30px;
+      transform: none;
+      background: #000;
+
+      &::before {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 5px;
+        height: 5px;
+      }
+    }
+
+    .tiktok-screen {
+      border-radius: 32px;
+    }
+
+    .tiktok-phone__home-indicator {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  // Phone Model 5: Xiaomi 14 (Centered Small Punch Hole)
+  &:nth-child(5) {
+    background: linear-gradient(145deg, #1e1e1e, #0d0d0d);
+    border-radius: 36px;
+    padding: 6px;
+
+    .tiktok-phone__notch {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      top: 16px;
+      background: #000;
+
+      &::before {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 4px;
+        height: 4px;
+      }
+    }
+
+    .tiktok-screen {
+      border-radius: 30px;
+    }
+
+    .tiktok-phone__home-indicator {
+      width: 80px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.25);
+    }
   }
 }
 
