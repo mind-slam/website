@@ -31,13 +31,27 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   appStoreUrl = 'https://apps.apple.com/de/app/mind-slam/id6744414622';
   playStoreUrl = 'https://play.google.com/store/apps/details?id=app.mindslam&utm_source=emea_Med';
 
+  // Typewriter effect - komplette Sätze
+  headlines = [
+    'Lern-App, die sich wie Zocken anfühlt.',
+    '10 Minuten am Tag zur Eins.',
+    'Gemeinsam statt einsam.'
+  ];
+  currentHeadlineIndex = 0;
+  displayedText = '';
+  isTyping = true;
+  private typewriterInterval: any;
+  private headlineTimeout: any;
+
   get currentVideo(): VideoData {
     return this.videos[this.currentVideoIndex];
   }
 
   constructor(private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.startTypewriter();
+  }
 
   ngAfterViewInit(): void {
     this.setupVideo();
@@ -48,6 +62,65 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     if (video) {
       video.pause();
     }
+    this.clearTypewriter();
+  }
+
+  private clearTypewriter(): void {
+    if (this.typewriterInterval) {
+      clearInterval(this.typewriterInterval);
+    }
+    if (this.headlineTimeout) {
+      clearTimeout(this.headlineTimeout);
+    }
+  }
+
+  private startTypewriter(): void {
+    this.typeText();
+  }
+
+  private typeText(): void {
+    const currentHeadline = this.headlines[this.currentHeadlineIndex];
+    let charIndex = 0;
+    this.displayedText = '';
+    this.isTyping = true;
+
+    this.typewriterInterval = setInterval(() => {
+      if (charIndex < currentHeadline.length) {
+        this.displayedText += currentHeadline[charIndex];
+        charIndex++;
+        this.cdr.detectChanges();
+      } else {
+        clearInterval(this.typewriterInterval);
+        this.isTyping = false;
+        this.cdr.detectChanges();
+
+        // Warte 3 Sekunden, dann lösche den Text
+        this.headlineTimeout = setTimeout(() => {
+          this.deleteText();
+        }, 3000);
+      }
+    }, 80); // Tippgeschwindigkeit
+  }
+
+  private deleteText(): void {
+    this.isTyping = true;
+
+    this.typewriterInterval = setInterval(() => {
+      if (this.displayedText.length > 0) {
+        this.displayedText = this.displayedText.slice(0, -1);
+        this.cdr.detectChanges();
+      } else {
+        clearInterval(this.typewriterInterval);
+
+        // Nächste Headline
+        this.currentHeadlineIndex = (this.currentHeadlineIndex + 1) % this.headlines.length;
+
+        // Kurze Pause, dann nächsten Text tippen
+        this.headlineTimeout = setTimeout(() => {
+          this.typeText();
+        }, 500);
+      }
+    }, 40); // Löschgeschwindigkeit (schneller als Tippen)
   }
 
   private setupVideo(): void {

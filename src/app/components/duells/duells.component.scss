@@ -1,0 +1,251 @@
+@import '../../../styles/variables';
+
+.duells {
+  position: relative;
+  padding: 80px 0;
+  background: $bg-light;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: 120px 0;
+  }
+
+  &__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 8px;
+  }
+
+  // Header
+  &__header {
+    text-align: center;
+    margin-bottom: 50px;
+
+    @media (min-width: $breakpoint-lg) {
+      margin-bottom: 70px;
+    }
+  }
+
+  &__tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba($primary-green, 0.1);
+    color: $primary-green-dark;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  &__title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 16px;
+    line-height: 1.2;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 3rem;
+    }
+
+    .highlight {
+      color: $primary-green-dark;
+    }
+
+    .typewriter {
+      color: $primary-green-dark;
+      display: inline;
+    }
+
+    .cursor {
+      display: inline;
+      color: $primary-green-dark;
+      font-weight: 400;
+      animation: blink 1s step-end infinite;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.1rem;
+    color: $text-secondary;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  // Duell List - 4 Kacheln pro Reihe, volle Breite
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+// Wrapper für Kachel mit Überschrift
+.duell-card-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+// Überschrift über der Kachel
+.duell-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.duell-card__uni-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 24px;
+  padding: 0 8px;
+  background: linear-gradient(135deg, $primary-green, $secondary-blue);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.duell-card__uni-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: $text-primary;
+}
+
+.duell-card__course-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: $text-secondary;
+
+  &::before {
+    content: '•';
+    margin-right: 8px;
+    opacity: 0.5;
+  }
+}
+
+// Duell Card - Gradient Design (kompakter)
+.duell-card {
+  background: linear-gradient(135deg, $primary-green 0%, mix($primary-green, $secondary-blue, 50%) 50%, $secondary-blue 100%);
+  border-radius: 16px;
+  padding: 16px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 8px 32px rgba($secondary-blue, 0.2);
+
+  @media (min-width: $breakpoint-md) {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba($secondary-blue, 0.3);
+  }
+
+  // Battle Area
+  &__battle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // Player - kompakter
+  &__player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+
+    @media (min-width: $breakpoint-md) {
+      gap: 8px;
+    }
+  }
+
+  &__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(white, 0.9);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+    @media (min-width: $breakpoint-md) {
+      width: 56px;
+      height: 56px;
+      border-width: 3px;
+    }
+  }
+
+  &__name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 0.9rem;
+    }
+  }
+
+  // VS Badge - kompakter
+  &__vs {
+    flex-shrink: 0;
+    margin: 0 10px;
+
+    @media (min-width: $breakpoint-md) {
+      margin: 0 16px;
+    }
+  }
+
+  &__vs-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: white;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: $secondary-blue;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+    @media (min-width: $breakpoint-md) {
+      width: 42px;
+      height: 42px;
+      font-size: 0.95rem;
+      border-radius: 12px;
+    }
+  }
+}
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

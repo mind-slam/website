@@ -1,8 +1,18 @@
 @import '../../../styles/variables';
 
 .features {
+  position: relative;
   padding: 100px 0;
-  background: linear-gradient(180deg, #f8fafb 0%, #eef3f7 100%);
+  padding-top: 30px; // Weniger Padding oben, da Ringbuch-Übergang hier reinragt
+  // Berg-Aufstieg Gradient - von türkis/grün unten links nach blau oben rechts
+  background: linear-gradient(
+    to top right,
+    $primary-green 0%,
+    mix($primary-green, $secondary-blue, 60%) 30%,
+    mix($primary-green, $secondary-blue, 40%) 50%,
+    $secondary-blue 100%
+  );
+  overflow: hidden;
 
   @media (min-width: $breakpoint-lg) {
     padding: 140px 0;
@@ -27,20 +37,21 @@
   &__tag {
     display: inline-block;
     padding: 8px 16px;
-    background: rgba($secondary-blue, 0.1);
-    color: $secondary-blue;
+    background: rgba(white, 0.15);
+    color: white;
     font-size: 0.85rem;
     font-weight: 600;
     border-radius: 50px;
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    border: 1px solid rgba(white, 0.2);
   }
 
   &__title {
     font-size: 2.2rem;
     font-weight: 700;
-    color: $text-primary;
+    color: white;
     margin-bottom: 16px;
     line-height: 1.2;
 
@@ -49,16 +60,15 @@
     }
 
     .highlight {
-      background: linear-gradient(135deg, $primary-green, $secondary-blue);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: $bg-dark;
+      background: none;
+      -webkit-text-fill-color: $bg-dark;
     }
   }
 
   &__subtitle {
     font-size: 1.15rem;
-    color: $text-secondary;
+    color: rgba(white, 0.85);
     max-width: 500px;
     margin: 0 auto;
   }
@@ -85,9 +95,9 @@
     gap: 40px;
     margin-top: 80px;
     padding: 40px;
-    background: white;
+    background: rgba(white, 0.95);
     border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
 
     @media (min-width: $breakpoint-lg) {
       gap: 80px;
@@ -117,13 +127,13 @@
     }
 
     &--primary {
-      background: $primary-green;
+      background: white;
       color: $bg-dark;
 
       &:hover {
-        background: darken($primary-green, 5%);
+        background: rgba(white, 0.9);
         transform: translateY(-3px);
-        box-shadow: 0 12px 28px rgba($primary-green, 0.35);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
       }
     }
   }
@@ -132,7 +142,7 @@
     display: block;
     margin-top: 12px;
     font-size: 0.9rem;
-    color: $text-muted;
+    color: rgba(white, 0.7);
   }
 }
 
@@ -237,25 +247,31 @@
 
   &__number {
     position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 44px;
-    height: 44px;
+    top: 16px;
+    left: 16px;
+    min-width: 56px;
+    height: 56px;
+    padding: 0 16px;
     background: $secondary-blue;
     color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 800;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba($secondary-blue, 0.4);
-    border: 3px solid white;
+    box-shadow: 0 6px 20px rgba($secondary-blue, 0.5);
+    z-index: 2;
+
+    @media (min-width: $breakpoint-lg) {
+      min-width: 64px;
+      height: 64px;
+      font-size: 1.75rem;
+    }
   }
 
   &__content {
-    padding: 36px 24px 28px;
+    padding: 24px 24px 28px;
     text-align: center;
   }
 

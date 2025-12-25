@@ -1,0 +1,51 @@
+<section class="duells">
+  <div class="duells__container">
+    <!-- Header -->
+    <div class="duells__header">
+      <span class="duells__tag">Live Battles</span>
+      <h2 class="duells__title"><span class="typewriter">{{ displayedText }}</span><span class="cursor">|</span> im <span class="highlight">Duell</span></h2>
+      <p class="duells__subtitle">In Klassen, an Unis - überall treten Studenten gegeneinander an</p>
+    </div>
+
+    <!-- Duell Cards -->
+    <div class="duells__list">
+      @for (duell of duells; track duell.id; let i = $index) {
+        <div class="duell-card-wrapper">
+          <!-- Überschrift über der Kachel -->
+          <div class="duell-card__header">
+            <span class="duell-card__uni-badge">{{ duell.uniBadge }}</span>
+            <span class="duell-card__uni-name">{{ duell.uni }}</span>
+            <span class="duell-card__course-name">{{ duell.course }}</span>
+          </div>
+
+          <!-- Kachel -->
+          <div
+            #duellCard
+            class="duell-card"
+            [class.duell-card--visible]="duell.visible"
+          >
+            <!-- Battle Area -->
+            <div class="duell-card__battle">
+              <!-- Player 1 -->
+              <div class="duell-card__player">
+                <img [src]="duell.player1.image" [alt]="duell.player1.name" class="duell-card__avatar">
+                <span class="duell-card__name">{{ duell.player1.name }}</span>
+              </div>
+
+              <!-- VS -->
+              <div class="duell-card__vs">
+                <span class="duell-card__vs-text">VS</span>
+              </div>
+
+              <!-- Player 2 -->
+              <div class="duell-card__player">
+                <img [src]="duell.player2.image" [alt]="duell.player2.name" class="duell-card__avatar">
+                <span class="duell-card__name">{{ duell.player2.name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

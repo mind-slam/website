@@ -7,9 +7,17 @@
     <div class="hero__main">
       <!-- Left: Text Content -->
       <div class="hero__text">
-        <h1 class="hero__headline">
-          Lern-App, die sich wie
-          <span class="hero__highlight">Zocken</span> anfühlt.
+        <!-- Logo & App Title -->
+        <div class="hero__branding">
+          <img src="mind.slam_App-Icon_v1.0.png" alt="DiggiDuell Logo" class="hero__logo">
+          <div class="hero__app-info">
+            <span class="hero__app-badge">Die neue Lern-App</span>
+            <h2 class="hero__app-name">DiggiDuell</h2>
+          </div>
+        </div>
+
+        <h1 class="hero__headline hero__typewriter">
+          {{ displayedText }}<span class="hero__cursor" [class.typing]="isTyping">|</span>
         </h1>
 
         <p class="hero__description">
