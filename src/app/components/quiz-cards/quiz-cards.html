@@ -1,0 +1,64 @@
+<section class="quiz-cards">
+  <div class="quiz-cards__container">
+    <!-- Header -->
+    <div class="quiz-cards__header">
+      <span class="quiz-cards__tag">Teste dein Wissen</span>
+      <h2 class="quiz-cards__title">Wie gut bist <span class="highlight">du</span>?</h2>
+      <p class="quiz-cards__subtitle">Beantworte alle Fragen und sichere dir dein Gratis-Probeabo!</p>
+    </div>
+
+    <!-- Quiz Grid or Result -->
+    @if (!showResult) {
+      <div class="quiz-cards__grid">
+        @for (question of quizQuestions; track question.id) {
+          <div class="quiz-item">
+            <!-- Question Card (App-Style) -->
+            <div class="quiz-item__question-card">
+              <p class="quiz-item__question-text">{{ question.question }}</p>
+            </div>
+
+            <!-- Answer Options -->
+            <div class="quiz-item__options">
+              @for (option of question.options; track option; let i = $index) {
+                <button
+                  class="quiz-item__option"
+                  [class.correct]="getOptionClass(question, i) === 'correct'"
+                  [class.wrong]="getOptionClass(question, i) === 'wrong'"
+                  [class.disabled]="getOptionClass(question, i) === 'disabled'"
+                  [disabled]="question.answered"
+                  (click)="selectAnswer(question.id, i)"
+                >
+                  {{ option }}
+                </button>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <!-- Result Screen -->
+      <div class="quiz-result">
+        <div class="quiz-result__card">
+          <div class="quiz-result__icon">🎉</div>
+          <h3 class="quiz-result__title">Geschafft!</h3>
+          <p class="quiz-result__score">Du hast {{ correctCount }} von {{ quizQuestions.length }} Fragen richtig beantwortet!</p>
+
+          <div class="quiz-result__reward">
+            <span class="quiz-result__reward-label">Deine Belohnung</span>
+            <h4 class="quiz-result__reward-title">1 Monat Gratis-Probeabo</h4>
+            <p class="quiz-result__reward-text">
+              Schreibe eine E-Mail an<br>
+              <a href="mailto:info@mind-slam.com?subject=DiggiDuell%20Free&body=Hallo%20Mind%20Slam%20Team%2C%0A%0AIch%20habe%20das%20Quiz%20auf%20der%20Website%20abgeschlossen%20und%20m%C3%B6chte%20mein%20Gratis-Probeabo%20einl%C3%B6sen.%0A%0ACode%3A%20DIGGIDUELL-FREE%0A%0AViele%20Gr%C3%BC%C3%9Fe" class="quiz-result__email">info@mind-slam.com</a>
+            </p>
+            <div class="quiz-result__code">
+              <span class="quiz-result__code-label">Dein Code:</span>
+              <span class="quiz-result__code-value">DIGGIDUELL-FREE</span>
+            </div>
+          </div>
+
+          <button class="quiz-result__retry" (click)="resetQuiz()">Nochmal spielen</button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

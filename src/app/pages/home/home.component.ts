@@ -10,6 +10,7 @@ import { TestimonialsComponent } from '../../components/testimonials/testimonial
 import { RoadmapComponent } from '../../components/roadmap/roadmap.component';
 import { BillboardComponent } from '../../components/billboard/billboard.component';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { QuizCardsComponent } from '../../components/quiz-cards/quiz-cards';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
     TiktokCarouselComponent,
     FeaturesComponent,
     DuellsComponent,
+    QuizCardsComponent,
     DozentenComponent,
     TeamComponent,
     TestimonialsComponent,

@@ -65,7 +65,7 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
   private observer!: IntersectionObserver;
 
   // Typewriter Effekt (wie in Hero-Komponente)
-  words = ['Studenten', 'Diggis'];
+  words = ['Student:innen', 'Diggis'];
   currentWordIndex = 0;
   displayedText = '';
   private typewriterInterval: any;
