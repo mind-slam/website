@@ -3,10 +3,14 @@
 .duells {
   position: relative;
   padding: 80px 0;
+  padding-bottom: 160px; // Platz für Papier-Übergang
   background: $bg-light;
+  overflow: visible;
+  margin-bottom: 70px; // Platz für unteren Teil des Übergangs
 
   @media (min-width: $breakpoint-lg) {
     padding: 120px 0;
+    padding-bottom: 200px;
   }
 
   &__container {
@@ -247,5 +251,191 @@
   }
   50% {
     opacity: 0;
+  }
+}
+
+// ============================================
+// RINGBUCH ÜBERGANG - Spiralen über dem Papier
+// ============================================
+
+$binding-height: 160px;
+$ring-gap: clamp(45px, 6vw, 80px);
+$ring-width: 20px;
+$ring-height: 50px;
+$hole-size: 12px;
+
+// Kariertes Muster
+@mixin grid-pattern($opacity: 0.15) {
+  background-image:
+    linear-gradient(rgba($secondary-blue, $opacity) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($secondary-blue, $opacity) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.duells__paper-edge {
+  position: absolute;
+  bottom: calc(-#{$binding-height} / 2);
+  left: 0;
+  right: 0;
+  height: $binding-height;
+  z-index: 10;
+  pointer-events: none;
+}
+
+// Obere karierte Seite (Duells-Seite)
+.grid-paper--top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: $bg-light;
+  @include grid-pattern;
+  z-index: 1;
+
+  // Perforierungslinie oben
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    height: 0;
+    border-top: 2px dashed rgba(#666, 0.4);
+  }
+
+  // Trennlinie unten (Mitte der Bindung)
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      to bottom,
+      rgba(#666, 0.3) 0%,
+      rgba(#444, 0.5) 50%,
+      rgba(#666, 0.3) 100%
+    );
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+}
+
+// Untere karierte Seite (Quiz-Sektion)
+.grid-paper--bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: $bg-light;
+  @include grid-pattern;
+  z-index: 1;
+
+  // Trennlinie oben (Mitte der Bindung)
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      to bottom,
+      rgba(#666, 0.3) 0%,
+      rgba(#444, 0.5) 50%,
+      rgba(#666, 0.3) 100%
+    );
+    box-shadow: 0 -1px 2px rgba(0,0,0,0.15);
+  }
+
+  // Perforierungslinie unten
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    right: 5%;
+    height: 0;
+    border-bottom: 2px dashed rgba(#666, 0.4);
+  }
+}
+
+// Container für Löcher
+.paper-holes {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  gap: $ring-gap;
+  padding: 0 5%;
+  z-index: 2;
+}
+
+// Einzelnes Loch - transparent (nur Schatten für Tiefe)
+.paper-hole {
+  width: $hole-size;
+  height: $hole-size;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: transparent;
+
+  @media (max-width: $breakpoint-md) {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+// Spiralringe
+.spiral-rings {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  gap: $ring-gap;
+  padding: 0 5%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+// Einzelner Spiralring
+.spiral-ring {
+  width: $ring-width;
+  height: $ring-height;
+  flex-shrink: 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 5px solid;
+    border-radius: 40%;
+    box-sizing: border-box;
+    border-color: #888;
+    background: white;
+    box-shadow:
+      0 3px 8px rgba(0,0,0,0.4),
+      inset 0 2px 6px rgba(0,0,0,0.15),
+      inset 0 -2px 6px rgba(0,0,0,0.1);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    width: 16px;
+    height: 38px;
+
+    &::before {
+      border-width: 4px;
+    }
   }
 }
