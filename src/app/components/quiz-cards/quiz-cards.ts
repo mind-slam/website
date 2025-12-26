@@ -19,6 +19,7 @@ interface QuizQuestion {
 })
 export class QuizCardsComponent {
   showResult = false;
+  isLoading = false;
 
   quizQuestions: QuizQuestion[] = [
     {
@@ -63,9 +64,11 @@ export class QuizCardsComponent {
 
       // Check if all questions are answered
       if (this.allAnswered) {
+        this.isLoading = true;
         setTimeout(() => {
+          this.isLoading = false;
           this.showResult = true;
-        }, 1000);
+        }, 600);
       }
     }
   }
@@ -88,6 +91,7 @@ export class QuizCardsComponent {
 
   resetQuiz(): void {
     this.showResult = false;
+    this.isLoading = false;
     this.quizQuestions.forEach(q => {
       q.selectedIndex = null;
       q.answered = false;

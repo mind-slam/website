@@ -7,8 +7,14 @@
       <p class="quiz-cards__subtitle">Beantworte alle Fragen und sichere dir dein Gratis-Probeabo!</p>
     </div>
 
-    <!-- Quiz Grid or Result -->
-    @if (!showResult) {
+    <!-- Quiz Grid, Loading or Result -->
+    @if (isLoading) {
+      <!-- Loading State -->
+      <div class="quiz-loading">
+        <div class="quiz-loading__spinner"></div>
+        <p class="quiz-loading__text">Ergebnis wird berechnet...</p>
+      </div>
+    } @else if (!showResult) {
       <div class="quiz-cards__grid">
         @for (question of quizQuestions; track question.id) {
           <div class="quiz-item">
@@ -47,8 +53,8 @@
             <span class="quiz-result__reward-label">Deine Belohnung</span>
             <h4 class="quiz-result__reward-title">1 Monat Gratis-Probeabo</h4>
             <p class="quiz-result__reward-text">
-              Schreibe eine E-Mail an<br>
-              <a href="mailto:info@mind-slam.com?subject=DiggiDuell%20Free&body=Hallo%20Mind%20Slam%20Team%2C%0A%0AIch%20habe%20das%20Quiz%20auf%20der%20Website%20abgeschlossen%20und%20m%C3%B6chte%20mein%20Gratis-Probeabo%20einl%C3%B6sen.%0A%0ACode%3A%20DIGGIDUELL-FREE%0A%0AViele%20Gr%C3%BC%C3%9Fe" class="quiz-result__email">info@mind-slam.com</a>
+              Schreibe eine E-Mail mit dem Code und deinem Avatar-Namen an<br>
+              <a href="mailto:info@mind-slam.com?subject=DIGGIDUELL-FREE&body=Hallo%20Mind%20Slam%20Team%2C%0A%0AIch%20habe%20das%20Quiz%20auf%20der%20Website%20abgeschlossen%20und%20m%C3%B6chte%20mein%20Gratis-Probeabo%20einl%C3%B6sen.%0A%0ACode%3A%20DIGGIDUELL-FREE%0AMein%20Avatar-Name%3A%20%5BHier%20eintragen%5D%0A%0AViele%20Gr%C3%BC%C3%9Fe" class="quiz-result__email">info@mind-slam.com</a>
             </p>
             <div class="quiz-result__code">
               <span class="quiz-result__code-label">Dein Code:</span>
