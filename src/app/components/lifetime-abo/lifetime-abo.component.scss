@@ -1,0 +1,542 @@
+@import '../../../styles/variables';
+
+.lifetime {
+  position: relative;
+  padding: 80px 0;
+  padding-bottom: 160px;
+  background: $bg-light;
+  overflow: visible;
+  margin-bottom: 70px;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: 120px 0;
+    padding-bottom: 200px;
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  // Header
+  &__header {
+    text-align: center;
+    margin-bottom: 50px;
+
+    @media (min-width: $breakpoint-lg) {
+      margin-bottom: 70px;
+    }
+  }
+
+  &__tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, rgba($tertiary-gold, 0.2), rgba($tertiary-gold, 0.1));
+    color: darken($tertiary-gold, 15%);
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid rgba($tertiary-gold, 0.3);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  &__title {
+    font-family: $font-headline;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 16px;
+    line-height: 1.2;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 3rem;
+    }
+
+    .typewriter {
+      color: $primary-green;
+      display: inline;
+    }
+
+    .cursor {
+      display: inline;
+      color: $primary-green;
+      font-weight: 400;
+      animation: blink 1s step-end infinite;
+    }
+  }
+
+  &__subtitle {
+    font-family: $font-body;
+    font-size: 1.1rem;
+    color: $text-secondary;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+
+    strong {
+      color: $text-primary;
+      font-weight: 700;
+    }
+  }
+
+  // Counter Card
+  &__counter-card {
+    max-width: 520px;
+    margin: 0 auto 60px;
+    animation: fadeInUp 0.8s ease-out both;
+  }
+
+  // Benefits Grid
+  &__benefits {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 50px;
+
+    @media (min-width: $breakpoint-sm) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+  }
+
+  // CTA
+  &__cta {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 16px;
+    font-family: $font-body;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+
+    &--primary {
+      background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 100%);
+      color: #fff;
+      box-shadow:
+        0 8px 24px rgba($primary-green, 0.35),
+        0 4px 12px rgba($primary-green, 0.2);
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow:
+          0 12px 32px rgba($primary-green, 0.45),
+          0 6px 16px rgba($primary-green, 0.3);
+      }
+
+      &:active {
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// ============================================
+// Counter Card
+// ============================================
+.counter-card__inner {
+  background: #fff;
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba($primary-green, 0.08);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, $primary-green, $tertiary-gold, $primary-green);
+    background-size: 200% 100%;
+    animation: gradientSlide 3s ease infinite;
+  }
+}
+
+.counter-card__remaining {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.counter-card__number {
+  display: block;
+  font-family: $font-headline;
+  font-size: 4.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, $primary-green, $secondary-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 4px;
+
+  @media (min-width: $breakpoint-lg) {
+    font-size: 5.5rem;
+  }
+}
+
+.counter-card__label {
+  font-family: $font-body;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+// Progress Bar
+.counter-card__progress-wrap {
+  margin-bottom: 20px;
+}
+
+.counter-card__progress-bar {
+  width: 100%;
+  height: 12px;
+  background: rgba($primary-green, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.counter-card__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $primary-green, $primary-green-dark);
+  border-radius: 6px;
+  transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    animation: progressShine 2s ease-in-out infinite;
+  }
+}
+
+.counter-card__progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-body;
+  font-size: 0.8rem;
+  color: $text-muted;
+  font-weight: 500;
+}
+
+// Urgency indicator
+.counter-card__urgency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: $font-body;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $primary-green-dark;
+  padding: 10px 0 0;
+}
+
+.urgency-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $primary-green;
+  animation: urgencyPulse 1.5s ease-in-out infinite;
+}
+
+// ============================================
+// Benefit Cards
+// ============================================
+.benefit-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+  border: 1px solid rgba($primary-green, 0.06);
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba($primary-green, 0.15);
+    border-color: rgba($primary-green, 0.15);
+  }
+
+  &__icon {
+    font-size: 2.5rem;
+    margin-bottom: 14px;
+    display: block;
+    line-height: 1;
+  }
+
+  &__title {
+    font-family: $font-headline;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    color: $text-secondary;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+// ============================================
+// Animations
+// ============================================
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes urgencyPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+}
+
+// ============================================
+// RINGBUCH ÜBERGANG (gleich wie Duells)
+// ============================================
+$binding-height: 160px;
+$ring-gap: clamp(45px, 6vw, 80px);
+$ring-width: 20px;
+$ring-height: 50px;
+$hole-size: 12px;
+
+@mixin grid-pattern($opacity: 0.15) {
+  background-image:
+    linear-gradient(rgba($secondary-blue, $opacity) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($secondary-blue, $opacity) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.lifetime__paper-edge {
+  position: absolute;
+  bottom: calc(-#{$binding-height} / 2);
+  left: 0;
+  right: 0;
+  height: $binding-height;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.grid-paper--top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: $bg-light;
+  @include grid-pattern;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    height: 0;
+    border-top: 2px dashed rgba(#666, 0.4);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      to bottom,
+      rgba(#666, 0.3) 0%,
+      rgba(#444, 0.5) 50%,
+      rgba(#666, 0.3) 100%
+    );
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  }
+}
+
+.grid-paper--bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: $bg-light;
+  @include grid-pattern;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      to bottom,
+      rgba(#666, 0.3) 0%,
+      rgba(#444, 0.5) 50%,
+      rgba(#666, 0.3) 100%
+    );
+    box-shadow: 0 -1px 2px rgba(0,0,0,0.15);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    right: 5%;
+    height: 0;
+    border-bottom: 2px dashed rgba(#666, 0.4);
+  }
+}
+
+.paper-holes {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  gap: $ring-gap;
+  padding: 0 5%;
+  z-index: 2;
+}
+
+.paper-hole {
+  width: $hole-size;
+  height: $hole-size;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: transparent;
+
+  @media (max-width: $breakpoint-md) {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.spiral-rings {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  gap: $ring-gap;
+  padding: 0 5%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.spiral-ring {
+  width: $ring-width;
+  height: $ring-height;
+  flex-shrink: 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 5px solid;
+    border-radius: 40%;
+    box-sizing: border-box;
+    border-color: #888;
+    background: white;
+    box-shadow:
+      0 3px 8px rgba(0,0,0,0.4),
+      inset 0 2px 6px rgba(0,0,0,0.15),
+      inset 0 -2px 6px rgba(0,0,0,0.1);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    width: 16px;
+    height: 38px;
+
+    &::before {
+      border-width: 4px;
+    }
+  }
+}

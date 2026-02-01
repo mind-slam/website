@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import '../../../styles/variables';
 
 .tiktok-section {
@@ -591,7 +592,7 @@
     135deg,
     darken($primary-green, 12%) 0%,
     $primary-green 30%,
-    mix($primary-green, $secondary-blue, 50%) 60%,
+    color.mix($primary-green, $secondary-blue, 50%) 60%,
     $secondary-blue 100%
   );
   margin: 0 (-$spacing-lg);

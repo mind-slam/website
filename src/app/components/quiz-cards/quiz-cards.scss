@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import '../../../styles/variables';
 
 .quiz-cards {
@@ -87,7 +88,7 @@
   gap: 12px;
 
   &__question-card {
-    background: linear-gradient(135deg, $primary-green 0%, mix($primary-green, $secondary-blue, 50%) 50%, $secondary-blue 100%);
+    background: linear-gradient(135deg, $primary-green 0%, color.mix($primary-green, $secondary-blue, 50%) 50%, $secondary-blue 100%);
     border-radius: 16px;
     padding: 24px 20px;
     min-height: 120px;
@@ -202,7 +203,7 @@
   animation: fadeInUp 0.6s ease-out;
 
   &__card {
-    background: linear-gradient(135deg, $primary-green 0%, mix($primary-green, $secondary-blue, 50%) 50%, $secondary-blue 100%);
+    background: linear-gradient(135deg, $primary-green 0%, color.mix($primary-green, $secondary-blue, 50%) 50%, $secondary-blue 100%);
     border-radius: 28px;
     padding: 50px 40px;
     text-align: center;

@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import '../../../styles/variables';
 
 .hero {
@@ -8,15 +9,15 @@
   overflow: visible; // Wichtig: Übergang ragt in nächste Sektion
   margin-bottom: 70px; // Platz für den unteren Teil des Übergangs
 
-  // Background - Blau-Grüner Gradient
+  // Background - Grün/Teal Gradient (passend zum App Logo)
   &__bg {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       135deg,
-      $secondary-blue 0%,
-      mix($secondary-blue, $primary-green, 60%) 50%,
-      $primary-green 100%
+      $primary-green 0%,
+      color.mix($primary-green, $primary-green-dark, 50%) 50%,
+      $primary-green-dark 100%
     );
     z-index: 0;
   }
@@ -79,23 +80,19 @@
   &__logo {
     width: 80px;
     height: 80px;
-    border-radius: 20px;
-    background: white;
-    padding: 8px;
+    border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 
     @media (min-width: $breakpoint-md) {
       width: 100px;
       height: 100px;
-      border-radius: 24px;
-      padding: 10px;
+      border-radius: 20px;
     }
 
     @media (min-width: $breakpoint-lg) {
       width: 120px;
       height: 120px;
-      border-radius: 28px;
-      padding: 12px;
+      border-radius: 24px;
     }
   }
 
@@ -171,7 +168,7 @@
 
   &__cursor {
     display: inline;
-    color: $primary-green;
+    color: $primary-green-light;
     font-weight: 400;
     animation: blink 1s step-end infinite;
 
@@ -225,7 +222,7 @@
       display: block;
       font-size: 1.75rem;
       font-weight: 700;
-      color: $primary-green;
+      color: $primary-green-light;
       line-height: 1;
       margin-bottom: 4px;
 
@@ -468,8 +465,8 @@ $hole-size: 12px;
 // Kariertes Muster
 @mixin grid-pattern($opacity: 0.15) {
   background-image:
-    linear-gradient(rgba($secondary-blue, $opacity) 1px, transparent 1px),
-    linear-gradient(90deg, rgba($secondary-blue, $opacity) 1px, transparent 1px);
+    linear-gradient(rgba($primary-green-dark, $opacity) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($primary-green-dark, $opacity) 1px, transparent 1px);
   background-size: 18px 18px;
 }
 
@@ -581,8 +578,8 @@ $hole-size: 12px;
   flex-shrink: 0;
   background: linear-gradient(
     135deg,
-    mix($primary-green, $secondary-blue, 60%) 0%,
-    mix($secondary-blue, $primary-green, 60%) 100%
+    $primary-green 0%,
+    $primary-green-dark 100%
   );
   box-shadow:
     inset 0 2px 4px rgba(0,0,0,0.5),

@@ -1,43 +1,46 @@
-// mind.slam Color Palette
+@use 'sass:color';
+
+// DiggiDuell Color Palette
 // ========================
-// Grün ist die DOMINANTE Farbe, Blau ist Akzentfarbe
+// Angepasst an Flutter App Theme (flutter_flow_theme.dart)
+// Primary: Teal/Mint, Secondary: Emerald, Accent: Sky Blue
 
-// Primary Colors (GRÜN = Hauptfarbe)
-$primary-green: #7CCD7C;
-$primary-green-dark: #5CB85C;
-$primary-green-light: #9FE09F;
+// Primary Colors (TEAL/MINT = Hauptfarbe aus Flutter App)
+$primary-green: #3BC09C;
+$primary-green-dark: #10B981;
+$primary-green-light: #6EE7B7;
 
-// Secondary Colors (BLAU = Akzentfarbe)
-$secondary-blue: #194F82;
-$secondary-blue-dark: #0B3D66;
-$secondary-blue-light: #2B6AA8;
+// Secondary Colors (SKY BLUE = Akzentfarbe)
+$secondary-blue: #0EA5E9;
+$secondary-blue-dark: #0284C7;
+$secondary-blue-light: #38BDF8;
 
 // Tertiary Colors
-$tertiary-gold: #FFD700;
+$tertiary-gold: #F59E0B;
 
-// Text Colors
-$text-primary: #161C24;
-$text-secondary: #636F81;
-$text-muted: #919BAB;
+// Text Colors (aus Flutter App Theme)
+$text-primary: #1F2937;
+$text-secondary: #6B7280;
+$text-muted: #9CA3AF;
 $text-light: #FFFFFF;
-$text-light-secondary: #919BAB;
+$text-light-secondary: #9CA3AF;
 
-// Background Colors
-$bg-light: #F0F5F9;
+// Background Colors (aus Flutter App Theme)
+$bg-light: #F9FAFB;
 $bg-white: #FFFFFF;
-$bg-dark: #161C24;
-$bg-dark-secondary: #212B36;
+$bg-dark: #1F2937;
+$bg-dark-secondary: #374151;
 
-// Status Colors
-$success: #27AE52;
-$warning: #FC964D;
-$error: #BC0B0E;
+// Status Colors (aus Flutter App Theme)
+$success: #3BC09C;
+$warning: #F59E0B;
+$error: #EF4444;
 
 // Gradients (Grün dominiert)
-$gradient-hero: linear-gradient(135deg, $primary-green 0%, mix($primary-green, $secondary-blue, 70%) 50%, $secondary-blue 100%);
+$gradient-hero: linear-gradient(135deg, $primary-green 0%, color.mix($primary-green, $secondary-blue, 70%) 50%, $secondary-blue 100%);
 $gradient-button: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 100%);
 $gradient-accent: linear-gradient(135deg, $primary-green 0%, $secondary-blue 100%);
-$gradient-green-dominant: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 60%, mix($primary-green, $secondary-blue, 50%) 100%);
+$gradient-green-dominant: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 60%, color.mix($primary-green, $secondary-blue, 50%) 100%);
 
 // Typography
 $font-headline: 'Outfit', sans-serif;

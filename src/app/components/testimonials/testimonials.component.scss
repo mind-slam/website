@@ -1,10 +1,11 @@
+@use 'sass:color';
 @import '../../../styles/variables';
 
 .testimonials {
   position: relative;
   padding: $spacing-4xl 0;
-  // Grün-dominierter heller Hintergrund
-  background: linear-gradient(180deg, #f8fafc 0%, #e8f5e9 50%, #f0f9f0 100%);
+  // Heller Hintergrund mit App-Farben
+  background: linear-gradient(180deg, #f8fafb 0%, #ecfdf5 50%, #f0fdf9 100%);
   overflow: hidden;
 
   // Background
@@ -213,7 +214,7 @@
     gap: $spacing-sm;
     padding: $spacing-md $spacing-xl;
     // Grün-dominierter Button
-    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 70%, mix($primary-green, $secondary-blue, 60%) 100%);
+    background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 70%, color.mix($primary-green, $secondary-blue, 60%) 100%);
     color: white;
     border-radius: 50px;
     font-family: $font-headline;

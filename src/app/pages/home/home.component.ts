@@ -11,6 +11,7 @@ import { RoadmapComponent } from '../../components/roadmap/roadmap.component';
 import { BillboardComponent } from '../../components/billboard/billboard.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { QuizCardsComponent } from '../../components/quiz-cards/quiz-cards';
+import { LifetimeAboComponent } from '../../components/lifetime-abo/lifetime-abo.component';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ import { QuizCardsComponent } from '../../components/quiz-cards/quiz-cards';
     FeaturesComponent,
     DuellsComponent,
     QuizCardsComponent,
+    LifetimeAboComponent,
     DozentenComponent,
     TeamComponent,
     TestimonialsComponent,

@@ -1,12 +1,25 @@
 @import '../../../styles/variables';
 
+// ============================================
+// Flutter App Color Tokens (from flutter_flow_theme.dart)
+// ============================================
+$app-primary: $primary-green;
+$app-secondary: $primary-green-dark;
+$app-warning: $warning;
+$app-error: $error;
+$app-bg: $bg-light;
+$app-secondary-bg: #ECFDF5;
+$app-primary-text: $text-primary;
+$app-secondary-text: $text-secondary;
+$app-alternate: #E0E3E7;
+
 .duells {
   position: relative;
   padding: 80px 0;
-  padding-bottom: 160px; // Platz für Papier-Übergang
+  padding-bottom: 160px;
   background: $bg-light;
   overflow: visible;
-  margin-bottom: 70px; // Platz für unteren Teil des Übergangs
+  margin-bottom: 70px;
 
   @media (min-width: $breakpoint-lg) {
     padding: 120px 0;
@@ -14,9 +27,9 @@
   }
 
   &__container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 8px;
+    padding: 0 16px;
   }
 
   // Header
@@ -32,8 +45,8 @@
   &__tag {
     display: inline-block;
     padding: 8px 16px;
-    background: rgba($primary-green, 0.1);
-    color: $primary-green-dark;
+    background: rgba($app-primary, 0.12);
+    color: $app-primary;
     font-size: 0.85rem;
     font-weight: 600;
     border-radius: 50px;
@@ -54,17 +67,17 @@
     }
 
     .highlight {
-      color: $primary-green-dark;
+      color: $app-primary;
     }
 
     .typewriter {
-      color: $primary-green-dark;
+      color: $app-primary;
       display: inline;
     }
 
     .cursor {
       display: inline;
-      color: $primary-green-dark;
+      color: $app-primary;
       font-weight: 400;
       animation: blink 1s step-end infinite;
     }
@@ -77,171 +90,380 @@
     margin: 0 auto;
   }
 
-  // Duell List - 4 Kacheln pro Reihe, volle Breite
-  &__list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+  // Phone Mockup Wrapper
+  &__phone-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  // Phone Frame
+  &__phone {
+    width: 100%;
+    max-width: 420px;
+    background: $app-bg;
+    border-radius: 40px;
+    padding: 20px 16px 32px;
+    box-shadow:
+      0 25px 60px rgba(0, 0, 0, 0.15),
+      0 0 0 8px #1a1a1a,
+      0 0 0 10px #333,
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+
+    @media (min-width: $breakpoint-md) {
+      max-width: 440px;
+      padding: 24px 20px 36px;
+    }
   }
 }
 
-// Wrapper für Kachel mit Überschrift
-.duell-card-wrapper {
-  display: flex;
-  flex-direction: column;
+// Phone Notch
+.phone__notch {
+  width: 120px;
+  height: 28px;
+  background: #1a1a1a;
+  border-radius: 0 0 16px 16px;
+  margin: -20px auto 16px;
+
+  @media (min-width: $breakpoint-md) {
+    margin: -24px auto 20px;
+  }
 }
 
-// Überschrift über der Kachel
-.duell-card__header {
+// ============================================
+// Filter Tabs (matches Flutter _buildFilterTabs)
+// ============================================
+.phone__filter-tabs {
+  display: flex;
+  background: $app-secondary-bg;
+  border-radius: 14px;
+  padding: 4px;
+  margin-bottom: 16px;
+}
+
+.filter-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 0;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: $font-body;
+
+  &--active {
+    background: linear-gradient(135deg, $app-primary, $app-secondary);
+    box-shadow: 0 2px 8px rgba($app-primary, 0.3);
+
+    .filter-tab__label {
+      color: #fff;
+    }
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: $app-secondary-text;
+    white-space: nowrap;
+  }
+}
+
+// ============================================
+// New Duel Button (matches Flutter _buildNewDuelButton)
+// ============================================
+.phone__new-duel {
+  margin-bottom: 20px;
+}
+
+.new-duel-btn {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, $app-primary, $app-secondary);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 20px rgba($app-primary, 0.4),
+    0 12px 40px rgba($app-secondary, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 28px rgba($app-primary, 0.5),
+      0 16px 48px rgba($app-secondary, 0.3);
+  }
+
+  &__icon {
+    color: #fff;
+    flex-shrink: 0;
+    margin-right: 14px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  &__sub {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__arrow {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+  }
+}
+
+// ============================================
+// Section Header
+// ============================================
+.phone__section-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   padding: 0 4px;
 }
 
-.duell-card__uni-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 36px;
-  height: 24px;
-  padding: 0 8px;
-  background: linear-gradient(135deg, $primary-green, $secondary-blue);
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 800;
-  border-radius: 6px;
-  letter-spacing: 0.5px;
-}
+.section-header {
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: $app-primary;
 
-.duell-card__uni-name {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: $text-primary;
-}
+    &--pulse {
+      animation: dotPulse 1.5s ease-in-out infinite alternate;
+    }
+  }
 
-.duell-card__course-name {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: $text-secondary;
+  &__icon {
+    font-size: 14px;
+  }
 
-  &::before {
-    content: '•';
-    margin-right: 8px;
-    opacity: 0.5;
+  &__text {
+    font-size: 14px;
+    font-weight: 600;
+    color: $app-primary-text;
   }
 }
 
-// Duell Card - Gradient Design (kompakter)
-.duell-card {
-  background: linear-gradient(135deg, $primary-green 0%, mix($primary-green, $secondary-blue, 50%) 50%, $secondary-blue 100%);
+// ============================================
+// Duel Cards (matches Flutter _buildDuelCard)
+// ============================================
+.phone__duels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.duel-card {
+  background: $app-secondary-bg;
   border-radius: 16px;
-  padding: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 8px 32px rgba($secondary-blue, 0.2);
-
-  @media (min-width: $breakpoint-md) {
-    padding: 20px;
-    border-radius: 18px;
-  }
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 
   &--visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba($secondary-blue, 0.3);
+  // Content Area
+  &__content {
+    padding: 14px 16px;
   }
 
-  // Battle Area
+  // Chapter Heading
+  &__chapter {
+    font-size: 15px;
+    font-weight: 700;
+    color: $app-primary-text;
+    margin-bottom: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Battle Row
   &__battle {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 12px;
   }
 
-  // Player - kompakter
-  &__player {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    flex: 1;
-
-    @media (min-width: $breakpoint-md) {
-      gap: 8px;
-    }
+  // Avatar
+  &__avatar-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+    flex-shrink: 0;
+    overflow: hidden;
   }
 
   &__avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border: 2px solid rgba(white, 0.9);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-
-    @media (min-width: $breakpoint-md) {
-      width: 56px;
-      height: 56px;
-      border-width: 3px;
-    }
+    border-radius: 50%;
   }
 
-  &__name {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: white;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: 0.9rem;
-    }
-  }
-
-  // VS Badge - kompakter
-  &__vs {
-    flex-shrink: 0;
-    margin: 0 10px;
-
-    @media (min-width: $breakpoint-md) {
-      margin: 0 16px;
-    }
-  }
-
-  &__vs-text {
+  // vs + Opponent Name
+  &__vs-name {
+    flex: 1;
+    min-width: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: white;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    font-weight: 900;
-    color: $secondary-blue;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    align-items: baseline;
+    gap: 6px;
+  }
 
-    @media (min-width: $breakpoint-md) {
-      width: 42px;
-      height: 42px;
-      font-size: 0.95rem;
-      border-radius: 12px;
+  &__vs-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: $app-secondary-text;
+    flex-shrink: 0;
+  }
+
+  &__opponent-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: $app-primary-text;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Score Boxes
+  &__scores {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  // Action Bar
+  &__action {
+    padding: 9px 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+
+    &--active {
+      background: $app-primary;
+    }
+
+    &--waiting {
+      background: $app-warning;
+    }
+
+    &--win {
+      background: $app-primary;
+    }
+
+    &--loss {
+      background: $app-error;
+    }
+
+    &--draw {
+      background: $app-warning;
     }
   }
 }
 
-// Animations
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
+// Score Box
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__label {
+    font-size: 9px;
+    font-weight: 600;
+    color: $app-secondary-text;
+    margin-bottom: 2px;
   }
-  50% {
-    opacity: 0.7;
+
+  &__value {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    background: $app-bg;
+    color: $app-primary-text;
+
+    &--primary {
+      background: $app-primary;
+      color: #fff;
+    }
+
+    &--draw {
+      background: $app-bg;
+      color: $app-primary-text;
+    }
+
+    &--neutral {
+      background: $app-bg;
+      color: $app-primary-text;
+    }
+  }
+
+  &__sep {
+    font-size: 16px;
+    font-weight: 700;
+    color: $app-secondary-text;
+    padding: 0 2px;
+    align-self: flex-end;
+    padding-bottom: 6px;
+  }
+}
+
+// ============================================
+// Animations
+// ============================================
+@keyframes dotPulse {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -293,7 +515,6 @@ $hole-size: 12px;
   @include grid-pattern;
   z-index: 1;
 
-  // Perforierungslinie oben
   &::before {
     content: '';
     position: absolute;
@@ -304,7 +525,6 @@ $hole-size: 12px;
     border-top: 2px dashed rgba(#666, 0.4);
   }
 
-  // Trennlinie unten (Mitte der Bindung)
   &::after {
     content: '';
     position: absolute;
@@ -333,7 +553,6 @@ $hole-size: 12px;
   @include grid-pattern;
   z-index: 1;
 
-  // Trennlinie oben (Mitte der Bindung)
   &::before {
     content: '';
     position: absolute;
@@ -350,7 +569,6 @@ $hole-size: 12px;
     box-shadow: 0 -1px 2px rgba(0,0,0,0.15);
   }
 
-  // Perforierungslinie unten
   &::after {
     content: '';
     position: absolute;
@@ -376,7 +594,7 @@ $hole-size: 12px;
   z-index: 2;
 }
 
-// Einzelnes Loch - transparent (nur Schatten für Tiefe)
+// Einzelnes Loch
 .paper-hole {
   width: $hole-size;
   height: $hole-size;
