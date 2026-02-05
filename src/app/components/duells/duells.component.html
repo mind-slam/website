@@ -7,126 +7,335 @@
       <p class="duells__subtitle">In Klassen, an Unis - überall treten Studenten gegeneinander an</p>
     </div>
 
-    <!-- Phone Mockup with App UI -->
-    <div class="duells__phone-wrapper">
-      <div class="duells__phone">
+    <!-- Phone + Side Text Layout -->
+    <div class="duells__layout"
+      [class.duells__layout--phone-left]="phoneSide === 'left'"
+      [class.duells__layout--phone-right]="phoneSide === 'right'"
+    >
+      <!-- Side Text Panel (always in DOM, hidden during transition to keep layout stable) -->
+      <div class="side-text"
+        [class.side-text--left]="phoneSide === 'right'"
+        [class.side-text--right]="phoneSide === 'left'"
+        [class.side-text--hidden]="transitionActive"
+      >
+        <div class="side-text__content">
+          <h3 class="side-text__title">{{ sideTextTitle }}</h3>
+          <p class="side-text__body">{{ sideTextBody }}</p>
+          <span class="side-text__accent">{{ sideTextAccent }}</span>
+          <!-- Arrow pointing toward phone -->
+          <div class="side-text__arrow"
+            [class.side-text__arrow--point-right]="phoneSide === 'right'"
+            [class.side-text__arrow--point-left]="phoneSide === 'left'"
+          >
+            <svg viewBox="0 0 60 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12 H 50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5 4"/>
+              <path d="M44 5 L 54 12 L 44 19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone Mockup -->
+      <div class="duells__phone-wrapper">
+        <div class="duells__phone">
         <!-- Phone Notch -->
         <div class="phone__notch"></div>
 
-        <!-- Filter Tabs -->
-        <div class="phone__filter-tabs">
-          @for (tab of filterTabs; track tab.key) {
-            <button
-              class="filter-tab"
-              [class.filter-tab--active]="activeFilter === tab.key"
-              (click)="setFilter(tab.key)"
-            >
-              <span class="filter-tab__dot" [style.background-color]="activeFilter === tab.key ? '#fff' : tab.dotColor"></span>
-              <span class="filter-tab__label">{{ tab.label }}{{ tab.count !== null ? ' (' + tab.count + ')' : '' }}</span>
-            </button>
-          }
-        </div>
+        <!-- =============================== -->
+        <!-- TRIANGLE TRANSITION OVERLAY -->
+        <!-- =============================== -->
+        @if (transitionActive) {
+          <div class="triangle-transition">
+            <div class="triangle triangle--left"></div>
+            <div class="triangle triangle--right"></div>
+          </div>
+        }
 
-        <!-- New Duel Button -->
-        <div class="phone__new-duel">
-          <div class="new-duel-btn">
-            <div class="new-duel-btn__icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 11h4a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2z"/>
-                <path d="M14 7h4a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"/>
-                <path d="M10 7V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/>
-              </svg>
-            </div>
-            <div class="new-duel-btn__text">
-              <span class="new-duel-btn__title">Neues Duell starten</span>
-              <span class="new-duel-btn__sub">Fordere jemanden heraus!</span>
-            </div>
-            <div class="new-duel-btn__arrow">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
+        <!-- =============================== -->
+        <!-- PHASE: DUEL LIST -->
+        <!-- =============================== -->
+        @if (walkthroughPhase === 'list') {
+          <!-- Filter Tabs -->
+          <div class="phone__filter-tabs">
+            @for (tab of filterTabs; track tab.key) {
+              <button
+                class="filter-tab"
+                [class.filter-tab--active]="activeFilter === tab.key"
+                (click)="setFilter(tab.key)"
+              >
+                <span class="filter-tab__dot" [style.background-color]="activeFilter === tab.key ? '#fff' : tab.dotColor"></span>
+                <span class="filter-tab__label">{{ tab.label }}{{ tab.count !== null ? ' (' + tab.count + ')' : '' }}</span>
+              </button>
+            }
+          </div>
+
+          <!-- New Duel Button -->
+          <div class="phone__new-duel">
+            <div class="new-duel-btn">
+              <div class="new-duel-btn__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 11h4a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2z"/>
+                  <path d="M14 7h4a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z"/>
+                  <path d="M10 7V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/>
+                </svg>
+              </div>
+              <div class="new-duel-btn__text">
+                <span class="new-duel-btn__title">Neues Duell starten</span>
+                <span class="new-duel-btn__sub">Fordere jemanden heraus!</span>
+              </div>
+              <div class="new-duel-btn__arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Section Header -->
-        <div class="phone__section-header">
-          @if (activeFilter === 'aktiv') {
-            <span class="section-header__dot section-header__dot--pulse"></span>
-            <span class="section-header__text">Du bist dran!</span>
-          } @else if (activeFilter === 'warten') {
-            <span class="section-header__icon">&#9203;</span>
-            <span class="section-header__text">Warte auf Gegner</span>
-          } @else {
-            <span class="section-header__text">Abgeschlossen</span>
-          }
-        </div>
+          <!-- Section Header -->
+          <div class="phone__section-header">
+            @if (activeFilter === 'aktiv') {
+              <span class="section-header__dot section-header__dot--pulse"></span>
+              <span class="section-header__text">Du bist dran!</span>
+            } @else if (activeFilter === 'warten') {
+              <span class="section-header__icon">&#9203;</span>
+              <span class="section-header__text">Warte auf Gegner</span>
+            } @else {
+              <span class="section-header__text">Abgeschlossen</span>
+            }
+          </div>
 
-        <!-- Duel Cards -->
-        <div class="phone__duels-list">
-          @for (duel of filteredDuels; track duel.id; let i = $index) {
-            <div
-              #duellCard
-              class="duel-card"
-              [class.duel-card--visible]="duel.visible"
-            >
-              <!-- Content Area -->
-              <div class="duel-card__content">
-                <!-- Chapter -->
-                <div class="duel-card__chapter">Kapitel: {{ duel.chapter }}</div>
+          <!-- Duel Cards -->
+          <div class="phone__duels-list">
+            @for (duel of filteredDuels; track duel.id; let i = $index) {
+              <div
+                #duellCard
+                class="duel-card"
+                [class.duel-card--visible]="duel.visible"
+                [class.duel-card--clickable]="duel.status === 'aktiv'"
+                (click)="onDuelCardClick(duel)"
+              >
+                <!-- Click hint moved outside phone -->
 
-                <!-- Battle Row -->
-                <div class="duel-card__battle">
-                  <!-- Opponent Avatar -->
-                  <div class="duel-card__avatar-wrap">
-                    <img [src]="duel.player2.image" [alt]="duel.player2.name" class="duel-card__avatar">
-                  </div>
+                <!-- Content Area -->
+                <div class="duel-card__content">
+                  <!-- Chapter -->
+                  <div class="duel-card__chapter">Kapitel: {{ duel.chapter }}</div>
 
-                  <!-- vs Name -->
-                  <div class="duel-card__vs-name">
-                    <span class="duel-card__vs-label">vs</span>
-                    <span class="duel-card__opponent-name">{{ duel.player2.name }}</span>
-                  </div>
-
-                  <!-- Score Boxes -->
-                  <div class="duel-card__scores">
-                    <div class="score-box">
-                      <span class="score-box__label">Du</span>
-                      <span class="score-box__value" [class.score-box__value--primary]="duel.score1 > duel.score2" [class.score-box__value--draw]="duel.score1 === duel.score2">{{ duel.score1 }}</span>
+                  <!-- Battle Row -->
+                  <div class="duel-card__battle">
+                    <!-- Opponent Avatar -->
+                    <div class="duel-card__avatar-wrap">
+                      <img [src]="duel.player2.image" [alt]="duel.player2.name" class="duel-card__avatar">
                     </div>
-                    <span class="score-box__sep">:</span>
-                    <div class="score-box">
-                      <span class="score-box__label">VS</span>
-                      <span class="score-box__value score-box__value--neutral">{{ duel.score2 }}</span>
+
+                    <!-- vs Name -->
+                    <div class="duel-card__vs-name">
+                      <span class="duel-card__vs-label">vs</span>
+                      <span class="duel-card__opponent-name">{{ duel.player2.name }}</span>
+                    </div>
+
+                    <!-- Score Boxes -->
+                    <div class="duel-card__scores">
+                      <div class="score-box">
+                        <span class="score-box__label">Du</span>
+                        <span class="score-box__value" [class.score-box__value--primary]="duel.score1 > duel.score2" [class.score-box__value--draw]="duel.score1 === duel.score2">{{ duel.score1 }}</span>
+                      </div>
+                      <span class="score-box__sep">:</span>
+                      <div class="score-box">
+                        <span class="score-box__label">VS</span>
+                        <span class="score-box__value score-box__value--neutral">{{ duel.score2 }}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- Action Bar -->
+                <div class="duel-card__action"
+                  [class.duel-card__action--active]="duel.status === 'aktiv'"
+                  [class.duel-card__action--waiting]="duel.status === 'warten'"
+                  [class.duel-card__action--win]="duel.status === 'beendet' && duel.result === 'win'"
+                  [class.duel-card__action--loss]="duel.status === 'beendet' && duel.result === 'loss'"
+                  [class.duel-card__action--draw]="duel.status === 'beendet' && duel.result === 'draw'"
+                >
+                  @if (duel.status === 'aktiv') {
+                    {{ duel.course }}
+                  } @else if (duel.status === 'warten') {
+                    Warte auf {{ duel.player2.name }} ...
+                  } @else if (duel.result === 'win') {
+                    Gewonnen! – Details ansehen
+                  } @else if (duel.result === 'loss') {
+                    Verloren – Details ansehen
+                  } @else {
+                    Unentschieden – Details ansehen
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- =============================== -->
+        <!-- PHASE: DUEL ARENA -->
+        <!-- =============================== -->
+        @if (walkthroughPhase === 'arena') {
+          <div class="arena">
+            <!-- Arena Header -->
+            <div class="arena__header">
+              <div class="arena__player arena__player--you">
+                <div class="arena__avatar arena__avatar--you">
+                  <span>&#128526;</span>
+                </div>
+                <span class="arena__name">Du</span>
+                <div class="arena__dots">
+                  @for (r of roundResults; track $index) {
+                    <span class="arena__dot" [class.arena__dot--correct]="r" [class.arena__dot--wrong]="!r"></span>
+                  }
+                  @for (e of [].constructor(3 - roundResults.length); track $index) {
+                    <span class="arena__dot arena__dot--empty"></span>
+                  }
+                </div>
               </div>
 
-              <!-- Action Bar -->
-              <div class="duel-card__action"
-                [class.duel-card__action--active]="duel.status === 'aktiv'"
-                [class.duel-card__action--waiting]="duel.status === 'warten'"
-                [class.duel-card__action--win]="duel.status === 'beendet' && duel.result === 'win'"
-                [class.duel-card__action--loss]="duel.status === 'beendet' && duel.result === 'loss'"
-                [class.duel-card__action--draw]="duel.status === 'beendet' && duel.result === 'draw'"
-              >
-                @if (duel.status === 'aktiv') {
-                  {{ duel.course }}
-                } @else if (duel.status === 'warten') {
-                  Warte auf {{ duel.player2.name }} ...
-                } @else if (duel.result === 'win') {
-                  Gewonnen! – Details ansehen
-                } @else if (duel.result === 'loss') {
-                  Verloren – Details ansehen
-                } @else {
-                  Unentschieden – Details ansehen
-                }
+              <div class="arena__score-center">
+                <span class="arena__round-label">Runde {{ currentQuestionIndex + 1 }}/3</span>
+                <div class="arena__score-pill">
+                  <span class="arena__score-num arena__score-num--you">{{ playerScore }}</span>
+                  <span class="arena__score-sep">:</span>
+                  <span class="arena__score-num arena__score-num--bot">{{ botScore }}</span>
+                </div>
+              </div>
+
+              <div class="arena__player arena__player--bot">
+                <div class="arena__avatar arena__avatar--bot" [class.arena__avatar--answered]="botAnswerIndex !== null">
+                  <img [src]="selectedDuelForArena?.player2?.image" [alt]="selectedDuelForArena?.player2?.name" class="arena__avatar-img">
+                  @if (botAnswerIndex !== null) {
+                    <span class="arena__bot-badge">&#10003;</span>
+                  }
+                </div>
+                <span class="arena__name">{{ selectedDuelForArena?.player2?.name }}</span>
+                <div class="arena__dots">
+                  @for (r of botRoundResults; track $index) {
+                    <span class="arena__dot" [class.arena__dot--correct]="r" [class.arena__dot--wrong]="!r"></span>
+                  }
+                  @for (e of [].constructor(3 - botRoundResults.length); track $index) {
+                    <span class="arena__dot arena__dot--empty"></span>
+                  }
+                </div>
               </div>
             </div>
-          }
-        </div>
+
+            <!-- Timer Bar -->
+            <div class="arena__timer-bar">
+              <div class="arena__timer-icon">&#9201;</div>
+              <div class="arena__timer-track">
+                <div class="arena__timer-fill" [style.width.%]="timerPercent" [class.arena__timer-fill--urgent]="duelTimer <= 3"></div>
+              </div>
+              <div class="arena__timer-num" [class.arena__timer-num--urgent]="duelTimer <= 3">{{ duelTimer }}s</div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="arena__question-card">
+              <p class="arena__question-text">{{ currentQuestion.question }}</p>
+            </div>
+
+            <!-- Answer Buttons -->
+            <div class="arena__answers">
+              @for (answer of currentQuestion.answers; track $index; let idx = $index) {
+                <button
+                  class="arena__answer-btn"
+                  [class.arena__answer-btn--correct]="getAnswerClass(idx) === 'correct'"
+                  [class.arena__answer-btn--wrong]="getAnswerClass(idx) === 'wrong'"
+                  [class.arena__answer-btn--dimmed]="getAnswerClass(idx) === 'dimmed'"
+                  [disabled]="selectedAnswerIndex !== null"
+                  (click)="onAnswerClick(idx)"
+                >
+                  <span class="arena__answer-letter">{{ answerLetters[idx] }}</span>
+                  <span class="arena__answer-text">{{ answer }}</span>
+                </button>
+              }
+            </div>
+
+            <!-- Feedback -->
+            @if (showFeedback && selectedAnswerIndex !== null) {
+              <div class="arena__feedback"
+                [class.arena__feedback--correct]="selectedAnswerIndex === currentQuestion.correct"
+                [class.arena__feedback--wrong]="selectedAnswerIndex !== currentQuestion.correct"
+              >
+                @if (selectedAnswerIndex === currentQuestion.correct) {
+                  <span>&#127881;</span> Richtig! +1 Punkt
+                } @else {
+                  <span>&#128517;</span> Knapp daneben!
+                }
+              </div>
+            }
+          </div>
+        }
+
+        <!-- =============================== -->
+        <!-- PHASE: RESULT SCREEN -->
+        <!-- =============================== -->
+        @if (walkthroughPhase === 'result') {
+          <div class="result">
+            <div class="result__content">
+              <!-- Winner/Result Emoji -->
+              <div class="result__emoji">
+                @if (playerScore > botScore) {
+                  <span>&#127942;</span>
+                } @else if (playerScore < botScore) {
+                  <span>&#128148;</span>
+                } @else {
+                  <span>&#129309;</span>
+                }
+              </div>
+
+              <!-- Result Message -->
+              <div class="result__message">
+                <h2 class="result__title"
+                  [class.result__title--win]="playerScore > botScore"
+                  [class.result__title--loss]="playerScore < botScore"
+                  [class.result__title--draw]="playerScore === botScore"
+                >{{ resultTitle }}</h2>
+                <p class="result__subtitle">{{ resultSubtitle }}</p>
+              </div>
+
+              <!-- Score Cards -->
+              <div class="result__score-cards">
+                <div class="result__score-card" [class.result__score-card--winner]="playerScore >= botScore">
+                  <span class="result__score-card-avatar">&#128526;</span>
+                  <span class="result__score-card-name">Du</span>
+                  <span class="result__score-card-value">{{ playerScore }}/3</span>
+                </div>
+                <span class="result__vs">vs</span>
+                <div class="result__score-card" [class.result__score-card--winner]="botScore > playerScore">
+                  <div class="result__score-card-avatar-wrap">
+                    <img [src]="selectedDuelForArena?.player2?.image" [alt]="selectedDuelForArena?.player2?.name" class="result__score-card-avatar-img">
+                  </div>
+                  <span class="result__score-card-name">{{ selectedDuelForArena?.player2?.name }}</span>
+                  <span class="result__score-card-value">{{ botScore }}/3</span>
+                </div>
+              </div>
+
+              <!-- Round Details -->
+              <div class="result__rounds">
+                @for (r of roundResults; track $index; let i = $index) {
+                  <div class="result__round-row">
+                    <span class="result__round-num">Frage {{ i + 1 }}</span>
+                    <span class="result__round-badge" [class.result__round-badge--correct]="r" [class.result__round-badge--wrong]="!r">
+                      {{ r ? 'Richtig' : 'Falsch' }}
+                    </span>
+                  </div>
+                }
+              </div>
+
+              <!-- Back Button -->
+              <button class="result__back-btn" (click)="onBackToList()">
+                Zurück zur Übersicht
+              </button>
+            </div>
+          </div>
+        }
       </div>
+    </div>
     </div>
   </div>
 

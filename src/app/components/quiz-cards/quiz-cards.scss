@@ -1,14 +1,18 @@
 @use 'sass:color';
-@import '../../../styles/variables';
+@use '../../../styles/variables' as *;
+
+$card-width: 300px;
+$card-gap: 20px;
 
 .quiz-cards {
   position: relative;
-  padding: 80px 0;
-  padding-top: 120px; // Extra Platz für Papier-Übergang von oben
+  padding: 80px 0 60px;
+  padding-top: 120px;
   background: $bg-light;
+  overflow: hidden;
 
   @media (min-width: $breakpoint-lg) {
-    padding: 120px 0;
+    padding: 120px 0 80px;
     padding-top: 160px;
   }
 
@@ -24,7 +28,7 @@
     margin-bottom: 50px;
 
     @media (min-width: $breakpoint-lg) {
-      margin-bottom: 70px;
+      margin-bottom: 60px;
     }
   }
 
@@ -42,6 +46,7 @@
   }
 
   &__title {
+    font-family: $font-headline;
     font-size: 2.2rem;
     font-weight: 700;
     color: $text-primary;
@@ -58,323 +63,255 @@
   }
 
   &__subtitle {
+    font-family: $font-body;
     font-size: 1.1rem;
     color: $text-secondary;
     max-width: 600px;
     margin: 0 auto;
   }
+}
 
-  // Quiz Grid - 3 items nebeneinander
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+// ============================================
+// SLIDER TRACKS
+// ============================================
+.slider-track {
+  width: 100%;
+  overflow: hidden;
+  padding: 8px 0;
 
-    @media (max-width: $breakpoint-lg) {
-      grid-template-columns: repeat(2, 1fr);
+  // Fade-Ränder
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+
+  &--left {
+    margin-bottom: 16px;
+
+    .slider-track__inner {
+      animation: slideLeft 30s linear infinite;
     }
+  }
 
-    @media (max-width: $breakpoint-md) {
-      grid-template-columns: 1fr;
-      gap: 30px;
+  &--right {
+    .slider-track__inner {
+      animation: slideRight 35s linear infinite;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    gap: $card-gap;
+    width: max-content;
+    will-change: transform;
+
+    &:hover {
+      animation-play-state: paused;
     }
   }
 }
 
-// Quiz Item (Question + Options)
-.quiz-item {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    // Verschiebung um die Hälfte (6 Karten × Breite+Gap)
+    transform: translateX(calc(-1 * (#{$card-width} + #{$card-gap}) * 6));
+  }
+}
 
-  &__question-card {
-    background: linear-gradient(135deg, $primary-green 0%, color.mix($primary-green, $secondary-blue, 50%) 50%, $secondary-blue 100%);
-    border-radius: 16px;
-    padding: 24px 20px;
-    min-height: 120px;
+@keyframes slideRight {
+  0% {
+    transform: translateX(calc(-1 * (#{$card-width} + #{$card-gap}) * 6));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// ============================================
+// SLIDE CARD (Duel-Kachel im Slider)
+// ============================================
+.slide-card {
+  flex-shrink: 0;
+  width: $card-width;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba($primary-green, 0.15);
+  }
+
+  // Content
+  &__content {
+    padding: 14px 16px;
+  }
+
+  &__chapter {
+    font-family: $font-body;
+    font-size: 13px;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  // Matchup Row (Duell-Charakter)
+  &__matchup {
     display: flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 32px rgba($secondary-blue, 0.2);
+    justify-content: space-between;
+    gap: 6px;
   }
 
-  &__question-text {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-align: center;
-    line-height: 1.4;
-    margin: 0;
-
-    @media (min-width: $breakpoint-lg) {
-      font-size: 1.2rem;
-    }
-  }
-
-  &__options {
+  &__duelist {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
   }
 
-  &__option {
-    width: 100%;
-    padding: 14px 18px;
-    border: none;
-    border-radius: 12px;
-    background: white;
+  &__duelist-name {
+    font-family: $font-body;
+    font-size: 13px;
+    font-weight: 700;
     color: $text-primary;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-
-    &:hover:not(:disabled) {
-      background: darken(white, 3%);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-    }
-
-    &:disabled {
-      cursor: default;
-    }
-
-    // Correct answer - Green
-    &.correct {
-      background: $success;
-      color: white;
-      box-shadow: 0 4px 16px rgba($success, 0.4);
-    }
-
-    // Wrong answer - Red
-    &.wrong {
-      background: $error;
-      color: white;
-      box-shadow: 0 4px 16px rgba($error, 0.4);
-    }
-
-    // Disabled (not selected, not correct)
-    &.disabled {
-      opacity: 0.5;
-      background: $bg-light;
-    }
-  }
-}
-
-// Loading State
-.quiz-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  gap: 20px;
-
-  &__spinner {
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba($primary-green, 0.2);
-    border-top-color: $primary-green-dark;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
-  &__text {
-    font-size: 1.1rem;
-    color: $text-secondary;
-    font-weight: 500;
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-// Result Screen
-.quiz-result {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 500px;
-  animation: fadeInUp 0.6s ease-out;
-
-  &__card {
-    background: linear-gradient(135deg, $primary-green 0%, color.mix($primary-green, $secondary-blue, 50%) 50%, $secondary-blue 100%);
-    border-radius: 28px;
-    padding: 50px 40px;
-    text-align: center;
-    max-width: 550px;
-    width: 100%;
-    box-shadow: 0 25px 80px rgba($secondary-blue, 0.3);
-    position: relative;
+    white-space: nowrap;
     overflow: hidden;
-
-    // Decorative circles
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(white, 0.08);
-    }
-
-    &::before {
-      width: 200px;
-      height: 200px;
-      top: -80px;
-      right: -60px;
-    }
-
-    &::after {
-      width: 150px;
-      height: 150px;
-      bottom: -50px;
-      left: -40px;
-    }
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
-  &__icon {
-    font-size: 5rem;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
-    animation: bounce 1s ease infinite;
+  &__avatar-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, $tertiary-gold, color.adjust($tertiary-gold, $lightness: -12%));
+    border: 2px solid rgba($primary-green, 0.2);
   }
 
-  &__title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: white;
-    margin: 0 0 12px 0;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  // Score Center
+  &__score-center {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    padding: 0 2px;
   }
 
   &__score {
-    font-size: 1.15rem;
-    color: rgba(white, 0.9);
-    margin: 0 0 35px 0;
-    font-weight: 500;
-  }
-
-  &__reward {
-    background: rgba(white, 0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(white, 0.2);
-    border-radius: 20px;
-    padding: 28px 24px;
-    margin-bottom: 28px;
-  }
-
-  &__reward-label {
-    display: inline-block;
-    padding: 6px 16px;
-    background: rgba(white, 0.2);
-    border-radius: 50px;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 16px;
-  }
-
-  &__reward-title {
-    color: white;
-    font-size: 1.8rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 16px;
     font-weight: 800;
-    margin: 0 0 16px 0;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
+    background: $bg-light;
+    color: $text-primary;
 
-  &__reward-text {
-    color: rgba(white, 0.95);
-    font-size: 1rem;
-    margin: 0 0 20px 0;
-    line-height: 1.6;
-  }
-
-  &__email {
-    color: white;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    background: rgba(white, 0.2);
-    padding: 4px 12px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background: rgba(white, 0.3);
+    &--winning {
+      background: $primary-green;
+      color: #fff;
     }
   }
 
-  &__code {
-    background: white;
-    border-radius: 14px;
-    padding: 16px 20px;
+  &__sep {
+    font-size: 16px;
+    font-weight: 800;
+    color: $text-secondary;
+  }
+
+  // Action Bar
+  &__action {
+    padding: 8px 0;
+    text-align: center;
+    font-family: $font-body;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+
+    &--active {
+      background: $primary-green;
+    }
+
+    &--waiting {
+      background: $warning;
+    }
+
+    &--win {
+      background: $primary-green;
+    }
+
+    &--loss {
+      background: $error;
+    }
+
+    &--draw {
+      background: $warning;
+    }
+  }
+
+  // Testimonial
+  &__testimonial {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    text-align: center;
+    padding: 12px 14px;
+    background: $bg-light;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
 
-  &__code-label {
+  &__testimonial-text {
+    font-family: $font-body;
+    font-size: 12px;
+    line-height: 1.5;
     color: $text-secondary;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-style: italic;
+    margin: 0 0 6px;
   }
 
-  &__code-value {
-    background: linear-gradient(135deg, $primary-green-dark 0%, $secondary-blue 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 1.5rem;
-    font-weight: 900;
-    letter-spacing: 3px;
-    font-family: 'Courier New', monospace;
-  }
-
-  &__retry {
-    padding: 16px 40px;
-    background: white;
-    border: none;
-    border-radius: 50px;
-    color: $secondary-blue;
-    font-size: 1rem;
+  &__testimonial-name {
+    font-family: $font-body;
+    font-size: 13px;
     font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    color: $text-primary;
+  }
 
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    }
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
+  &__testimonial-uni {
+    font-family: $font-body;
+    font-size: 11px;
+    color: $text-secondary;
+    margin-top: 2px;
   }
 }

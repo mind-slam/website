@@ -1,5 +1,5 @@
 @use 'sass:color';
-@import '../../../styles/variables';
+@use '../../../styles/variables' as *;
 
 .tiktok-section {
   position: relative;
@@ -590,7 +590,7 @@
   align-items: center;
   background: linear-gradient(
     135deg,
-    darken($primary-green, 12%) 0%,
+    color.adjust($primary-green, $lightness: -12%) 0%,
     $primary-green 30%,
     color.mix($primary-green, $secondary-blue, 50%) 60%,
     $secondary-blue 100%

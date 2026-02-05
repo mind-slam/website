@@ -1,5 +1,5 @@
 @use 'sass:color';
-@import '../../../styles/variables';
+@use '../../../styles/variables' as *;
 
 .team {
   position: relative;
@@ -7,7 +7,7 @@
   // Grün-dominierter Hintergrund mit Mind-Slam Farben
   background: linear-gradient(
     135deg,
-    darken($primary-green, 12%) 0%,
+    color.adjust($primary-green, $lightness: -12%) 0%,
     $primary-green 30%,
     color.mix($primary-green, $secondary-blue, 50%) 60%,
     $secondary-blue 100%
@@ -31,7 +31,7 @@
       &--1 {
         width: 600px;
         height: 600px;
-        background: linear-gradient(135deg, rgba($primary-green, 0.4), rgba(lighten($primary-green, 20%), 0.3));
+        background: linear-gradient(135deg, rgba($primary-green, 0.4), rgba(color.adjust($primary-green, $lightness: 20%), 0.3));
         top: -150px;
         left: -150px;
         animation-delay: 0s;
@@ -40,7 +40,7 @@
       &--2 {
         width: 500px;
         height: 500px;
-        background: linear-gradient(135deg, rgba(lighten($secondary-blue, 10%), 0.4), rgba($primary-green, 0.3));
+        background: linear-gradient(135deg, rgba(color.adjust($secondary-blue, $lightness: 10%), 0.4), rgba($primary-green, 0.3));
         bottom: -150px;
         right: -150px;
         animation-delay: -10s;

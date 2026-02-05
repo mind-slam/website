@@ -4,67 +4,185 @@
     <div class="quiz-cards__header">
       <span class="quiz-cards__tag">Teste dein Wissen</span>
       <h2 class="quiz-cards__title">Wie gut bist <span class="highlight">du</span>?</h2>
-      <p class="quiz-cards__subtitle">Beantworte alle Fragen und sichere dir dein Gratis-Probeabo!</p>
+      <p class="quiz-cards__subtitle">Tausende Duelle laufen gerade – fordere deine Freunde heraus!</p>
     </div>
+  </div>
 
-    <!-- Quiz Grid, Loading or Result -->
-    @if (isLoading) {
-      <!-- Loading State -->
-      <div class="quiz-loading">
-        <div class="quiz-loading__spinner"></div>
-        <p class="quiz-loading__text">Ergebnis wird berechnet...</p>
-      </div>
-    } @else if (!showResult) {
-      <div class="quiz-cards__grid">
-        @for (question of quizQuestions; track question.id) {
-          <div class="quiz-item">
-            <!-- Question Card (App-Style) -->
-            <div class="quiz-item__question-card">
-              <p class="quiz-item__question-text">{{ question.question }}</p>
-            </div>
-
-            <!-- Answer Options -->
-            <div class="quiz-item__options">
-              @for (option of question.options; track option; let i = $index) {
-                <button
-                  class="quiz-item__option"
-                  [class.correct]="getOptionClass(question, i) === 'correct'"
-                  [class.wrong]="getOptionClass(question, i) === 'wrong'"
-                  [class.disabled]="getOptionClass(question, i) === 'disabled'"
-                  [disabled]="question.answered"
-                  (click)="selectAnswer(question.id, i)"
-                >
-                  {{ option }}
-                </button>
-              }
-            </div>
-          </div>
-        }
-      </div>
-    } @else {
-      <!-- Result Screen -->
-      <div class="quiz-result">
-        <div class="quiz-result__card">
-          <div class="quiz-result__icon">🎉</div>
-          <h3 class="quiz-result__title">Geschafft!</h3>
-          <p class="quiz-result__score">Du hast {{ correctCount }} von {{ quizQuestions.length }} Fragen richtig beantwortet!</p>
-
-          <div class="quiz-result__reward">
-            <span class="quiz-result__reward-label">Deine Belohnung</span>
-            <h4 class="quiz-result__reward-title">1 Monat Gratis-Probeabo</h4>
-            <p class="quiz-result__reward-text">
-              Schreibe eine E-Mail mit dem Code und deinem Avatar-Namen an<br>
-              <a href="mailto:info@mind-slam.com?subject=DIGGIDUELL-FREE&body=Hallo%20Mind%20Slam%20Team%2C%0A%0AIch%20habe%20das%20Quiz%20auf%20der%20Website%20abgeschlossen%20und%20m%C3%B6chte%20mein%20Gratis-Probeabo%20einl%C3%B6sen.%0A%0ACode%3A%20DIGGIDUELL-FREE%0AMein%20Avatar-Name%3A%20%5BHier%20eintragen%5D%0A%0AViele%20Gr%C3%BC%C3%9Fe" class="quiz-result__email">info@mind-slam.com</a>
-            </p>
-            <div class="quiz-result__code">
-              <span class="quiz-result__code-label">Dein Code:</span>
-              <span class="quiz-result__code-value">DIGGIDUELL-FREE</span>
+  <!-- Sliding Duel Cards - Reihe 1 (nach links) -->
+  <div class="slider-track slider-track--left">
+    <div class="slider-track__inner">
+      <!-- Doppelt für nahtlose Endlosschleife -->
+      @for (duel of topRow; track duel.id) {
+        <div class="slide-card">
+          <div class="slide-card__content">
+            <div class="slide-card__chapter">{{ duel.chapter }}</div>
+            <div class="slide-card__matchup">
+              <!-- Player 1 -->
+              <div class="slide-card__duelist">
+                <div class="slide-card__avatar-wrap">
+                  <img [src]="duel.player.image" [alt]="duel.player.name" class="slide-card__avatar">
+                </div>
+                <span class="slide-card__duelist-name">{{ duel.player.name }}</span>
+              </div>
+              <!-- Score Center -->
+              <div class="slide-card__score-center">
+                <span class="slide-card__score" [class.slide-card__score--winning]="duel.score1 > duel.score2">{{ duel.score1 }}</span>
+                <span class="slide-card__sep">:</span>
+                <span class="slide-card__score" [class.slide-card__score--winning]="duel.score2 > duel.score1">{{ duel.score2 }}</span>
+              </div>
+              <!-- Player 2 -->
+              <div class="slide-card__duelist">
+                <div class="slide-card__avatar-wrap">
+                  <img [src]="duel.opponent.image" [alt]="duel.opponent.name" class="slide-card__avatar">
+                </div>
+                <span class="slide-card__duelist-name">{{ duel.opponent.name }}</span>
+              </div>
             </div>
           </div>
-
-          <button class="quiz-result__retry" (click)="resetQuiz()">Nochmal spielen</button>
+          <div class="slide-card__action"
+            [class.slide-card__action--active]="duel.status === 'aktiv'"
+            [class.slide-card__action--waiting]="duel.status === 'warten'"
+            [class.slide-card__action--win]="duel.status === 'beendet' && duel.result === 'win'"
+            [class.slide-card__action--loss]="duel.status === 'beendet' && duel.result === 'loss'"
+            [class.slide-card__action--draw]="duel.status === 'beendet' && duel.result === 'draw'"
+          >
+            {{ getStatusLabel(duel) }}
+          </div>
+          <div class="slide-card__testimonial">
+            <p class="slide-card__testimonial-text">"{{ duel.testimonial }}"</p>
+            <span class="slide-card__testimonial-name">{{ duel.opponent.name }}</span>
+            <span class="slide-card__testimonial-uni">{{ duel.university }} &bull; {{ duel.studiengang }}</span>
+          </div>
         </div>
-      </div>
-    }
+      }
+      <!-- Duplikat für Loop -->
+      @for (duel of topRow; track 'dup-' + duel.id) {
+        <div class="slide-card">
+          <div class="slide-card__content">
+            <div class="slide-card__chapter">{{ duel.chapter }}</div>
+            <div class="slide-card__matchup">
+              <div class="slide-card__duelist">
+                <div class="slide-card__avatar-wrap">
+                  <img [src]="duel.player.image" [alt]="duel.player.name" class="slide-card__avatar">
+                </div>
+                <span class="slide-card__duelist-name">{{ duel.player.name }}</span>
+              </div>
+              <div class="slide-card__score-center">
+                <span class="slide-card__score" [class.slide-card__score--winning]="duel.score1 > duel.score2">{{ duel.score1 }}</span>
+                <span class="slide-card__sep">:</span>
+                <span class="slide-card__score" [class.slide-card__score--winning]="duel.score2 > duel.score1">{{ duel.score2 }}</span>
+              </div>
+              <div class="slide-card__duelist">
+                <div class="slide-card__avatar-wrap">
+                  <img [src]="duel.opponent.image" [alt]="duel.opponent.name" class="slide-card__avatar">
+                </div>
+                <span class="slide-card__duelist-name">{{ duel.opponent.name }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="slide-card__action"
+            [class.slide-card__action--active]="duel.status === 'aktiv'"
+            [class.slide-card__action--waiting]="duel.status === 'warten'"
+            [class.slide-card__action--win]="duel.status === 'beendet' && duel.result === 'win'"
+            [class.slide-card__action--loss]="duel.status === 'beendet' && duel.result === 'loss'"
+            [class.slide-card__action--draw]="duel.status === 'beendet' && duel.result === 'draw'"
+          >
+            {{ getStatusLabel(duel) }}
+          </div>
+          <div class="slide-card__testimonial">
+            <p class="slide-card__testimonial-text">"{{ duel.testimonial }}"</p>
+            <span class="slide-card__testimonial-name">{{ duel.opponent.name }}</span>
+            <span class="slide-card__testimonial-uni">{{ duel.university }} &bull; {{ duel.studiengang }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Sliding Duel Cards - Reihe 2 (nach rechts) -->
+  <div class="slider-track slider-track--right">
+    <div class="slider-track__inner">
+      @for (duel of bottomRow; track duel.id) {
+        <div class="slide-card">
+          <div class="slide-card__content">
+            <div class="slide-card__chapter">{{ duel.chapter }}</div>
+            <div class="slide-card__matchup">
+              <div class="slide-card__duelist">
+                <div class="slide-card__avatar-wrap">
+                  <img [src]="duel.player.image" [alt]="duel.player.name" class="slide-card__avatar">
+                </div>
+                <span class="slide-card__duelist-name">{{ duel.player.name }}</span>
+              </div>
+              <div class="slide-card__score-center">
+                <span class="slide-card__score" [class.slide-card__score--winning]="duel.score1 > duel.score2">{{ duel.score1 }}</span>
+                <span class="slide-card__sep">:</span>
+                <span class="slide-card__score" [class.slide-card__score--winning]="duel.score2 > duel.score1">{{ duel.score2 }}</span>
+              </div>
+              <div class="slide-card__duelist">
+                <div class="slide-card__avatar-wrap">
+                  <img [src]="duel.opponent.image" [alt]="duel.opponent.name" class="slide-card__avatar">
+                </div>
+                <span class="slide-card__duelist-name">{{ duel.opponent.name }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="slide-card__action"
+            [class.slide-card__action--active]="duel.status === 'aktiv'"
+            [class.slide-card__action--waiting]="duel.status === 'warten'"
+            [class.slide-card__action--win]="duel.status === 'beendet' && duel.result === 'win'"
+            [class.slide-card__action--loss]="duel.status === 'beendet' && duel.result === 'loss'"
+            [class.slide-card__action--draw]="duel.status === 'beendet' && duel.result === 'draw'"
+          >
+            {{ getStatusLabel(duel) }}
+          </div>
+          <div class="slide-card__testimonial">
+            <p class="slide-card__testimonial-text">"{{ duel.testimonial }}"</p>
+            <span class="slide-card__testimonial-name">{{ duel.opponent.name }}</span>
+            <span class="slide-card__testimonial-uni">{{ duel.university }} &bull; {{ duel.studiengang }}</span>
+          </div>
+        </div>
+      }
+      <!-- Duplikat für Loop -->
+      @for (duel of bottomRow; track 'dup-' + duel.id) {
+        <div class="slide-card">
+          <div class="slide-card__content">
+            <div class="slide-card__chapter">{{ duel.chapter }}</div>
+            <div class="slide-card__matchup">
+              <div class="slide-card__duelist">
+                <div class="slide-card__avatar-wrap">
+                  <img [src]="duel.player.image" [alt]="duel.player.name" class="slide-card__avatar">
+                </div>
+                <span class="slide-card__duelist-name">{{ duel.player.name }}</span>
+              </div>
+              <div class="slide-card__score-center">
+                <span class="slide-card__score" [class.slide-card__score--winning]="duel.score1 > duel.score2">{{ duel.score1 }}</span>
+                <span class="slide-card__sep">:</span>
+                <span class="slide-card__score" [class.slide-card__score--winning]="duel.score2 > duel.score1">{{ duel.score2 }}</span>
+              </div>
+              <div class="slide-card__duelist">
+                <div class="slide-card__avatar-wrap">
+                  <img [src]="duel.opponent.image" [alt]="duel.opponent.name" class="slide-card__avatar">
+                </div>
+                <span class="slide-card__duelist-name">{{ duel.opponent.name }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="slide-card__action"
+            [class.slide-card__action--active]="duel.status === 'aktiv'"
+            [class.slide-card__action--waiting]="duel.status === 'warten'"
+            [class.slide-card__action--win]="duel.status === 'beendet' && duel.result === 'win'"
+            [class.slide-card__action--loss]="duel.status === 'beendet' && duel.result === 'loss'"
+            [class.slide-card__action--draw]="duel.status === 'beendet' && duel.result === 'draw'"
+          >
+            {{ getStatusLabel(duel) }}
+          </div>
+          <div class="slide-card__testimonial">
+            <p class="slide-card__testimonial-text">"{{ duel.testimonial }}"</p>
+            <span class="slide-card__testimonial-name">{{ duel.opponent.name }}</span>
+            <span class="slide-card__testimonial-uni">{{ duel.university }} &bull; {{ duel.studiengang }}</span>
+          </div>
+        </div>
+      }
+    </div>
   </div>
 </section>

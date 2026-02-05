@@ -1,4 +1,4 @@
-@import '../../../styles/variables';
+@use '../../../styles/variables' as *;
 
 // ============================================
 // Flutter App Color Tokens (from flutter_flow_theme.dart)
@@ -90,44 +90,81 @@ $app-alternate: #E0E3E7;
     margin: 0 auto;
   }
 
+  // ========================================
+  // Two-column layout: Phone + Side Text
+  // ========================================
+  &__layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+
+    @media (min-width: $breakpoint-lg) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+    }
+
+    &--phone-left {
+      @media (min-width: $breakpoint-lg) {
+        flex-direction: row; // phone first, text second
+      }
+    }
+
+    &--phone-right {
+      @media (min-width: $breakpoint-lg) {
+        flex-direction: row-reverse; // text first, phone second
+      }
+    }
+  }
+
   // Phone Mockup Wrapper
   &__phone-wrapper {
     display: flex;
     justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    width: 280px;
+
+    @media (min-width: $breakpoint-md) {
+      width: 320px;
+    }
   }
 
   // Phone Frame
   &__phone {
-    width: 100%;
-    max-width: 420px;
+    width: 280px;
+    min-height: 520px;
     background: $app-bg;
-    border-radius: 40px;
-    padding: 20px 16px 32px;
+    border-radius: 32px;
+    padding: 16px 12px 24px;
     box-shadow:
       0 25px 60px rgba(0, 0, 0, 0.15),
-      0 0 0 8px #1a1a1a,
-      0 0 0 10px #333,
+      0 0 0 6px #1a1a1a,
+      0 0 0 8px #333,
       inset 0 0 0 1px rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
 
     @media (min-width: $breakpoint-md) {
-      max-width: 440px;
-      padding: 24px 20px 36px;
+      width: 320px;
+      min-height: 560px;
+      padding: 18px 14px 28px;
     }
   }
 }
 
 // Phone Notch
 .phone__notch {
-  width: 120px;
-  height: 28px;
+  width: 90px;
+  height: 22px;
   background: #1a1a1a;
-  border-radius: 0 0 16px 16px;
-  margin: -20px auto 16px;
+  border-radius: 0 0 12px 12px;
+  margin: -16px auto 12px;
 
   @media (min-width: $breakpoint-md) {
-    margin: -24px auto 20px;
+    margin: -18px auto 14px;
   }
 }
 
@@ -137,9 +174,9 @@ $app-alternate: #E0E3E7;
 .phone__filter-tabs {
   display: flex;
   background: $app-secondary-bg;
-  border-radius: 14px;
-  padding: 4px;
-  margin-bottom: 16px;
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 10px;
 }
 
 .filter-tab {
@@ -147,10 +184,10 @@ $app-alternate: #E0E3E7;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 10px 0;
+  gap: 4px;
+  padding: 7px 0;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   background: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -166,14 +203,14 @@ $app-alternate: #E0E3E7;
   }
 
   &__dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     flex-shrink: 0;
   }
 
   &__label {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
     color: $app-secondary-text;
     white-space: nowrap;
@@ -184,15 +221,15 @@ $app-alternate: #E0E3E7;
 // New Duel Button (matches Flutter _buildNewDuelButton)
 // ============================================
 .phone__new-duel {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .new-duel-btn {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
+  padding: 12px 14px;
   background: linear-gradient(135deg, $app-primary, $app-secondary);
-  border-radius: 16px;
+  border-radius: 12px;
   box-shadow:
     0 8px 20px rgba($app-primary, 0.4),
     0 12px 40px rgba($app-secondary, 0.2);
@@ -209,9 +246,14 @@ $app-alternate: #E0E3E7;
   &__icon {
     color: #fff;
     flex-shrink: 0;
-    margin-right: 14px;
+    margin-right: 10px;
     display: flex;
     align-items: center;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
   }
 
   &__text {
@@ -221,21 +263,21 @@ $app-alternate: #E0E3E7;
   }
 
   &__title {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
     color: #fff;
   }
 
   &__sub {
-    font-size: 12px;
+    font-size: 10px;
     color: rgba(255, 255, 255, 0.9);
   }
 
   &__arrow {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -250,15 +292,15 @@ $app-alternate: #E0E3E7;
 .phone__section-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 6px;
+  margin-bottom: 8px;
   padding: 0 4px;
 }
 
 .section-header {
   &__dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: $app-primary;
 
@@ -268,11 +310,11 @@ $app-alternate: #E0E3E7;
   }
 
   &__icon {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   &__text {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     color: $app-primary-text;
   }
@@ -284,34 +326,48 @@ $app-alternate: #E0E3E7;
 .phone__duels-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .duel-card {
   background: $app-secondary-bg;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.07);
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
 
   &--visible {
     opacity: 1;
     transform: translateY(0);
   }
 
+  &--clickable {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba($app-primary, 0.2);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
   // Content Area
   &__content {
-    padding: 14px 16px;
+    padding: 10px 12px;
   }
 
   // Chapter Heading
   &__chapter {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 700;
     color: $app-primary-text;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -321,13 +377,13 @@ $app-alternate: #E0E3E7;
   &__battle {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
   }
 
   // Avatar
   &__avatar-wrap {
-    width: 44px;
-    height: 44px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: linear-gradient(135deg, #F59E0B, #D97706);
     flex-shrink: 0;
@@ -351,14 +407,14 @@ $app-alternate: #E0E3E7;
   }
 
   &__vs-label {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
     color: $app-secondary-text;
     flex-shrink: 0;
   }
 
   &__opponent-name {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
     color: $app-primary-text;
     white-space: nowrap;
@@ -376,9 +432,9 @@ $app-alternate: #E0E3E7;
 
   // Action Bar
   &__action {
-    padding: 9px 0;
+    padding: 7px 0;
     text-align: center;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 700;
     color: #fff;
 
@@ -411,20 +467,20 @@ $app-alternate: #E0E3E7;
   align-items: center;
 
   &__label {
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 600;
     color: $app-secondary-text;
     margin-bottom: 2px;
   }
 
   &__value {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: 6px;
+    font-size: 13px;
     font-weight: 700;
     background: $app-bg;
     color: $app-primary-text;
@@ -446,12 +502,804 @@ $app-alternate: #E0E3E7;
   }
 
   &__sep {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 700;
     color: $app-secondary-text;
     padding: 0 2px;
     align-self: flex-end;
-    padding-bottom: 6px;
+    padding-bottom: 4px;
+  }
+}
+
+// ============================================
+// SIDE TEXT - Emotional description next to phone
+// ============================================
+.side-text {
+  max-width: 400px;
+  width: 400px;
+  text-align: center;
+  transition: opacity 0.4s ease;
+
+  @media (min-width: $breakpoint-lg) {
+    max-width: 380px;
+    width: 380px;
+    text-align: left;
+  }
+
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &--right {
+    @media (min-width: $breakpoint-lg) {
+      text-align: left;
+    }
+  }
+
+  &--left {
+    @media (min-width: $breakpoint-lg) {
+      text-align: right;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__title {
+    font-family: $font-headline;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: $text-primary;
+    line-height: 1.2;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__body {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: $text-secondary;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 1.1rem;
+    }
+  }
+
+  &__accent {
+    display: inline-block;
+    font-family: $font-chalk;
+    font-size: 1.4rem;
+    color: $app-primary;
+    font-weight: 700;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__arrow {
+    display: none;
+
+    @media (min-width: $breakpoint-lg) {
+      display: block;
+      width: 60px;
+      color: $app-primary;
+      opacity: 0.6;
+      animation: arrowBounceH 1.5s ease-in-out infinite;
+    }
+
+    &--point-left {
+      @media (min-width: $breakpoint-lg) {
+        transform: scaleX(-1);
+        align-self: flex-end;
+      }
+    }
+
+    &--point-right {
+      @media (min-width: $breakpoint-lg) {
+        align-self: flex-start;
+      }
+    }
+  }
+}
+
+@keyframes sideTextIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes arrowBounceH {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+// point-left variant needs separate keyframe (because of scaleX)
+.side-text__arrow--point-left {
+  @media (min-width: $breakpoint-lg) {
+    animation: arrowBounceHFlip 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes arrowBounceHFlip {
+  0%, 100% { transform: scaleX(-1) translateX(0); }
+  50% { transform: scaleX(-1) translateX(8px); }
+}
+
+// ============================================
+// CHALK HINT - Outside phone with chalk arrow
+// ============================================
+.chalk-hint {
+  position: absolute;
+  top: 180px;
+  left: calc(50% + 150px);
+  z-index: 20;
+  pointer-events: none;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  animation: chalkFadeIn 0.6s ease-out both;
+  animation-delay: 1s;
+
+  @media (min-width: $breakpoint-md) {
+    display: flex;
+    left: calc(50% + 170px);
+    top: 200px;
+  }
+
+  &__text {
+    font-family: 'Caveat', 'Segoe Script', 'Comic Sans MS', cursive;
+    font-size: 24px;
+    font-weight: 700;
+    color: #555;
+    white-space: nowrap;
+    transform: rotate(4deg);
+    margin-bottom: -2px;
+    align-self: flex-end;
+    opacity: 0.85;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  &__arrow {
+    width: 110px;
+    height: 70px;
+    color: #555;
+    opacity: 0.75;
+  }
+}
+
+@keyframes chalkFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// TRIANGLE TRANSITION - Sliding triangles
+// ============================================
+.triangle-transition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.triangle {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  &--left {
+    left: 0;
+    background: $app-primary;
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+    animation: triangleSlideLeft 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+
+  &--right {
+    right: 0;
+    background: $app-secondary;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    animation: triangleSlideRight 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+}
+
+@keyframes triangleSlideLeft {
+  0% { transform: translateX(-110%); }
+  40% { transform: translateX(0); }
+  60% { transform: translateX(0); }
+  100% { transform: translateX(-110%); }
+}
+
+@keyframes triangleSlideRight {
+  0% { transform: translateX(110%); }
+  40% { transform: translateX(0); }
+  60% { transform: translateX(0); }
+  100% { transform: translateX(110%); }
+}
+
+// ============================================
+// DUEL ARENA - 1:1 App Design (Dark Theme)
+// ============================================
+.arena {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #1F2937 0%, #111827 100%);
+  border-radius: 32px;
+  padding: 14px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  animation: arenaFadeIn 0.4s ease-out;
+}
+
+@keyframes arenaFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// Arena Header - Player vs Player
+.arena__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 0 2px;
+}
+
+.arena__player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  min-width: 55px;
+}
+
+.arena__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &--you {
+    background: linear-gradient(135deg, $app-primary, $secondary-blue);
+
+    > span {
+      width: 100%;
+      height: 100%;
+      background: #1F2937;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+  }
+
+  &--bot {
+    background: linear-gradient(135deg, #F59E0B, #EF4444);
+    overflow: hidden;
+  }
+
+  &--answered {
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      border: 2px solid $app-primary;
+      animation: avatarAnswered 0.3s ease-out;
+    }
+  }
+}
+
+.arena__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.arena__bot-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 14px;
+  height: 14px;
+  background: $app-primary;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1F2937;
+}
+
+@keyframes avatarAnswered {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.arena__name {
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.arena__dots {
+  display: flex;
+  gap: 4px;
+}
+
+.arena__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  &--correct { background: $app-primary; }
+  &--wrong { background: $app-error; }
+  &--empty { background: rgba(255, 255, 255, 0.2); }
+}
+
+// Score Center
+.arena__score-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.arena__round-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.arena__score-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, $app-primary, $secondary-blue);
+  padding: 6px 14px;
+  border-radius: 10px;
+}
+
+.arena__score-num {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.arena__score-sep {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+// Timer Bar
+.arena__timer-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.arena__timer-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.arena__timer-track {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.arena__timer-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $app-primary, $secondary-blue);
+  border-radius: 4px;
+  transition: width 1s linear;
+
+  &--urgent {
+    background: linear-gradient(90deg, $app-error, #DC2626);
+    animation: timerUrgent 0.5s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes timerUrgent {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+.arena__timer-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  min-width: 22px;
+  text-align: right;
+  font-family: monospace;
+
+  &--urgent {
+    color: $app-error;
+    animation: timerUrgent 0.5s ease-in-out infinite alternate;
+  }
+}
+
+// Question Card - Gradient like app
+.arena__question-card {
+  background: linear-gradient(135deg, $app-primary, $secondary-blue);
+  border-radius: 14px;
+  padding: 14px 12px;
+  margin-bottom: 8px;
+}
+
+.arena__question-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.5;
+  text-align: center;
+}
+
+// Answer Buttons - Near-white like app
+.arena__answers {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 6px;
+  flex: 1;
+}
+
+.arena__answer-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: $font-body;
+
+  &:hover:not(:disabled) {
+    background: #fff;
+    transform: translateX(3px);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &--correct {
+    background: #D1FAE5 !important;
+    border-color: $app-primary !important;
+
+    .arena__answer-letter {
+      background: $app-primary;
+      color: #fff;
+    }
+
+    .arena__answer-text {
+      color: #059669;
+    }
+  }
+
+  &--wrong {
+    background: #FEE2E2 !important;
+    border-color: $app-error !important;
+    animation: shakeWrong 0.4s ease;
+
+    .arena__answer-letter {
+      background: $app-error;
+      color: #fff;
+    }
+
+    .arena__answer-text {
+      color: #DC2626;
+    }
+  }
+
+  &--dimmed {
+    opacity: 0.4;
+  }
+}
+
+@keyframes shakeWrong {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.arena__answer-letter {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #F3F4F6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: $text-secondary;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.arena__answer-text {
+  font-size: 11px;
+  font-weight: 500;
+  color: $text-primary;
+  text-align: left;
+  line-height: 1.3;
+}
+
+// Feedback
+.arena__feedback {
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  animation: feedbackPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &--correct {
+    background: rgba($app-primary, 0.2);
+    color: $app-primary;
+  }
+
+  &--wrong {
+    background: rgba($app-error, 0.2);
+    color: $app-error;
+  }
+}
+
+@keyframes feedbackPop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+// ============================================
+// RESULT SCREEN - 1:1 App Design (Dark Theme)
+// ============================================
+.result {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #1F2937 0%, #111827 100%);
+  border-radius: 32px;
+  padding: 20px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: arenaFadeIn 0.4s ease-out;
+  overflow: hidden;
+}
+
+.result__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  z-index: 10;
+}
+
+// Winner Emoji
+.result__emoji {
+  font-size: 40px;
+  animation: emojiPop 0.6s ease infinite alternate;
+}
+
+@keyframes emojiPop {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+// Result Message
+.result__message {
+  text-align: center;
+}
+
+.result__title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  animation: resultTitleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &--win { color: $app-primary; }
+  &--loss { color: $app-error; }
+  &--draw { color: $app-warning; }
+}
+
+@keyframes resultTitleIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.result__subtitle {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+// Score Cards (glassmorphism)
+.result__score-cards {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.result__score-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+
+  &--winner {
+    background: rgba($app-primary, 0.2);
+    border-color: $app-primary;
+  }
+}
+
+.result__score-card-avatar {
+  font-size: 22px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result__score-card-avatar-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.result__score-card-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.result__score-card-name {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.result__score-card-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.result__vs {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+// Round Details
+.result__rounds {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 4px;
+}
+
+.result__round-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+.result__round-num {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.result__round-badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+
+  &--correct {
+    background: rgba($app-primary, 0.2);
+    color: $app-primary;
+  }
+
+  &--wrong {
+    background: rgba($app-error, 0.2);
+    color: $app-error;
+  }
+}
+
+// Back Button
+.result__back-btn {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, $app-primary, $secondary-blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: $font-body;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 20px rgba($app-primary, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba($app-primary, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }
 

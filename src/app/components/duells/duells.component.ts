@@ -27,6 +27,14 @@ interface FilterTab {
   dotColor: string;
 }
 
+interface DuelQuestion {
+  question: string;
+  answers: string[];
+  correct: number;
+  botAnswer: number;
+  botDelay: number;
+}
+
 // Avatar URLs
 const AVATAR_IMAGES = [
   'https://images.unsplash.com/photo-1728577740843-5f29c7586afe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxMnx8YXZhdGFyfGVufDB8fHx8MTczMjEyMDcwNHww&ixlib=rb-4.0.3&q=80&w=1080',
@@ -69,6 +77,93 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
     { key: 'aktiv', label: 'Aktiv', count: 3, dotColor: '#3BC09C' },
     { key: 'warten', label: 'Warten', count: 2, dotColor: '#F59E0B' },
     { key: 'beendet', label: 'Beendet', count: null, dotColor: '#6B7280' },
+  ];
+
+  // ========================================
+  // Walkthrough / Interactive Duel State
+  // ========================================
+  walkthroughPhase: 'list' | 'transition' | 'arena' | 'result' = 'list';
+  showClickHint = true;
+  selectedDuelForArena: Duell | null = null;
+
+  // Phase-based side text configuration
+  // phoneSide: where the phone sits, text goes on the opposite side
+  get phoneSide(): 'left' | 'right' {
+    return 'right'; // phone always on the right
+  }
+
+  get sideTextTitle(): string {
+    switch (this.walkthroughPhase) {
+      case 'list': return 'Deine Duelle auf einen Blick';
+      case 'arena': return 'Wissen ist deine Waffe';
+      case 'result': return 'Jedes Duell macht dich besser';
+      default: return '';
+    }
+  }
+
+  get sideTextBody(): string {
+    switch (this.walkthroughPhase) {
+      case 'list': return 'Sieh, wer dich herausfordert. Fordere zurück. Jede Runde zählt, jeder Punkt bringt dich weiter. Bist du bereit?';
+      case 'arena': return 'Tick, tack. 10 Sekunden pro Frage. Dein Gegner antwortet gleichzeitig. Wer schneller und schlauer ist, gewinnt die Runde.';
+      case 'result': return 'Sofort sehen, was du richtig hattest und was nicht. Aus Fehlern lernen, beim nächsten Mal dominieren.';
+      default: return '';
+    }
+  }
+
+  get sideTextAccent(): string {
+    switch (this.walkthroughPhase) {
+      case 'list': return 'Klicke auf ein aktives Duell!';
+      case 'arena': return 'Beantworte die Fragen!';
+      case 'result': return 'So sieht Fortschritt aus.';
+      default: return '';
+    }
+  }
+
+  // Transition
+  transitionActive = false;
+  // During transition, we keep track of both the outgoing and incoming phase
+  // so we can render both simultaneously (new screen builds underneath triangles)
+  transitionFrom: 'list' | 'arena' | 'result' | null = null;
+  transitionTo: 'list' | 'arena' | 'result' | null = null;
+  outgoingSlideOut = false;
+
+  // Duel Arena
+  duelTimer = 10;
+  currentQuestionIndex = 0;
+  selectedAnswerIndex: number | null = null;
+  botAnswerIndex: number | null = null;
+  playerScore = 0;
+  botScore = 0;
+  roundResults: boolean[] = [];
+  botRoundResults: boolean[] = [];
+  showFeedback = false;
+  private timerInterval: any;
+  private botTimeout: any;
+  private nextQuestionTimeout: any;
+
+  // Mock questions for the duel
+  duelQuestions: DuelQuestion[] = [
+    {
+      question: 'Welche Stadt ist die Hauptstadt von Australien?',
+      answers: ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'],
+      correct: 2,
+      botAnswer: 2,
+      botDelay: 2500,
+    },
+    {
+      question: 'Wie viele Planeten hat unser Sonnensystem?',
+      answers: ['7', '8', '9', '10'],
+      correct: 1,
+      botAnswer: 2,
+      botDelay: 1800,
+    },
+    {
+      question: 'Wer malte die Mona Lisa?',
+      answers: ['Michelangelo', 'Leonardo da Vinci', 'Raphael', 'Donatello'],
+      correct: 1,
+      botAnswer: 1,
+      botDelay: 3200,
+    },
   ];
 
   // All duels across different statuses
@@ -175,6 +270,30 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.allDuels.filter(d => d.status === this.activeFilter);
   }
 
+  get currentQuestion(): DuelQuestion {
+    return this.duelQuestions[this.currentQuestionIndex];
+  }
+
+  get timerPercent(): number {
+    return (this.duelTimer / 10) * 100;
+  }
+
+  get resultTitle(): string {
+    if (this.playerScore > this.botScore) return 'Gewonnen!';
+    if (this.playerScore < this.botScore) return 'Verloren!';
+    return 'Unentschieden!';
+  }
+
+  get resultSubtitle(): string {
+    if (this.playerScore > this.botScore) return 'Starke Leistung! Du hast das Duell dominiert.';
+    if (this.playerScore < this.botScore) return 'Knapp! Nächstes Mal holst du dir den Sieg.';
+    return 'Ein ausgeglichenes Duell!';
+  }
+
+  get answerLetters(): string[] {
+    return ['A', 'B', 'C', 'D'];
+  }
+
   setFilter(key: string): void {
     this.activeFilter = key;
     // Reset visibility for animation
@@ -191,6 +310,194 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }, 50);
   }
+
+  // ========================================
+  // Walkthrough Methods
+  // ========================================
+
+  onDuelCardClick(duel: Duell): void {
+    if (duel.status !== 'aktiv' || this.walkthroughPhase !== 'list') return;
+
+    this.showClickHint = false;
+    this.selectedDuelForArena = duel;
+
+    // Start transition: triangles slide in covering old content
+    this.transitionFrom = 'list';
+    this.transitionTo = 'arena';
+    this.transitionActive = true;
+    this.outgoingSlideOut = false;
+    this.cdr.detectChanges();
+
+    // At 40% (480ms) triangles fully cover - switch to new phase underneath
+    setTimeout(() => {
+      this.walkthroughPhase = 'arena';
+      this.outgoingSlideOut = true;
+      this.cdr.detectChanges();
+      this.startDuelArena();
+    }, 480);
+
+    // At 100% (1200ms) triangles fully gone - clean up
+    setTimeout(() => {
+      this.transitionActive = false;
+      this.transitionFrom = null;
+      this.transitionTo = null;
+      this.outgoingSlideOut = false;
+      this.cdr.detectChanges();
+    }, 1200);
+  }
+
+  private startDuelArena(): void {
+    this.duelTimer = 10;
+    this.currentQuestionIndex = 0;
+    this.selectedAnswerIndex = null;
+    this.botAnswerIndex = null;
+    this.playerScore = 0;
+    this.botScore = 0;
+    this.roundResults = [];
+    this.botRoundResults = [];
+    this.showFeedback = false;
+
+    this.startTimer();
+    this.startBotAnswer();
+  }
+
+  private startTimer(): void {
+    this.clearTimers();
+    this.duelTimer = 10;
+    this.timerInterval = setInterval(() => {
+      if (this.duelTimer > 0 && this.selectedAnswerIndex === null) {
+        this.duelTimer--;
+        this.cdr.detectChanges();
+        if (this.duelTimer === 0) {
+          this.handleTimeUp();
+        }
+      }
+    }, 1000);
+  }
+
+  private startBotAnswer(): void {
+    const q = this.currentQuestion;
+    this.botTimeout = setTimeout(() => {
+      this.botAnswerIndex = q.botAnswer;
+      this.cdr.detectChanges();
+    }, q.botDelay);
+  }
+
+  private handleTimeUp(): void {
+    if (this.selectedAnswerIndex !== null) return;
+
+    const q = this.currentQuestion;
+    const botCorrect = q.botAnswer === q.correct;
+
+    this.selectedAnswerIndex = -1; // timeout marker
+    if (botCorrect) this.botScore++;
+    this.roundResults.push(false);
+    this.botRoundResults.push(botCorrect);
+    this.showFeedback = true;
+    this.cdr.detectChanges();
+
+    this.advanceAfterDelay();
+  }
+
+  onAnswerClick(answerIndex: number): void {
+    if (this.selectedAnswerIndex !== null || this.walkthroughPhase !== 'arena') return;
+
+    const q = this.currentQuestion;
+    const isCorrect = answerIndex === q.correct;
+    const botCorrect = q.botAnswer === q.correct;
+
+    this.selectedAnswerIndex = answerIndex;
+    if (isCorrect) this.playerScore++;
+    if (botCorrect) this.botScore++;
+
+    this.roundResults.push(isCorrect);
+    this.botRoundResults.push(botCorrect);
+    this.showFeedback = true;
+    this.cdr.detectChanges();
+
+    this.advanceAfterDelay();
+  }
+
+  private advanceAfterDelay(): void {
+    clearInterval(this.timerInterval);
+
+    this.nextQuestionTimeout = setTimeout(() => {
+      if (this.currentQuestionIndex < this.duelQuestions.length - 1) {
+        this.currentQuestionIndex++;
+        this.selectedAnswerIndex = null;
+        this.botAnswerIndex = null;
+        this.showFeedback = false;
+        this.cdr.detectChanges();
+        this.startTimer();
+        this.startBotAnswer();
+      } else {
+        // Duel finished → transition to result
+        this.showFeedback = false;
+        this.transitionFrom = 'arena';
+        this.transitionTo = 'result';
+        this.transitionActive = true;
+        this.outgoingSlideOut = false;
+        this.cdr.detectChanges();
+
+        setTimeout(() => {
+          this.walkthroughPhase = 'result';
+          this.outgoingSlideOut = true;
+          this.cdr.detectChanges();
+        }, 480);
+
+        setTimeout(() => {
+          this.transitionActive = false;
+          this.transitionFrom = null;
+          this.transitionTo = null;
+          this.outgoingSlideOut = false;
+          this.cdr.detectChanges();
+        }, 1200);
+      }
+    }, 1500);
+  }
+
+  onBackToList(): void {
+    this.transitionFrom = this.walkthroughPhase as 'list' | 'arena' | 'result';
+    this.transitionTo = 'list';
+    this.transitionActive = true;
+    this.outgoingSlideOut = false;
+    this.cdr.detectChanges();
+
+    setTimeout(() => {
+      this.walkthroughPhase = 'list';
+      this.outgoingSlideOut = true;
+      this.selectedDuelForArena = null;
+      this.showClickHint = true;
+      this.clearTimers();
+      this.cdr.detectChanges();
+    }, 480);
+
+    setTimeout(() => {
+      this.transitionActive = false;
+      this.transitionFrom = null;
+      this.transitionTo = null;
+      this.outgoingSlideOut = false;
+      this.cdr.detectChanges();
+    }, 1200);
+  }
+
+  getAnswerClass(idx: number): string {
+    if (this.selectedAnswerIndex === null) return '';
+    const q = this.currentQuestion;
+    if (idx === q.correct) return 'correct';
+    if (idx === this.selectedAnswerIndex) return 'wrong';
+    return 'dimmed';
+  }
+
+  private clearTimers(): void {
+    if (this.timerInterval) clearInterval(this.timerInterval);
+    if (this.botTimeout) clearTimeout(this.botTimeout);
+    if (this.nextQuestionTimeout) clearTimeout(this.nextQuestionTimeout);
+  }
+
+  // ========================================
+  // Lifecycle
+  // ========================================
 
   ngOnInit(): void {
     this.setupIntersectionObserver();
@@ -209,6 +516,7 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.observer.disconnect();
     }
     this.clearTypewriter();
+    this.clearTimers();
   }
 
   private clearTypewriter(): void {

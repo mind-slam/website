@@ -1,5 +1,5 @@
 @use 'sass:color';
-@import '../../../styles/variables';
+@use '../../../styles/variables' as *;
 
 .testimonials {
   position: relative;
@@ -100,7 +100,7 @@
 
     .text-gradient {
       // Grün dominiert
-      background: linear-gradient(135deg, $primary-green 0%, darken($primary-green, 10%) 60%, $secondary-blue 100%);
+      background: linear-gradient(135deg, $primary-green 0%, color.adjust($primary-green, $lightness: -10%) 60%, $secondary-blue 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
