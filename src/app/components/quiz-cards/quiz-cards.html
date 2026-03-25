@@ -2,9 +2,9 @@
   <div class="quiz-cards__container">
     <!-- Header -->
     <div class="quiz-cards__header">
-      <span class="quiz-cards__tag">Teste dein Wissen</span>
-      <h2 class="quiz-cards__title">Wie gut bist <span class="highlight">du</span>?</h2>
-      <p class="quiz-cards__subtitle">Tausende Duelle laufen gerade – fordere deine Freunde heraus!</p>
+      <span class="quiz-cards__tag">{{ 'quizCards.tag' | translate }}</span>
+      <h2 class="quiz-cards__title" [innerHTML]="'quizCards.title' | translate"></h2>
+      <p class="quiz-cards__subtitle">{{ 'quizCards.subtitle' | translate }}</p>
     </div>
   </div>
 

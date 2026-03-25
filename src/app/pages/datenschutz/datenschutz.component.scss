@@ -2,57 +2,47 @@
 
 .datenschutz {
   min-height: 100vh;
-  background: $bg-light;
+  background: $bg-white;
 
-  &__header {
-    background: linear-gradient(135deg, $primary-green, $secondary-blue);
-    padding: $spacing-3xl $spacing-lg;
-    text-align: center;
+  // Hero area — clean white, matching main page style
+  &__hero {
+    padding: 160px 48px $spacing-3xl;
+    max-width: 1200px;
+    margin: 0 auto;
 
-    &-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  }
-
-  &__back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: $spacing-sm;
-    color: rgba(255, 255, 255, 0.9);
-    text-decoration: none;
-    font-size: $font-size-sm;
-    margin-bottom: $spacing-lg;
-    transition: color $transition-base;
-
-    &:hover {
-      color: white;
-    }
-
-    svg {
-      width: 16px;
-      height: 16px;
+    @media (max-width: $breakpoint-md) {
+      padding: 120px 20px $spacing-2xl;
     }
   }
 
   &__title {
     font-family: $font-headline;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2.4rem, 5vw, 3.5rem);
     font-weight: 800;
-    color: white;
+    color: $text-primary;
     margin: 0 0 $spacing-md;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
   }
 
   &__subtitle {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: $font-size-lg;
+    color: $text-secondary;
+    font-family: $font-body;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    line-height: 1.6;
     margin: 0;
+    max-width: 560px;
   }
 
+  // Content area
   &__content {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: $spacing-3xl $spacing-lg;
+    padding: 0 48px $spacing-4xl;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0 20px $spacing-3xl;
+    }
   }
 
   &__section {
@@ -67,7 +57,7 @@
     font-family: $font-headline;
     font-size: $font-size-2xl;
     font-weight: 700;
-    color: $secondary-blue;
+    color: $text-primary;
     margin: 0 0 $spacing-lg;
     padding-bottom: $spacing-sm;
     border-bottom: 2px solid $primary-green;
@@ -83,6 +73,7 @@
 
   &__text {
     color: $text-secondary;
+    font-family: $font-body;
     font-size: $font-size-base;
     line-height: 1.8;
     margin: 0 0 $spacing-md;
@@ -105,62 +96,40 @@
   }
 
   &__contact-box {
-    background: linear-gradient(135deg, rgba($primary-green, 0.1), rgba($secondary-blue, 0.1));
-    border-radius: $radius-lg;
+    background: $bg-light;
+    border: 1px solid rgba($text-primary, 0.08);
+    border-radius: $radius-xl;
     padding: $spacing-xl;
     margin: $spacing-lg 0;
 
     p {
       margin: $spacing-xs 0;
       color: $text-primary;
+      font-family: $font-body;
     }
 
     a {
-      color: $secondary-blue;
+      color: $primary-green;
       text-decoration: none;
-      transition: color $transition-base;
+      font-weight: 600;
+      transition: color $transition-fast;
 
       &:hover {
-        color: $primary-green;
+        color: $primary-green-dark;
       }
     }
   }
 
-  &__external-link {
-    color: $secondary-blue;
+  &__link {
+    color: $primary-green;
     text-decoration: none;
+    font-weight: 500;
     word-break: break-all;
-    transition: color $transition-base;
+    transition: color $transition-fast;
 
     &:hover {
-      color: $primary-green;
+      color: $primary-green-dark;
       text-decoration: underline;
-    }
-  }
-
-  &__footer {
-    background: $bg-dark;
-    padding: $spacing-xl $spacing-lg;
-    text-align: center;
-
-    &-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: $font-size-sm;
-      margin: 0;
-    }
-
-    a {
-      color: $primary-green;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 }

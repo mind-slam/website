@@ -11,14 +11,12 @@
     <div class="dozenten__header">
       <span class="dozenten__badge">
         <span>🎓</span>
-        Für Dozierende
+        {{ 'dozenten.badge' | translate }}
       </span>
-      <h2 class="dozenten__title">
-        Ihre Studierenden lernen. <span class="highlight">Von alleine.</span>
+      <h2 class="dozenten__title" [innerHTML]="'dozenten.title' | translate">
       </h2>
       <p class="dozenten__subtitle">
-        Stellen Sie sich vor: Ihre Studierenden bereiten sich freiwillig auf die Prüfung vor –
-        weil Lernen endlich Spaß macht. Mit DiggiDuell wird das Realität.
+        {{ 'dozenten.subtitle' | translate }}
       </p>
     </div>
 
@@ -35,12 +33,12 @@
 
     <!-- CTA Section -->
     <div class="dozenten__cta">
-      <h3 class="dozenten__cta-title">Kostenlos für Sie und Ihre Studierenden</h3>
+      <h3 class="dozenten__cta-title">{{ 'dozenten.cta.title' | translate }}</h3>
       <p class="dozenten__cta-text">
-        Wir richten alles für Sie ein. Sie müssen nur noch Ihr Skript hochladen.
+        {{ 'dozenten.cta.text' | translate }}
       </p>
       <button (click)="openModal()" class="dozenten__cta-button">
-        <span>Jetzt Klassenzimmer erstellen</span>
+        <span>{{ 'dozenten.cta.button' | translate }}</span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
@@ -58,8 +56,8 @@
           </svg>
         </button>
 
-        <h3 class="contact-modal__title">Kontakt aufnehmen</h3>
-        <p class="contact-modal__subtitle">Wir freuen uns auf Ihre Nachricht!</p>
+        <h3 class="contact-modal__title">{{ 'dozenten.modal.title' | translate }}</h3>
+        <p class="contact-modal__subtitle">{{ 'dozenten.modal.subtitle' | translate }}</p>
 
         @if (submitSuccess) {
           <div class="contact-modal__success">
@@ -67,41 +65,41 @@
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
               <polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
-            <p>Nachricht erfolgreich gesendet!</p>
+            <p>{{ 'dozenten.modal.success' | translate }}</p>
           </div>
         } @else {
           <form (ngSubmit)="submitForm()" class="contact-modal__form">
             <div class="contact-modal__field">
-              <label for="name">Name</label>
-              <input type="text" id="name" [(ngModel)]="contactForm.name" name="name" required placeholder="Ihr Name">
+              <label for="name">{{ 'dozenten.modal.nameLabel' | translate }}</label>
+              <input type="text" id="name" [(ngModel)]="contactForm.name" name="name" required [placeholder]="'dozenten.modal.namePlaceholder' | translate">
             </div>
 
             <div class="contact-modal__field">
-              <label for="email">E-Mail</label>
-              <input type="email" id="email" [(ngModel)]="contactForm.email" name="email" required placeholder="ihre.email@beispiel.de">
+              <label for="email">{{ 'dozenten.modal.emailLabel' | translate }}</label>
+              <input type="email" id="email" [(ngModel)]="contactForm.email" name="email" required [placeholder]="'dozenten.modal.emailPlaceholder' | translate">
             </div>
 
             <div class="contact-modal__field">
-              <label for="subject">Betreff</label>
-              <input type="text" id="subject" [(ngModel)]="contactForm.subject" name="subject" required placeholder="Betreff">
+              <label for="subject">{{ 'dozenten.modal.subjectLabel' | translate }}</label>
+              <input type="text" id="subject" [(ngModel)]="contactForm.subject" name="subject" required [placeholder]="'dozenten.modal.subjectPlaceholder' | translate">
             </div>
 
             <div class="contact-modal__field">
-              <label for="message">Nachricht</label>
-              <textarea id="message" [(ngModel)]="contactForm.message" name="message" required rows="5" placeholder="Ihre Nachricht..."></textarea>
+              <label for="message">{{ 'dozenten.modal.messageLabel' | translate }}</label>
+              <textarea id="message" [(ngModel)]="contactForm.message" name="message" required rows="5" [placeholder]="'dozenten.modal.messagePlaceholder' | translate"></textarea>
             </div>
 
             @if (submitError) {
               <div class="contact-modal__error">
-                Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.
+                {{ 'dozenten.modal.error' | translate }}
               </div>
             }
 
             <button type="submit" class="contact-modal__submit" [disabled]="isSubmitting">
               @if (isSubmitting) {
-                <span>Wird gesendet...</span>
+                <span>{{ 'dozenten.modal.submitting' | translate }}</span>
               } @else {
-                <span>Nachricht senden</span>
+                <span>{{ 'dozenten.modal.submit' | translate }}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                 </svg>

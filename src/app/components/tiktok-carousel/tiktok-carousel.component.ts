@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChildren, ViewChild, QueryList, AfterViewInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface VideoState {
   ready: boolean;
@@ -16,7 +17,7 @@ interface VideoState {
 @Component({
   selector: 'app-tiktok-carousel',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './tiktok-carousel.component.html',
   styleUrl: './tiktok-carousel.component.scss'
 })

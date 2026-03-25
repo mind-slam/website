@@ -12,26 +12,24 @@
   <div class="showcase__container">
     <!-- Text Content - Centered over parallax -->
     <div class="showcase__content">
-      <span class="showcase__badge">Lernen neu gedacht</span>
-      <h2 class="showcase__title">
-        Studierende lieben <span class="text-gradient">DiggiDuell</span>
+      <span class="showcase__badge">{{ 'showcase.badge' | translate }}</span>
+      <h2 class="showcase__title" [innerHTML]="'showcase.title' | translate">
       </h2>
       <p class="showcase__description">
-        Ob in der Bib, unterwegs oder zu Hause – mit DiggiDuell wird jede freie Minute zur Lernchance.
-        Fordere deine Kommilitonen heraus und bereite dich spielerisch auf deine Prüfungen vor.
+        {{ 'showcase.desc' | translate }}
       </p>
       <ul class="showcase__features">
         <li>
           <span class="showcase__feature-icon">⚡</span>
-          <span>Schnelle Quiz-Duelle in 5 Minuten</span>
+          <span>{{ 'showcase.feature1' | translate }}</span>
         </li>
         <li>
           <span class="showcase__feature-icon">🎯</span>
-          <span>Fragen passend zu deinem Kurs</span>
+          <span>{{ 'showcase.feature2' | translate }}</span>
         </li>
         <li>
           <span class="showcase__feature-icon">📈</span>
-          <span>Verfolge deinen Lernfortschritt</span>
+          <span>{{ 'showcase.feature3' | translate }}</span>
         </li>
       </ul>
     </div>

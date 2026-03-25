@@ -2,8 +2,8 @@
   <div class="roadmap__container">
     <!-- Header -->
     <div class="roadmap__header">
-      <p class="roadmap__intro">In DiggiDuell stecken unzählige Iterationen und Vorstudien</p>
-      <h2 class="roadmap__title">Unsere <span class="text-gradient">Roadmap</span></h2>
+      <p class="roadmap__intro">{{ 'roadmap.intro' | translate }}</p>
+      <h2 class="roadmap__title" [innerHTML]="'roadmap.title' | translate"></h2>
     </div>
 
     <!-- Road with Milestones -->
@@ -28,8 +28,8 @@
             </svg>
           </div>
           <div class="milestone__content milestone__content--bottom">
-            <h3 class="milestone__title">Idee &<br>Vorstudie</h3>
-            <p class="milestone__date">Sommer 2024</p>
+            <h3 class="milestone__title" [innerHTML]="'roadmap.m1.title' | translate"></h3>
+            <p class="milestone__date">{{ 'roadmap.m1.date' | translate }}</p>
           </div>
         </div>
 
@@ -41,8 +41,8 @@
             </svg>
           </div>
           <div class="milestone__content milestone__content--top">
-            <h3 class="milestone__title">Gründung<br>der UG</h3>
-            <p class="milestone__date">Jan. 2025</p>
+            <h3 class="milestone__title" [innerHTML]="'roadmap.m2.title' | translate"></h3>
+            <p class="milestone__date">{{ 'roadmap.m2.date' | translate }}</p>
           </div>
         </div>
 
@@ -54,8 +54,8 @@
             </svg>
           </div>
           <div class="milestone__content milestone__content--top">
-            <h3 class="milestone__title">App im Store<br>& Pre-Launch</h3>
-            <p class="milestone__date">Juli 2025</p>
+            <h3 class="milestone__title" [innerHTML]="'roadmap.m3.title' | translate"></h3>
+            <p class="milestone__date">{{ 'roadmap.m3.date' | translate }}</p>
           </div>
         </div>
 
@@ -67,8 +67,8 @@
             </svg>
           </div>
           <div class="milestone__content milestone__content--top">
-            <h3 class="milestone__title">Launch auf<br>erstem Campus</h3>
-            <p class="milestone__date milestone__date--highlight">Oktober 2025</p>
+            <h3 class="milestone__title" [innerHTML]="'roadmap.m4.title' | translate"></h3>
+            <p class="milestone__date milestone__date--highlight">{{ 'roadmap.m4.date' | translate }}</p>
           </div>
         </div>
 
@@ -80,8 +80,8 @@
             </svg>
           </div>
           <div class="milestone__content milestone__content--top">
-            <h3 class="milestone__title">Präsent<br><strong>skalieren</strong></h3>
-            <p class="milestone__date milestone__date--highlight">ab Jan. 2026</p>
+            <h3 class="milestone__title" [innerHTML]="'roadmap.m5.title' | translate"></h3>
+            <p class="milestone__date milestone__date--highlight">{{ 'roadmap.m5.date' | translate }}</p>
           </div>
         </div>
 
@@ -93,8 +93,8 @@
             </svg>
           </div>
           <div class="milestone__content milestone__content--side">
-            <h3 class="milestone__title"><strong>Dtl.-weiter</strong><br>Rollout</h3>
-            <p class="milestone__date milestone__date--highlight">ab Q4 2026</p>
+            <h3 class="milestone__title" [innerHTML]="'roadmap.m6.title' | translate"></h3>
+            <p class="milestone__date milestone__date--highlight">{{ 'roadmap.m6.date' | translate }}</p>
           </div>
         </div>
       </div>

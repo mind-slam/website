@@ -1,0 +1,332 @@
+@use '../../../styles/variables' as *;
+
+$app-primary: $primary-green;
+$app-secondary: $primary-green-dark;
+
+.uni-challenge {
+  position: relative;
+  padding: 40px 0 40px;
+
+  &__confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+  background: $bg-white;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    padding: 60px 0 60px;
+  }
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  // ── Finn mascot + speech bubble ──
+  &__finn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 32px;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  &__speech-bubble {
+    position: relative;
+    background: $bg-light;
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 14px 24px;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+
+    // Triangle pointer
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid $bg-light;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-top: 11px solid rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  &__speech-text {
+    font-family: $font-body;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  &__finn-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+
+    @media (min-width: $breakpoint-md) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  // ── Typewriter heading ──
+  &__heading {
+    font-family: $font-headline;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $text-primary;
+    line-height: 1.2;
+    margin-bottom: 32px;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 3.5rem;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 4.5rem;
+    }
+  }
+
+  &__typed {
+    display: inline;
+  }
+
+  &__cursor {
+    display: inline-block;
+    width: 0;
+    overflow: visible;
+    color: $app-primary;
+    font-weight: 300;
+    animation: cursorBlink 1s step-end infinite;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  // ── Big uni name with triangle transition ──
+  &__uni-display {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  &__uni-slider {
+    position: relative;
+    display: inline-block;
+    min-width: 300px;
+    min-height: 80px;
+    overflow: hidden;
+
+    @media (min-width: $breakpoint-md) {
+      min-width: 400px;
+      min-height: 100px;
+    }
+  }
+
+  &__uni-name {
+    display: block;
+    font-family: $font-headline;
+    font-size: 3rem;
+    font-weight: 900;
+    background: $gradient-accent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.3;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 4.5rem;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 5.5rem;
+    }
+  }
+
+  &__transition-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  &__triangle {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    &--left {
+      left: 0;
+      background: $app-primary;
+      clip-path: polygon(0 0, 0 100%, 100% 100%);
+      animation: triangleSlideLeft 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+
+    &--right {
+      right: 0;
+      background: $app-secondary;
+      clip-path: polygon(100% 0, 0 0, 100% 100%);
+      animation: triangleSlideRight 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+  }
+
+  &__question {
+    font-family: $font-headline;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $text-primary;
+    margin-top: 16px;
+    animation: fadeInUp 0.6s ease 0.3s both;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 3.5rem;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 4.5rem;
+    }
+  }
+
+  // ── Full-width uni row ──
+  &__uni-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 16px;
+    margin-top: 48px;
+    gap: 8px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.6s ease 0.5s both;
+
+    @media (min-width: $breakpoint-md) {
+      gap: 12px;
+      margin-top: 64px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: flex-start;
+      padding: 0 24px;
+
+      // hide scrollbar
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar { display: none; }
+    }
+  }
+
+  &__uni-card {
+    flex-shrink: 0;
+    font-family: $font-headline;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 18px;
+    border-radius: $radius-md;
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+    background: $bg-light;
+    transition: all 0.4s ease;
+    white-space: nowrap;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 0.85rem;
+      padding: 12px 22px;
+    }
+
+    &--active {
+      color: white;
+      background: $gradient-accent;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba($app-primary, 0.3);
+      transform: scale(1.05);
+    }
+  }
+
+  &__separator {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: rgba($app-primary, 0.25);
+    transition: color 0.3s ease;
+
+    svg {
+      width: 12px;
+      height: 12px;
+
+      @media (min-width: $breakpoint-md) {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
+
+// ── Keyframes ──
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes triangleSlideLeft {
+  0% { transform: translateX(-110%); }
+  40% { transform: translateX(0); }
+  60% { transform: translateX(0); }
+  100% { transform: translateX(-110%); }
+}
+
+@keyframes triangleSlideRight {
+  0% { transform: translateX(110%); }
+  40% { transform: translateX(0); }
+  60% { transform: translateX(0); }
+  100% { transform: translateX(110%); }
+}

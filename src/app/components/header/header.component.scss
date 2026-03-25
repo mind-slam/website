@@ -23,7 +23,7 @@
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 $spacing-lg;
+    padding: 0 48px;
   }
 
   // Logo
@@ -47,43 +47,20 @@
       border-radius: $radius-md;
       transition: opacity $transition-base;
 
-      // Weißes Logo - sichtbar auf farbigem Hintergrund
+      // Immer farbiges Logo auf weißem Hintergrund
       &--white {
-        display: block;
-      }
-
-      // Farbiges Logo - versteckt auf farbigem Hintergrund
-      &--color {
         display: none;
       }
-    }
-  }
 
-  // Scrolled: Logo-Icons wechseln
-  &.scrolled &__logo-icon {
-    &--white {
-      display: none;
-    }
-
-    &--color {
-      display: block;
+      &--color {
+        display: block;
+      }
     }
   }
 
   // Logo-Text Styles
   &__logo-text {
-    color: $text-light;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  // Wenn gescrollt, dann Gradient-Text (Grün dominiert)
-  &.scrolled &__logo-text {
-    background: linear-gradient(90deg, $primary-green 0%, $primary-green-dark 60%, $secondary-blue 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-    color: transparent;
+    color: $text-primary;
   }
 
   // Desktop Navigation
@@ -100,10 +77,9 @@
       font-family: $font-body;
       font-weight: 500;
       font-size: $font-size-base;
-      color: rgba($text-light, 0.9);
+      color: $text-secondary;
       position: relative;
       padding: $spacing-xs 0;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       transition: color $transition-fast;
 
       &::after {
@@ -113,12 +89,12 @@
         left: 0;
         width: 0;
         height: 2px;
-        background: $text-light;
+        background: $gradient-button;
         transition: width $transition-base;
       }
 
       &:hover {
-        color: $text-light;
+        color: $text-primary;
 
         &::after {
           width: 100%;
@@ -127,17 +103,93 @@
     }
   }
 
-  // Scrolled State für Nav-Links
-  &.scrolled &__nav-link {
-    color: $text-secondary;
-    text-shadow: none;
+  // Language Toggle (Pill)
+  &__lang-toggle {
+    display: none;
+    position: relative;
+    align-items: center;
+    border-radius: $radius-full;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    padding: 3px;
+    cursor: pointer;
+    transition: all $transition-fast;
 
-    &::after {
-      background: $gradient-button;
+    @media (min-width: $breakpoint-lg) {
+      display: flex;
     }
 
     &:hover {
-      color: $text-primary;
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    &--mobile {
+      display: flex;
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.12);
+
+      .header__lang-option {
+        color: $text-secondary;
+        width: 38px;
+        height: 30px;
+        font-size: $font-size-sm;
+
+        &.active {
+          color: $text-light;
+        }
+      }
+
+      .header__lang-slider {
+        width: 38px;
+        height: 30px;
+        background: $text-primary;
+
+        &.right {
+          transform: translateX(100%);
+        }
+      }
+
+      &:hover {
+        border-color: rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
+  &__lang-option {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 26px;
+    font-family: $font-body;
+    font-weight: 600;
+    font-size: $font-size-xs;
+    letter-spacing: 0.5px;
+    color: $text-muted;
+    cursor: pointer;
+    transition: color $transition-fast;
+    user-select: none;
+
+    &.active {
+      color: $text-light;
+    }
+  }
+
+  &__lang-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 32px;
+    height: 26px;
+    border-radius: $radius-full;
+    background: $text-primary;
+    transition: transform $transition-base;
+    pointer-events: none;
+
+    &.right {
+      transform: translateX(100%);
     }
   }
 
@@ -169,7 +221,7 @@
       display: block;
       width: 100%;
       height: 2px;
-      background: $text-light;
+      background: $text-primary;
       transition: all $transition-base;
       transform-origin: center;
     }
@@ -189,10 +241,6 @@
     }
   }
 
-  // Scrolled state für mobile toggle
-  &.scrolled &__mobile-toggle span {
-    background: $text-primary;
-  }
 
   // Mobile Menu
   &__mobile-menu {

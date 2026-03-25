@@ -1,681 +1,913 @@
 @use 'sass:color';
 @use '../../../styles/variables' as *;
 
+// ============================================
+// HERO SECTION
+// ============================================
 .hero {
   position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  overflow: visible; // Wichtig: Übergang ragt in nächste Sektion
-  margin-bottom: 70px; // Platz für den unteren Teil des Übergangs
+  z-index: 1;
 
-  // Background - Grün/Teal Gradient (passend zum App Logo)
   &__bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      135deg,
-      $primary-green 0%,
-      color.mix($primary-green, $primary-green-dark, 50%) 50%,
-      $primary-green-dark 100%
-    );
+    background: $bg-white;
     z-index: 0;
   }
 
-  // Container
-  &__container {
+  &__content {
     position: relative;
     z-index: 1;
-    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 120px 24px 60px;
-
-    @media (min-width: $breakpoint-lg) {
-      padding: 140px 48px 80px;
-    }
+    padding: 0 48px;
+    gap: 60px;
   }
 
-  // Main Layout
-  &__main {
+  // ============================================
+  // LEFT COLUMN — sticky
+  // ============================================
+  &__left {
+    flex: 0 0 auto;
+    width: 380px;
+    min-width: 320px;
+    align-self: stretch;
+  }
+
+  &__left-inner {
+    position: sticky;
+    top: 100px;
+    height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 48px;
-
-    @media (min-width: $breakpoint-lg) {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      gap: 80px;
-    }
-  }
-
-  // Text Content
-  &__text {
-    flex: 1;
-    text-align: center;
-
-    @media (min-width: $breakpoint-lg) {
-      text-align: left;
-      max-width: 560px;
-    }
-  }
-
-  // Branding - Logo & App Name
-  &__branding {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 32px;
-
-    @media (min-width: $breakpoint-lg) {
-      justify-content: flex-start;
-      gap: 24px;
-      margin-bottom: 40px;
-    }
+    gap: 28px;
+    padding-bottom: 12vh;
   }
 
-  &__logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-
-    @media (min-width: $breakpoint-md) {
-      width: 100px;
-      height: 100px;
-      border-radius: 20px;
-    }
-
-    @media (min-width: $breakpoint-lg) {
-      width: 120px;
-      height: 120px;
-      border-radius: 24px;
-    }
-  }
-
-  &__app-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  &__app-badge {
-    display: inline-block;
-    padding: 6px 14px;
-    background: rgba($text-light, 0.15);
-    color: $text-light;
+  &__live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font-body;
     font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border-radius: 50px;
-    border: 1px solid rgba($text-light, 0.25);
-
-    @media (min-width: $breakpoint-md) {
-      font-size: 0.85rem;
-      padding: 8px 16px;
-    }
-  }
-
-  &__app-name {
-    font-size: 2.5rem;
     font-weight: 800;
-    color: $text-light;
-    line-height: 1;
-    margin: 0;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: $text-primary;
+    background: rgba(0, 0, 0, 0.06);
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    padding: 6px 16px;
+    border-radius: 50px;
+    width: fit-content;
 
-    @media (min-width: $breakpoint-md) {
-      font-size: 3rem;
-    }
-
-    @media (min-width: $breakpoint-lg) {
-      font-size: 3.5rem;
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $primary-green;
+      animation: badge-dot-blink 1.4s ease-in-out infinite;
     }
   }
 
   &__headline {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: $text-light;
+    font-family: $font-headline;
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    font-weight: 800;
     line-height: 1.15;
-    margin-bottom: 24px;
-
-    @media (min-width: $breakpoint-md) {
-      font-size: 3rem;
-    }
-
-    @media (min-width: $breakpoint-lg) {
-      font-size: 3.5rem;
-    }
+    color: $text-primary;
+    letter-spacing: -0.02em;
+    margin: 0;
   }
 
-  &__highlight {
-    background: linear-gradient(135deg, $primary-green, $tertiary-gold);
+  &__headline-accent {
+    display: inline-block;
+    background: linear-gradient(135deg, $primary-green, $primary-green-dark);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: duell-pulse 2s ease-in-out infinite;
+  }
+
+  &__typewriter-line {
+    font-family: $font-headline;
+    font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+    font-weight: 600;
+    color: $text-secondary;
+    margin: 0;
+    min-height: 2.4em;
   }
 
   &__typewriter {
-    display: block;
-    min-height: 1.2em; // Verhindert Layout-Sprünge
+    display: inline;
   }
 
   &__cursor {
-    display: inline;
-    color: $primary-green-light;
+    display: inline-block;
+    width: 0;
+    overflow: visible;
+    font-weight: 300;
+    animation: cursor-blink 0.7s step-end infinite;
+    color: $primary-green;
+  }
+
+  &__subtext {
+    font-family: $font-body;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
     font-weight: 400;
-    animation: blink 1s step-end infinite;
-
-    &.typing {
-      animation: none;
-      opacity: 1;
-    }
+    line-height: 1.6;
+    color: $text-secondary;
+    margin: 0;
+    max-width: 420px;
   }
 
-  @keyframes blink {
-    0%, 50% {
-      opacity: 1;
-    }
-    51%, 100% {
-      opacity: 0;
-    }
-  }
-
-  &__description {
-    font-size: 1.125rem;
-    color: rgba($text-light, 0.8);
-    line-height: 1.7;
-    margin-bottom: 40px;
-
-    @media (min-width: $breakpoint-lg) {
-      font-size: 1.25rem;
-    }
-  }
-
-  // Feature Highlights
-  &__highlights {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 36px;
-
-    @media (min-width: $breakpoint-lg) {
-      gap: 14px;
-    }
-  }
-
-  .highlight {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    @media (max-width: $breakpoint-lg) {
-      justify-content: center;
-    }
-
-    &__icon {
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba($tertiary-gold, 0.15);
-      border-radius: 8px;
-      flex-shrink: 0;
-
-      svg {
-        width: 18px;
-        height: 18px;
-        color: $tertiary-gold;
-      }
-    }
-
-    &__text {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: rgba($text-light, 0.9);
-      letter-spacing: 0.2px;
-    }
-  }
-
-  // Store Badges
-  &__stores {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    @media (min-width: $breakpoint-sm) {
-      flex-direction: row;
-      justify-content: center;
-    }
-
-    @media (min-width: $breakpoint-lg) {
-      justify-content: flex-start;
-    }
-  }
-
-  .store-badge {
+  &__social-proof {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 14px 24px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
+  }
+
+  &__avatars {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  &__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid $bg-white;
+    object-fit: cover;
+    margin-left: -14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &:last-child {
+      margin-left: 0;
+    }
+  }
+
+  &__join-text {
+    font-family: $font-body;
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-secondary;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: $primary-green;
+    color: #fff;
+    font-family: $font-body;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 50px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    border: none;
     cursor: pointer;
-    min-width: 180px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba($primary-green, 0.3);
+    width: fit-content;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.35);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    }
-
-    &__icon {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-
-      svg {
-        width: 22px;
-        height: 22px;
-        color: #fff;
-      }
-    }
-
-    &__text {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    &__label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.75);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    &__name {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.2;
+      background: $primary-green-dark;
+      box-shadow: 0 8px 30px rgba($primary-green, 0.4);
     }
   }
 
-  // Video Wrapper
-  &__video-wrapper {
-    flex-shrink: 0;
+  &__cta-arrow {
+    transition: transform 0.3s ease;
+
+    .hero__cta:hover & {
+      transform: translateX(4px);
+    }
   }
 
-  &__phone {
-    position: relative;
-    cursor: pointer;
-  }
-
-  &__glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(
-      circle,
-      rgba($primary-green, 0.2) 0%,
-      transparent 70%
-    );
-    z-index: -1;
-    animation: glowPulse 3s ease-in-out infinite;
+  // ============================================
+  // RIGHT — grid
+  // ============================================
+  &__grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 18px;
+    padding: 100px 0 80px;
   }
 }
 
-// Phone Component
-.phone {
-  width: 220px;
-  background: #000;
-  border-radius: 36px;
-  padding: 8px;
-  box-shadow:
-    0 0 0 2px #333,
-    0 25px 50px rgba(0, 0, 0, 0.5);
+// ============================================
+// TILES
+// ============================================
+.tile {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 
-  @media (min-width: $breakpoint-lg) {
-    width: 260px;
+  &:hover {
+    transform: translateY(-3px);
   }
 
-  &__screen {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 9 / 19;
-    background: #111;
-    border-radius: 30px;
-    overflow: hidden;
+  // ---- Placement in grid ----
+  &--1 {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: stretch;
+    min-height: 180px;
   }
 
-  &__video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  &--2 {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
   }
 
-  &__play {
-    position: absolute;
-    inset: 0;
+  &--3 {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+  }
+
+  &--step3 {
+    grid-column: 1 / -1;
     display: flex;
     align-items: center;
+    min-height: 180px;
+  }
+
+  &--4 {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.3);
+    min-height: 220px;
+  }
 
-    .play-btn {
-      width: 60px;
-      height: 60px;
-      background: rgba($primary-green, 0.9);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease;
+  &--4b {
+    grid-column: 2;
+    min-height: 220px;
+  }
 
-      svg {
-        width: 28px;
-        height: 28px;
-        color: white;
-        margin-left: 4px;
-      }
+  &--5 {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 180px;
+  }
 
-      &:hover {
-        transform: scale(1.1);
-      }
+  &--6 {
+    grid-column: 1;
+    grid-row: span 2;
+    min-height: 400px;
+  }
+
+  &--7 {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 160px;
+  }
+
+  &--8 {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 160px;
+  }
+
+  &--11 {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    min-height: 160px;
+  }
+
+  // ---- Color variants ----
+  &--blue {
+    background: #4361ee;
+  }
+
+  // Duell-Arena style: diagonal split with two green gradients
+  &--duell-green {
+    position: relative;
+    background: $primary-green-dark;
+    overflow: hidden;
+
+    // Upper triangle — primary green gradient
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, $primary-green 0%, $primary-green-dark 100%);
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+      z-index: 0;
+    }
+
+    // Lower triangle — darker green gradient
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, $primary-green-dark 0%, darken($primary-green-dark, 8%) 100%);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      z-index: 0;
+    }
+
+    // Ensure content sits above the triangles
+    > * {
+      position: relative;
+      z-index: 1;
     }
   }
 
-  &__ui {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    padding: 12px;
+  &--blue-dark {
+    background: #3347b8;
+  }
+
+  &--green {
+    background: $gradient-button;
+  }
+
+  &--green-dark {
+    background: linear-gradient(135deg, $primary-green-dark 0%, darken($primary-green-dark, 10%) 100%);
+  }
+
+  &--purple {
+    background: #7c5ce0;
+  }
+
+  &--teal {
+    background: #14b8a6;
+  }
+
+  &--teal-dark {
+    background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+  }
+
+  &--dark {
+    background: linear-gradient(160deg, $bg-dark 0%, color.mix($primary-green, $bg-dark, 15%) 100%);
+  }
+
+  &--img {
+    position: relative;
+  }
+
+  // ---- Text side (for full-width tiles) ----
+  &__text-side {
+    flex: 1;
+    padding: 28px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  &__ui-bottom {
-    padding-right: 50px;
-  }
-
-  &__username {
-    font-size: 13px;
-    font-weight: 700;
-    color: white;
-  }
-
-  &__caption {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.9);
-    margin-top: 4px;
-    line-height: 1.4;
-  }
-
-  &__ui-side {
-    position: absolute;
-    right: 10px;
-    bottom: 60px;
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
     gap: 16px;
   }
 
-  &__action {
+  &__img-side {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__video-side {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  // ---- Step badge ----
+  &__step-badge {
+    display: inline-block;
+    font-family: $font-body;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(#fff, 0.9);
+    background: rgba(#fff, 0.15);
+    backdrop-filter: blur(4px);
+    padding: 5px 14px;
+    border-radius: 50px;
+    width: fit-content;
+  }
+
+  // When step-badge is inside text-side, no extra margin
+  &__text-side &__step-badge {
+    margin: 0 0 4px;
+  }
+
+  // When step-badge is directly in a column tile
+  &--2 &__step-badge,
+  &--3 &__step-badge {
+    margin: 20px 24px 0;
+  }
+
+  // ---- Video ----
+  &__video {
+    width: 85%;
+    max-width: 280px;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+
+    // Card variant for column tiles
+    &--card {
+      width: 70%;
+      max-width: 200px;
+      margin: auto auto 0;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+      flex: 0 1 auto;
+      max-height: 55%;
+      object-fit: cover;
+    }
+  }
+
+  // Kachel 2 (links): Video breiter & höher
+  &--2 &__video--card {
+    width: 85%;
+    max-width: 240px;
+    max-height: 65%;
+  }
+
+  // ---- Finn inline variant (for column tiles) ----
+  &__finn--inline {
+    padding: 8px 24px 0;
+  }
+
+  &__finn--rag {
+    padding: 0;
+    margin-top: 4px;
+
+    .tile__finn-bubble {
+      background: rgba($primary-green, 0.2);
+      border: 1px solid rgba($primary-green, 0.3);
+
+      &::before {
+        background: rgba($primary-green, 0.2);
+      }
+    }
+  }
+
+  // ---- Tagline ----
+  &__tagline {
+    font-family: $font-headline;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    margin: 0;
+    padding: 24px 24px 0;
+
+    &--sm {
+      font-size: 1.05rem;
+      padding: 20px 20px 0;
+    }
+  }
+
+  // When tagline is inside text-side, no extra padding
+  &__text-side &__tagline {
+    padding: 0;
+  }
+
+  // ---- Screenshots ----
+  &__screenshot {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    &--float-right {
+      position: absolute;
+      top: 10%;
+      right: -5%;
+      width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    &--center {
+      width: 80%;
+      max-width: 220px;
+      margin: 20px auto 0;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      flex: 1;
+      object-fit: contain;
+    }
+
+    &--phone {
+      width: 70%;
+      max-width: 200px;
+      margin: auto auto 0;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    &--bottom {
+      width: 85%;
+      margin: auto auto 0;
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    &--top {
+      width: 85%;
+      margin: 0 auto auto;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // ---- Photo (full bleed) ----
+  &__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  // ---- Button ----
+  &__btn {
+    display: inline-block;
+    padding: 10px 22px;
+    background: #fff;
+    color: $bg-dark;
+    font-family: $font-body;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 50px;
+    text-decoration: none;
+    margin: 16px 24px 24px;
+    width: fit-content;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__text-side &__btn {
+    margin: 0;
+  }
+
+  // ---- Finn avatar + speech bubble ----
+  &__finn {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  &__finn-avatar-wrap {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
-    font-size: 11px;
-    color: white;
-
-    span:first-child {
-      font-size: 20px;
-    }
-  }
-}
-
-// Animations
-@keyframes glowPulse {
-  0%, 100% {
-    opacity: 0.7;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.05);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-// ============================================
-// RINGBUCH ÜBERGANG - Spiralen über dem Papier
-// ============================================
-
-$binding-height: 160px;
-$ring-gap: clamp(45px, 6vw, 80px);
-$ring-width: 20px;
-$ring-height: 50px; // Länglicher oval
-$hole-size: 12px;
-
-// Kariertes Muster
-@mixin grid-pattern($opacity: 0.15) {
-  background-image:
-    linear-gradient(rgba($primary-green-dark, $opacity) 1px, transparent 1px),
-    linear-gradient(90deg, rgba($primary-green-dark, $opacity) 1px, transparent 1px);
-  background-size: 18px 18px;
-}
-
-.hero__paper-edge {
-  position: absolute;
-  bottom: calc(-#{$binding-height} / 2);
-  left: 0;
-  right: 0;
-  height: $binding-height;
-  z-index: 10;
-  pointer-events: none;
-}
-
-// Obere karierte Seite (Hero-Seite)
-.grid-paper--top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: $bg-light;
-  @include grid-pattern;
-  z-index: 1;
-
-  // Grauer Trennstreifen am unteren Rand
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(
-      to bottom,
-      rgba(#666, 0.3) 0%,
-      rgba(#444, 0.5) 50%,
-      rgba(#666, 0.3) 100%
-    );
-    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-  }
-}
-
-// Untere karierte Seite (nächste Sektion)
-.grid-paper--bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: $bg-light;
-  @include grid-pattern;
-  z-index: 1;
-
-  // Grauer Trennstreifen am oberen Rand (zwischen den Papierseiten)
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(
-      to bottom,
-      rgba(#666, 0.3) 0%,
-      rgba(#444, 0.5) 50%,
-      rgba(#666, 0.3) 100%
-    );
-    box-shadow: 0 -1px 2px rgba(0,0,0,0.15);
+    flex-shrink: 0;
   }
 
-  // Gepunkteter Trennstreifen am unteren Rand (Übergang zur Features-Sektion)
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-image: radial-gradient(circle, rgba(#444, 0.5) 1px, transparent 1px);
-    background-size: 8px 2px;
-    background-position: center;
-  }
-}
-
-// Kein separater Papierstreifen mehr nötig
-.paper-strip {
-  display: none;
-}
-
-// Container für Löcher - jetzt auf beiden Papierhälften
-.paper-holes {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  gap: $ring-gap;
-  padding: 0 5%;
-  z-index: 2;
-}
-
-// Einzelnes Loch - durchsichtig zum Hintergrund
-.paper-hole {
-  width: $hole-size;
-  height: $hole-size;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: linear-gradient(
-    135deg,
-    $primary-green 0%,
-    $primary-green-dark 100%
-  );
-  box-shadow:
-    inset 0 2px 4px rgba(0,0,0,0.5),
-    inset 0 -1px 2px rgba(255,255,255,0.1);
-
-  @media (max-width: $breakpoint-md) {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-// Spiralringe - ÜBER dem Papier
-.spiral-rings {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  gap: $ring-gap;
-  padding: 0 5%;
-  pointer-events: none;
-  z-index: 10; // Über allem
-
-  // Keine getrennten back/front mehr nötig
-  &--back {
-    display: none;
+  &__finn-badge {
+    display: inline-block;
+    font-family: $font-body;
+    font-size: 0.55rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    background: rgba(#fff, 0.2);
+    backdrop-filter: blur(4px);
+    padding: 3px 8px;
+    border-radius: 50px;
+    white-space: nowrap;
+    margin-top: 4px;
   }
 
-  &--front {
-    z-index: 10;
-  }
-}
-
-// Einzelner Spiralring - Länglicher ovaler Ring mit weißer Mitte
-.spiral-ring {
-  width: $ring-width;
-  height: $ring-height;
-  flex-shrink: 0;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 5px solid;
-    border-radius: 40%; // Flachere Rundungen
-    box-sizing: border-box;
-    // Metallischer Rand mit weißer Mitte
-    border-color: #888;
-    background: white;
-    box-shadow:
-      0 3px 8px rgba(0,0,0,0.4),
-      inset 0 2px 6px rgba(0,0,0,0.15),
-      inset 0 -2px 6px rgba(0,0,0,0.1);
+  &__finn-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
   }
 
-  @media (max-width: $breakpoint-md) {
-    width: 16px;
-    height: 38px;
+  &__finn-bubble {
+    position: relative;
+    background: rgba(#fff, 0.25);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 14px 14px 14px 4px;
 
     &::before {
-      border-width: 4px;
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 8px;
+      width: 10px;
+      height: 10px;
+      background: rgba(#fff, 0.25);
+      clip-path: polygon(0 0, 100% 0, 0 100%);
     }
+  }
+
+  &__finn-text {
+    font-family: $font-body;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  // ---- Icon ----
+  &__icon {
+    font-size: 2rem;
+    padding: 20px 20px 0;
+  }
+
+  // ---- Link ----
+  &__link {
+    font-family: $font-body;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(#fff, 0.7);
+    padding: 8px 20px 20px;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  // ---- App Store badges ----
+  &__badges {
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px 20px;
+  }
+
+  &__badge {
+    height: 36px;
+    object-fit: contain;
+  }
+
+  // ---- RAG Engine tile (heartbeat pulse) ----
+  &--rag {
+    position: relative;
+    background: linear-gradient(145deg, $bg-dark 0%, color.adjust($bg-dark, $lightness: -5%) 100%);
+    padding: 20px;
+    gap: 8px;
+    animation: rag-heartbeat 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    transform-origin: center center;
+    will-change: transform;
+  }
+
+  &__rag-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__rag-icon {
+    width: 20px;
+    height: 20px;
+    color: $primary-green;
+    animation: rag-icon-beat 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    transform-origin: center center;
+  }
+
+  &__rag-label {
+    font-family: $font-body;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: $primary-green;
+  }
+
+  &--rag &__tagline--sm {
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  &__model-select {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(#fff, 0.08);
+    border: 1px solid rgba(#fff, 0.12);
+    border-radius: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background $transition-fast;
+    position: relative;
+    width: fit-content;
+    margin-top: 4px;
+
+    &:hover {
+      background: rgba(#fff, 0.14);
+    }
+  }
+
+  &__model-logo {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+  }
+
+  &__model-name {
+    font-family: $font-body;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  &__model-chevron {
+    width: 14px;
+    height: 14px;
+    color: rgba(#fff, 0.5);
+    transition: transform $transition-fast;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__model-dropdown {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 0;
+    min-width: 220px;
+    background: $bg-dark;
+    border: 1px solid rgba(#fff, 0.15);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    z-index: $z-dropdown;
+  }
+
+  &__model-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-family: $font-body;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(#fff, 0.8);
+    transition: background $transition-fast;
+
+    &--active {
+      background: rgba($primary-green, 0.12);
+      color: #fff;
+    }
+
+    &--soon {
+      color: rgba(#fff, 0.4);
+      font-style: italic;
+      cursor: default;
+    }
+  }
+
+  &__model-option-logo {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+  }
+
+  &__model-option-icon {
+    font-size: 16px;
+    width: 18px;
+    text-align: center;
+  }
+
+  &__model-check {
+    margin-left: auto;
+    color: $primary-green;
+    font-weight: 700;
   }
 }
 
+// ---- Duell pulse ----
+@keyframes duell-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+// ---- Typewriter cursor blink ----
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+// ---- RAG heartbeat keyframes ----
+// Mimics a real heartbeat: two quick pumps (systole + diastole), then rest
+@keyframes rag-heartbeat {
+  0%   { transform: scale(1); }
+  14%  { transform: scale(1.035); }   // 1st beat — strong pump
+  20%  { transform: scale(0.985); }   // recoil
+  28%  { transform: scale(1.02); }    // 2nd beat — softer echo
+  34%  { transform: scale(1); }       // settle
+  100% { transform: scale(1); }       // rest until next cycle
+}
+
+@keyframes rag-icon-beat {
+  0%   { transform: scale(1); }
+  14%  { transform: scale(1.25); }    // icon pumps harder than tile
+  20%  { transform: scale(0.9); }
+  28%  { transform: scale(1.12); }
+  34%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+// ---- Badge pulse ----
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba($primary-green, 0.4); }
+  50%      { box-shadow: 0 0 0 8px rgba($primary-green, 0); }
+}
+
+@keyframes badge-dot-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: $breakpoint-md) {
+  .hero {
+    &__content {
+      flex-direction: column;
+      padding: 0 20px;
+      gap: 32px;
+    }
+
+    &__left {
+      flex: none;
+      width: 100%;
+      min-width: unset;
+    }
+
+    &__left-inner {
+      position: relative;
+      height: auto;
+      padding: 100px 0 0;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+
+    &__headline {
+      font-size: clamp(1.8rem, 7vw, 2.5rem);
+    }
+
+    &__typewriter-line {
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
+      text-align: center;
+    }
+
+    &__subtext {
+      max-width: 360px;
+      text-align: center;
+    }
+
+    &__social-proof {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr 1fr;
+      padding: 24px 0 60px;
+      gap: 12px;
+    }
+  }
+
+  .tile {
+    &--6 {
+      grid-row: span 1;
+      min-height: 250px;
+    }
+
+    &__tagline {
+      font-size: 1.05rem;
+      padding: 18px 18px 0;
+    }
+  }
+}

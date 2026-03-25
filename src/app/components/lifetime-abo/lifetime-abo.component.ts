@@ -1,15 +1,20 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ChangeDetectorRef, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
+
+const TYPEWRITER_KEYS = ['lifetime.tw1', 'lifetime.tw2', 'lifetime.tw3'];
 
 @Component({
   selector: 'app-lifetime-abo',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './lifetime-abo.component.html',
   styleUrls: ['./lifetime-abo.component.scss']
 })
 export class LifetimeAboComponent implements OnInit, OnDestroy {
   @ViewChild('counterSection') counterSection!: ElementRef;
+  readonly ts = inject(TranslationService);
 
   // Countdown-Zähler: verbleibende Plätze
   totalSlots = 1000;
@@ -23,26 +28,33 @@ export class LifetimeAboComponent implements OnInit, OnDestroy {
   private observer!: IntersectionObserver;
 
   // Typewriter
-  words = ['Lifetime Zugang', 'Für immer lernen', 'Einmal. Fertig.'];
   currentWordIndex = 0;
   displayedText = '';
   private typewriterInterval: any;
   private wordTimeout: any;
 
   // Vorteile
-  benefits = [
-    { icon: '∞', title: 'Unbegrenzter Zugang', desc: 'Alle Kurse, alle Duelle – für immer.' },
-    { icon: '⚡', title: 'Keine monatlichen Kosten', desc: 'Einmal zahlen, nie wieder dran denken.' },
-    { icon: '🎓', title: 'Alle zukünftigen Features', desc: 'Neue Inhalte? Bekommst du automatisch.' },
-    { icon: '👑', title: 'Early Supporter Badge', desc: 'Zeig, dass du von Anfang an dabei warst.' }
-  ];
+  get benefits() {
+    return [
+      { icon: '∞', title: this.ts.t('lifetime.benefit1.title'), desc: this.ts.t('lifetime.benefit1.desc') },
+      { icon: '⚡', title: this.ts.t('lifetime.benefit2.title'), desc: this.ts.t('lifetime.benefit2.desc') },
+      { icon: '🎓', title: this.ts.t('lifetime.benefit3.title'), desc: this.ts.t('lifetime.benefit3.desc') },
+      { icon: '👑', title: this.ts.t('lifetime.benefit4.title'), desc: this.ts.t('lifetime.benefit4.desc') }
+    ];
+  }
 
   // Progress bar
   get progressPercent(): number {
     return (this.claimedSlots / this.totalSlots) * 100;
   }
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) {
+    effect(() => {
+      // React to language changes — restart typewriter with new words
+      const _ = this.ts.lang();
+      this.restartTypewriter();
+    });
+  }
 
   ngOnInit(): void {
     this.startTypewriter();
@@ -53,6 +65,16 @@ export class LifetimeAboComponent implements OnInit, OnDestroy {
     this.clearTypewriter();
     if (this.counterInterval) clearInterval(this.counterInterval);
     if (this.observer) this.observer.disconnect();
+  }
+
+  private getWords(): string[] {
+    return TYPEWRITER_KEYS.map((key) => this.ts.t(key));
+  }
+
+  private restartTypewriter(): void {
+    this.clearTypewriter();
+    this.currentWordIndex = 0;
+    this.startTypewriter();
   }
 
   // === Typewriter ===
@@ -66,7 +88,8 @@ export class LifetimeAboComponent implements OnInit, OnDestroy {
   }
 
   private typeText(): void {
-    const currentWord = this.words[this.currentWordIndex];
+    const words = this.getWords();
+    const currentWord = words[this.currentWordIndex];
     let charIndex = 0;
     this.displayedText = '';
 
@@ -90,7 +113,8 @@ export class LifetimeAboComponent implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       } else {
         clearInterval(this.typewriterInterval);
-        this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
+        const words = this.getWords();
+        this.currentWordIndex = (this.currentWordIndex + 1) % words.length;
         this.wordTimeout = setTimeout(() => this.typeText(), 400);
       }
     }, 40);
@@ -121,8 +145,6 @@ export class LifetimeAboComponent implements OnInit, OnDestroy {
     const target = this.remainingSlots;
     const duration = 2000;
     const steps = 60;
-    const increment = target / steps;
-    let current = 0;
     let step = 0;
 
     this.counterInterval = setInterval(() => {
@@ -130,8 +152,7 @@ export class LifetimeAboComponent implements OnInit, OnDestroy {
       // Easing: schnell am Anfang, langsam am Ende
       const progress = step / steps;
       const eased = 1 - Math.pow(1 - progress, 3);
-      current = Math.round(eased * target);
-      this.displayedRemaining = current;
+      this.displayedRemaining = Math.round(eased * target);
       this.cdr.detectChanges();
 
       if (step >= steps) {

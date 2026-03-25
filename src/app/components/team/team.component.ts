@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, ViewChildren, QueryList } from '@angular
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface TeamMember {
   name: string;
@@ -17,7 +19,7 @@ interface TeamMember {
 @Component({
   selector: 'app-team',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, TranslatePipe],
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss'
 })
@@ -39,7 +41,42 @@ export class TeamComponent implements OnInit {
     linkedin: ''
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public ts: TranslationService) {}
+
+  get teamMembers(): TeamMember[] {
+    return [
+      {
+        name: 'Maximilian Mintchev',
+        role: 'Co-Founder & CEO',
+        focus: 'Product & Tech',
+        description: this.ts.t('team.member1.desc'),
+        image: 'team_fotos/maximilian_mintchev.png',
+        skills: ['Development', 'Vision', 'Product'],
+        linkedin: 'https://linkedin.com/in/',
+        email: 'max@mind-slam.de'
+      },
+      {
+        name: 'Nick Heidmann',
+        role: 'Co-Founder & CFO',
+        focus: 'Finance & Strategy',
+        description: this.ts.t('team.member2.desc'),
+        image: 'team_fotos/nick_heidmann.png',
+        skills: ['Finance', 'Strategy', 'Partnerships'],
+        linkedin: 'https://linkedin.com/in/',
+        email: 'nick.h@mind-slam.de'
+      },
+      {
+        name: 'Nick Volkmann',
+        role: 'Co-Founder & CAIO',
+        focus: 'AI & Content',
+        description: this.ts.t('team.member3.desc'),
+        image: 'team_fotos/nick_volkmann.png',
+        skills: ['AI/ML', 'RAG', 'Content'],
+        linkedin: 'https://linkedin.com/in/',
+        email: 'nick.v@mind-slam.de'
+      }
+    ];
+  }
 
   openModal(): void {
     this.isModalOpen = true;
@@ -95,39 +132,6 @@ export class TeamComponent implements OnInit {
       }
     });
   }
-
-  teamMembers: TeamMember[] = [
-    {
-      name: 'Maximilian Mintchev',
-      role: 'Co-Founder & CEO',
-      focus: 'Product & Tech',
-      description: 'Die treibende Kraft hinter DiggiDuell. Max entwickelt die Vision und führt das technische Team. Als Student kennt er die Herausforderungen des Lernens aus erster Hand.',
-      image: 'team_fotos/maximilian_mintchev.png',
-      skills: ['Development', 'Vision', 'Product'],
-      linkedin: 'https://linkedin.com/in/',
-      email: 'max@mind-slam.de'
-    },
-    {
-      name: 'Nick Heidmann',
-      role: 'Co-Founder & CFO',
-      focus: 'Finance & Strategy',
-      description: 'Nick sorgt für das solide Fundament. Er verantwortet Finanzen, Strategie und Partnerschaften. Sein analytischer Blick treibt das Wachstum voran.',
-      image: 'team_fotos/nick_heidmann.png',
-      skills: ['Finance', 'Strategy', 'Partnerships'],
-      linkedin: 'https://linkedin.com/in/',
-      email: 'nick.h@mind-slam.de'
-    },
-    {
-      name: 'Nick Volkmann',
-      role: 'Co-Founder & CAIO',
-      focus: 'AI & Content',
-      description: 'Nick ist das Gehirn hinter unserer KI. Er entwickelt die Algorithmen für die automatische Fragengeneration und sorgt für hochwertige Lerninhalte.',
-      image: 'team_fotos/nick_volkmann.png',
-      skills: ['AI/ML', 'RAG', 'Content'],
-      linkedin: 'https://linkedin.com/in/',
-      email: 'nick.v@mind-slam.de'
-    }
-  ];
 
   ngOnInit(): void {
     this.setupScrollAnimation();

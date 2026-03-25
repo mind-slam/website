@@ -1,0 +1,197 @@
+@use '../../../styles/variables' as *;
+
+.faq {
+  background: $bg-light;
+  padding: 80px 0 100px;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0 140px;
+  }
+
+  &__container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  // Header
+  &__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba($primary-green, 0.1);
+    color: $primary-green;
+    font-size: $font-size-sm;
+    font-weight: 700;
+    border-radius: $radius-full;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: $font-size-3xl;
+    font-weight: 800;
+    color: $text-primary;
+    margin-bottom: 12px;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: $font-size-4xl;
+    }
+
+    :global(.text-gradient) {
+      background: $gradient-accent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &__subtitle {
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  // Accordion List
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  // Single Item
+  &__item {
+    background: $bg-white;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: box-shadow $transition-base, border-color $transition-base;
+
+    &:hover {
+      border-color: rgba($primary-green, 0.2);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    &--open {
+      border-color: rgba($primary-green, 0.3);
+      box-shadow: 0 8px 24px rgba($primary-green, 0.08);
+
+      .faq__chevron {
+        transform: rotate(180deg);
+      }
+
+      .faq__answer-wrapper {
+        grid-template-rows: 1fr;
+      }
+
+      .faq__answer {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Question Button
+  &__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: $font-headline;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: rgba($bg-light, 0.5);
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($primary-green, 0.08);
+    border-radius: 10px;
+    color: $primary-green;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+  }
+
+  &__q-text {
+    flex: 1;
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $text-primary;
+    line-height: 1.4;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__toggle {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba($primary-green, 0.08);
+    color: $primary-green;
+    transition: background $transition-fast;
+  }
+
+  &__chevron {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  // Answer (CSS Grid Expand)
+  &__answer-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__answer {
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+
+    p {
+      padding: 0 24px 24px 76px;
+      font-size: $font-size-base;
+      color: $text-secondary;
+      line-height: 1.75;
+      margin: 0;
+
+      @media (max-width: $breakpoint-md) {
+        padding-left: 24px;
+      }
+    }
+  }
+}

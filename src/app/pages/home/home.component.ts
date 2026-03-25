@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { HeroComponent } from '../../components/hero/hero.component';
-import { TiktokCarouselComponent } from '../../components/tiktok-carousel/tiktok-carousel.component';
-import { FeaturesComponent } from '../../components/features/features.component';
 import { DuellsComponent } from '../../components/duells/duells.component';
-import { DozentenComponent } from '../../components/dozenten/dozenten.component';
-import { TeamComponent } from '../../components/team/team.component';
-import { TestimonialsComponent } from '../../components/testimonials/testimonials.component';
-import { RoadmapComponent } from '../../components/roadmap/roadmap.component';
-import { BillboardComponent } from '../../components/billboard/billboard.component';
+import { FaqComponent } from '../../components/faq/faq.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { QuizCardsComponent } from '../../components/quiz-cards/quiz-cards';
-import { LifetimeAboComponent } from '../../components/lifetime-abo/lifetime-abo.component';
+import { StepsComponent } from '../../components/steps/steps.component';
+import { ConfettiComponent } from '../../components/confetti/confetti.component';
+import { UniChallengeComponent } from '../../components/uni-challenge/uni-challenge.component';
+// LIFETIME ABO MODULE AUSGEBLENDET
+// import { LifetimeAboComponent } from '../../components/lifetime-abo/lifetime-abo.component';
 
 @Component({
   selector: 'app-home',
@@ -19,17 +16,13 @@ import { LifetimeAboComponent } from '../../components/lifetime-abo/lifetime-abo
   imports: [
     HeaderComponent,
     HeroComponent,
-    TiktokCarouselComponent,
-    FeaturesComponent,
     DuellsComponent,
-    QuizCardsComponent,
-    LifetimeAboComponent,
-    DozentenComponent,
-    TeamComponent,
-    TestimonialsComponent,
-    RoadmapComponent,
-    BillboardComponent,
-    FooterComponent
+    UniChallengeComponent,
+    StepsComponent,
+    // LifetimeAboComponent, // LIFETIME ABO MODULE AUSGEBLENDET
+    FaqComponent,
+    FooterComponent,
+    ConfettiComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

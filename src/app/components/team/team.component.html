@@ -10,13 +10,13 @@
     <div class="team__header">
       <span class="team__badge">
         <span>👥</span>
-        Unser Team
+        {{ 'team.badge' | translate }}
       </span>
       <h2 class="team__title">
-        Die Köpfe hinter DiggiDuell
+        {{ 'team.title' | translate }}
       </h2>
       <p class="team__subtitle">
-        Drei Studenten mit einer gemeinsamen Vision: Das Lernen für alle Studierenden revolutionieren.
+        {{ 'team.subtitle' | translate }}
       </p>
     </div>
 
@@ -78,13 +78,13 @@
           </svg>
         </div>
         <div class="team__join-content">
-          <h3 class="team__join-title">Werde Teil des Teams!</h3>
+          <h3 class="team__join-title">{{ 'team.join.title' | translate }}</h3>
           <p class="team__join-text">
-            Du hast Lust, mit uns das Lernen zu revolutionieren? Wir suchen immer nach motivierten Talenten.
+            {{ 'team.join.text' | translate }}
           </p>
         </div>
         <button (click)="openModal()" class="team__join-button">
-          <span>Bewirb dich</span>
+          <span>{{ 'team.join.button' | translate }}</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -105,8 +105,8 @@
 
         <div class="application-modal__header">
           <span class="application-modal__icon">🚀</span>
-          <h3 class="application-modal__title">Bewirb dich bei DiggiDuell</h3>
-          <p class="application-modal__subtitle">Werde Teil unserer Mission!</p>
+          <h3 class="application-modal__title">{{ 'team.modal.title' | translate }}</h3>
+          <p class="application-modal__subtitle">{{ 'team.modal.subtitle' | translate }}</p>
         </div>
 
         @if (submitSuccess) {
@@ -115,56 +115,56 @@
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
               <polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
-            <p>Bewerbung erfolgreich gesendet!</p>
-            <span>Wir melden uns bei dir.</span>
+            <p>{{ 'team.modal.success' | translate }}</p>
+            <span>{{ 'team.modal.successSub' | translate }}</span>
           </div>
         } @else {
           <form (ngSubmit)="submitApplication()" class="application-modal__form">
             <div class="application-modal__field">
-              <label for="app-name">Name *</label>
-              <input type="text" id="app-name" [(ngModel)]="applicationForm.name" name="name" required placeholder="Dein vollständiger Name">
+              <label for="app-name">{{ 'team.modal.form.nameLabel' | translate }} *</label>
+              <input type="text" id="app-name" [(ngModel)]="applicationForm.name" name="name" required [placeholder]="'team.modal.form.namePlaceholder' | translate">
             </div>
 
             <div class="application-modal__field">
-              <label for="app-email">E-Mail *</label>
-              <input type="email" id="app-email" [(ngModel)]="applicationForm.email" name="email" required placeholder="deine.email@beispiel.de">
+              <label for="app-email">{{ 'team.modal.form.emailLabel' | translate }} *</label>
+              <input type="email" id="app-email" [(ngModel)]="applicationForm.email" name="email" required [placeholder]="'team.modal.form.emailPlaceholder' | translate">
             </div>
 
             <div class="application-modal__field">
-              <label for="app-position">Position / Bereich</label>
+              <label for="app-position">{{ 'team.modal.form.positionLabel' | translate }}</label>
               <select id="app-position" [(ngModel)]="applicationForm.position" name="position">
-                <option value="">Wähle einen Bereich...</option>
-                <option value="Entwicklung (Flutter/Mobile)">Entwicklung (Flutter/Mobile)</option>
-                <option value="Entwicklung (Backend/AI)">Entwicklung (Backend/AI)</option>
-                <option value="Entwicklung (Web/Frontend)">Entwicklung (Web/Frontend)</option>
-                <option value="Design (UI/UX)">Design (UI/UX)</option>
-                <option value="Marketing & Growth">Marketing & Growth</option>
-                <option value="Content & Redaktion">Content & Redaktion</option>
-                <option value="Sonstiges">Sonstiges</option>
+                <option value="">{{ 'team.modal.form.positionPlaceholder' | translate }}</option>
+                <option value="Entwicklung (Flutter/Mobile)">{{ 'team.modal.form.optionFlutter' | translate }}</option>
+                <option value="Entwicklung (Backend/AI)">{{ 'team.modal.form.optionBackend' | translate }}</option>
+                <option value="Entwicklung (Web/Frontend)">{{ 'team.modal.form.optionWeb' | translate }}</option>
+                <option value="Design (UI/UX)">{{ 'team.modal.form.optionDesign' | translate }}</option>
+                <option value="Marketing & Growth">{{ 'team.modal.form.optionMarketing' | translate }}</option>
+                <option value="Content & Redaktion">{{ 'team.modal.form.optionContent' | translate }}</option>
+                <option value="Sonstiges">{{ 'team.modal.form.optionOther' | translate }}</option>
               </select>
             </div>
 
             <div class="application-modal__field">
-              <label for="app-motivation">Warum DiggiDuell? *</label>
-              <textarea id="app-motivation" [(ngModel)]="applicationForm.motivation" name="motivation" required rows="4" placeholder="Erzähl uns, warum du Teil des Teams werden möchtest..."></textarea>
+              <label for="app-motivation">{{ 'team.modal.form.motivationLabel' | translate }} *</label>
+              <textarea id="app-motivation" [(ngModel)]="applicationForm.motivation" name="motivation" required rows="4" [placeholder]="'team.modal.form.motivationPlaceholder' | translate"></textarea>
             </div>
 
             <div class="application-modal__field">
-              <label for="app-linkedin">LinkedIn Profil (optional)</label>
-              <input type="url" id="app-linkedin" [(ngModel)]="applicationForm.linkedin" name="linkedin" placeholder="https://linkedin.com/in/dein-profil">
+              <label for="app-linkedin">{{ 'team.modal.form.linkedinLabel' | translate }}</label>
+              <input type="url" id="app-linkedin" [(ngModel)]="applicationForm.linkedin" name="linkedin" [placeholder]="'team.modal.form.linkedinPlaceholder' | translate">
             </div>
 
             @if (submitError) {
               <div class="application-modal__error">
-                Ein Fehler ist aufgetreten. Bitte versuche es erneut.
+                {{ 'team.modal.error' | translate }}
               </div>
             }
 
             <button type="submit" class="application-modal__submit" [disabled]="isSubmitting">
               @if (isSubmitting) {
-                <span>Wird gesendet...</span>
+                <span>{{ 'team.modal.form.submitting' | translate }}</span>
               } @else {
-                <span>Bewerbung absenden</span>
+                <span>{{ 'team.modal.form.submit' | translate }}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                 </svg>

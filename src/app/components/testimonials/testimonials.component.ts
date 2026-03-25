@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface Testimonial {
   name: string;
@@ -12,7 +14,7 @@ interface Testimonial {
 @Component({
   selector: 'app-testimonials',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './testimonials.component.html',
   styleUrl: './testimonials.component.scss'
 })
@@ -63,6 +65,8 @@ export class TestimonialsComponent implements OnInit {
       tags: ['Spaced Repetition', 'Jura']
     }
   ];
+
+  constructor(public ts: TranslationService) {}
 
   ngOnInit(): void {
     this.setupScrollAnimation();

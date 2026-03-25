@@ -16,14 +16,13 @@ $app-alternate: #E0E3E7;
 .duells {
   position: relative;
   padding: 80px 0;
-  padding-bottom: 160px;
+  padding-bottom: 80px;
   background: $bg-light;
   overflow: visible;
-  margin-bottom: 70px;
 
   @media (min-width: $breakpoint-lg) {
     padding: 120px 0;
-    padding-bottom: 200px;
+    padding-bottom: 120px;
   }
 
   &__container {
@@ -535,18 +534,35 @@ $app-alternate: #E0E3E7;
     @media (min-width: $breakpoint-lg) {
       text-align: left;
     }
+
+    .side-text__content {
+      @media (min-width: $breakpoint-lg) {
+        align-items: flex-start;
+      }
+    }
   }
 
   &--left {
     @media (min-width: $breakpoint-lg) {
-      text-align: right;
+      text-align: left;
+    }
+
+    .side-text__content {
+      @media (min-width: $breakpoint-lg) {
+        align-items: flex-start;
+      }
     }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 16px;
+
+    @media (min-width: $breakpoint-lg) {
+      align-items: flex-start;
+    }
   }
 
   &__title {
@@ -596,16 +612,76 @@ $app-alternate: #E0E3E7;
 
     &--point-left {
       @media (min-width: $breakpoint-lg) {
-        transform: scaleX(-1);
-        align-self: flex-end;
+        animation: arrowBounceHFlip 1.5s ease-in-out infinite;
+      }
+    }
+  }
+
+  // Store Buttons (shown on result phase)
+  &__store-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    justify-content: center;
+
+    @media (min-width: $breakpoint-lg) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    &--apple {
+      background: #000;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
       }
     }
 
-    &--point-right {
-      @media (min-width: $breakpoint-lg) {
-        align-self: flex-start;
+    &--google {
+      background: linear-gradient(135deg, $app-primary, $secondary-blue);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba($app-primary, 0.3);
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba($app-primary, 0.4);
       }
     }
+  }
+
+  &__store-label {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  &__store-small {
+    font-size: 0.65rem;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+
+  &__store-large {
+    font-size: 1rem;
+    font-weight: 700;
   }
 }
 
@@ -740,7 +816,7 @@ $app-alternate: #E0E3E7;
 }
 
 // ============================================
-// DUEL ARENA - 1:1 App Design (Dark Theme)
+// DUEL ARENA - Light Theme (matching website)
 // ============================================
 .arena {
   position: absolute;
@@ -748,7 +824,7 @@ $app-alternate: #E0E3E7;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, #1F2937 0%, #111827 100%);
+  background: $app-bg;
   border-radius: 32px;
   padding: 14px 10px 12px;
   display: flex;
@@ -796,7 +872,7 @@ $app-alternate: #E0E3E7;
     > span {
       width: 100%;
       height: 100%;
-      background: #1F2937;
+      background: #fff;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -842,7 +918,7 @@ $app-alternate: #E0E3E7;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #1F2937;
+  border: 2px solid $app-bg;
 }
 
 @keyframes avatarAnswered {
@@ -853,7 +929,7 @@ $app-alternate: #E0E3E7;
 .arena__name {
   font-size: 10px;
   font-weight: 600;
-  color: #fff;
+  color: $app-primary-text;
 }
 
 .arena__dots {
@@ -868,7 +944,7 @@ $app-alternate: #E0E3E7;
 
   &--correct { background: $app-primary; }
   &--wrong { background: $app-error; }
-  &--empty { background: rgba(255, 255, 255, 0.2); }
+  &--empty { background: rgba(0, 0, 0, 0.1); }
 }
 
 // Score Center
@@ -882,8 +958,8 @@ $app-alternate: #E0E3E7;
 .arena__round-label {
   font-size: 9px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.1);
+  color: $app-secondary-text;
+  background: $app-secondary-bg;
   padding: 3px 10px;
   border-radius: 12px;
 }
@@ -906,7 +982,7 @@ $app-alternate: #E0E3E7;
 .arena__score-sep {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 // Timer Bar
@@ -926,7 +1002,7 @@ $app-alternate: #E0E3E7;
 .arena__timer-track {
   flex: 1;
   height: 5px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.08);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -951,7 +1027,7 @@ $app-alternate: #E0E3E7;
 .arena__timer-num {
   font-size: 11px;
   font-weight: 700;
-  color: #fff;
+  color: $app-primary-text;
   min-width: 22px;
   text-align: right;
   font-family: monospace;
@@ -1099,207 +1175,169 @@ $app-alternate: #E0E3E7;
 }
 
 // ============================================
-// RESULT SCREEN - 1:1 App Design (Dark Theme)
+// RESULT / CTA SCREEN
 // ============================================
-.result {
+.result-cta {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, #1F2937 0%, #111827 100%);
+  background: linear-gradient(160deg, #0f1923 0%, #1a2a3a 40%, #0d2818 100%);
   border-radius: 32px;
-  padding: 20px 12px 14px;
+  padding: 24px 16px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 14px;
   z-index: 10;
   animation: arenaFadeIn 0.4s ease-out;
   overflow: hidden;
-}
 
-.result__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  z-index: 10;
-}
+  // Confetti container
+  &__confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-// Winner Emoji
-.result__emoji {
-  font-size: 40px;
-  animation: emojiPop 0.6s ease infinite alternate;
-}
+  // Finn character
+  &__finn {
+    position: relative;
+    z-index: 2;
+    width: 90px;
+    height: 90px;
+    animation: finnBounce 2s ease-in-out infinite;
 
-@keyframes emojiPop {
-  from { transform: translateY(0); }
-  to { transform: translateY(-6px); }
-}
+    &-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+  }
 
-// Result Message
-.result__message {
-  text-align: center;
-}
+  // CTA text
+  &__content {
+    text-align: center;
+    z-index: 2;
+  }
 
-.result__title {
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 4px;
-  color: #fff;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  animation: resultTitleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  &__title {
+    font-family: $font-headline;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    animation: ctaTitleIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
 
-  &--win { color: $app-primary; }
-  &--loss { color: $app-error; }
-  &--draw { color: $app-warning; }
-}
+  &__sub {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
+    font-family: $font-body;
+  }
 
-@keyframes resultTitleIn {
-  from { transform: scale(0.5); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
+  // Compact score
+  &__score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    z-index: 2;
 
-.result__subtitle {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
-}
+    &-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: $app-primary;
+    }
 
-// Score Cards (glassmorphism)
-.result__score-cards {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-}
+    &-value {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+    }
+  }
 
-.result__score-card {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  padding: 10px 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  border: 2px solid transparent;
-  transition: all 0.3s;
+  // Replay button
+  &__replay {
+    padding: 8px 24px;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: $font-body;
+    z-index: 2;
+    transition: all 0.2s ease;
 
-  &--winner {
-    background: rgba($app-primary, 0.2);
-    border-color: $app-primary;
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
   }
 }
 
-.result__score-card-avatar {
-  font-size: 22px;
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// Finn bounce
+@keyframes finnBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
-.result__score-card-avatar-wrap {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
+// CTA title entrance
+@keyframes ctaTitleIn {
+  from { transform: scale(0.5) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
 }
 
-.result__score-card-avatar-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
+// Confetti pieces
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  animation: confettiFall linear infinite;
+  opacity: 0.9;
 
-.result__score-card-name {
-  font-size: 10px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.result__score-card-value {
-  font-size: 18px;
-  font-weight: 800;
-  color: #fff;
-}
-
-.result__vs {
-  font-size: 12px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-// Round Details
-.result__rounds {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0 4px;
-}
-
-.result__round-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 7px 10px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-}
-
-.result__round-num {
-  font-size: 10px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.result__round-badge {
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 20px;
-
-  &--correct {
-    background: rgba($app-primary, 0.2);
-    color: $app-primary;
+  &--circle {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
   }
 
-  &--wrong {
-    background: rgba($app-error, 0.2);
-    color: $app-error;
+  &--strip {
+    width: 4px;
+    height: 12px;
+    border-radius: 1px;
   }
 }
 
-// Back Button
-.result__back-btn {
-  width: 100%;
-  padding: 10px;
-  background: linear-gradient(135deg, $app-primary, $secondary-blue);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-family: $font-body;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 6px 20px rgba($app-primary, 0.3);
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba($app-primary, 0.4);
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
   }
-
-  &:active {
-    transform: scale(0.98);
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(600px) rotate(720deg);
+    opacity: 0;
   }
 }
 
@@ -1324,184 +1362,5 @@ $app-alternate: #E0E3E7;
   }
 }
 
-// ============================================
-// RINGBUCH ÜBERGANG - Spiralen über dem Papier
-// ============================================
 
-$binding-height: 160px;
-$ring-gap: clamp(45px, 6vw, 80px);
-$ring-width: 20px;
-$ring-height: 50px;
-$hole-size: 12px;
 
-// Kariertes Muster
-@mixin grid-pattern($opacity: 0.15) {
-  background-image:
-    linear-gradient(rgba($secondary-blue, $opacity) 1px, transparent 1px),
-    linear-gradient(90deg, rgba($secondary-blue, $opacity) 1px, transparent 1px);
-  background-size: 18px 18px;
-}
-
-.duells__paper-edge {
-  position: absolute;
-  bottom: calc(-#{$binding-height} / 2);
-  left: 0;
-  right: 0;
-  height: $binding-height;
-  z-index: 10;
-  pointer-events: none;
-}
-
-// Obere karierte Seite (Duells-Seite)
-.grid-paper--top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: $bg-light;
-  @include grid-pattern;
-  z-index: 1;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 5%;
-    right: 5%;
-    height: 0;
-    border-top: 2px dashed rgba(#666, 0.4);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(
-      to bottom,
-      rgba(#666, 0.3) 0%,
-      rgba(#444, 0.5) 50%,
-      rgba(#666, 0.3) 100%
-    );
-    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-  }
-}
-
-// Untere karierte Seite (Quiz-Sektion)
-.grid-paper--bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  background: $bg-light;
-  @include grid-pattern;
-  z-index: 1;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(
-      to bottom,
-      rgba(#666, 0.3) 0%,
-      rgba(#444, 0.5) 50%,
-      rgba(#666, 0.3) 100%
-    );
-    box-shadow: 0 -1px 2px rgba(0,0,0,0.15);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 5%;
-    right: 5%;
-    height: 0;
-    border-bottom: 2px dashed rgba(#666, 0.4);
-  }
-}
-
-// Container für Löcher
-.paper-holes {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  gap: $ring-gap;
-  padding: 0 5%;
-  z-index: 2;
-}
-
-// Einzelnes Loch
-.paper-hole {
-  width: $hole-size;
-  height: $hole-size;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: transparent;
-
-  @media (max-width: $breakpoint-md) {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-// Spiralringe
-.spiral-rings {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  gap: $ring-gap;
-  padding: 0 5%;
-  pointer-events: none;
-  z-index: 10;
-}
-
-// Einzelner Spiralring
-.spiral-ring {
-  width: $ring-width;
-  height: $ring-height;
-  flex-shrink: 0;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 5px solid;
-    border-radius: 40%;
-    box-sizing: border-box;
-    border-color: #888;
-    background: white;
-    box-shadow:
-      0 3px 8px rgba(0,0,0,0.4),
-      inset 0 2px 6px rgba(0,0,0,0.15),
-      inset 0 -2px 6px rgba(0,0,0,0.1);
-  }
-
-  @media (max-width: $breakpoint-md) {
-    width: 16px;
-    height: 38px;
-
-    &::before {
-      border-width: 4px;
-    }
-  }
-}

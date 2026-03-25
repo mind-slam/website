@@ -1,0 +1,223 @@
+@use '../../../styles/variables' as *;
+
+.steps {
+  background: $bg-white;
+  position: relative;
+  z-index: 1;
+  padding: 40px 0 80px;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: 60px 0 120px;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    // Scroll-reveal: start hidden
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    // Stagger the visual side slightly
+    &--visible .steps__visual {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 80px;
+
+      @media (min-width: $breakpoint-lg) {
+        margin-bottom: 120px;
+      }
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      flex-direction: row;
+      gap: 80px;
+    }
+
+    &--reversed {
+      @media (min-width: $breakpoint-lg) {
+        flex-direction: row-reverse;
+      }
+
+      // Slide in from opposite side
+      .steps__visual {
+        transform: translateX(-30px);
+      }
+
+      @media (min-width: $breakpoint-lg) {
+        .steps__text {
+          text-align: right;
+        }
+
+        .steps__finn {
+          flex-direction: row-reverse;
+        }
+
+        .steps__speech-bubble {
+          border-radius: 16px 16px 4px 16px;
+
+          &::before {
+            left: auto;
+            right: -6px;
+            clip-path: polygon(0 0, 0 100%, 100% 100%);
+          }
+        }
+      }
+    }
+
+    &:not(&--reversed) .steps__visual {
+      transform: translateX(30px);
+    }
+  }
+
+  &__text {
+    flex: 1;
+
+    @media (max-width: $breakpoint-lg) {
+      text-align: center;
+    }
+  }
+
+  &__visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+  }
+
+  &__finn {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  &__finn-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
+
+    @media (min-width: $breakpoint-lg) {
+      width: 68px;
+      height: 68px;
+    }
+  }
+
+  &__speech-bubble {
+    position: relative;
+    background: $primary-green;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 16px 16px 16px 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: -6px;
+      width: 12px;
+      height: 12px;
+      background: $primary-green;
+      clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    }
+  }
+
+  &__tag {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: $text-primary;
+    line-height: 1.2;
+    margin-bottom: 16px;
+
+    @media (min-width: $breakpoint-lg) {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__desc {
+    font-size: 1.05rem;
+    color: $text-secondary;
+    line-height: 1.7;
+    max-width: 480px;
+
+    @media (max-width: $breakpoint-lg) {
+      margin: 0 auto;
+    }
+  }
+
+  &__phone {
+    position: relative;
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 9 / 19.5;
+
+    @media (min-width: $breakpoint-lg) {
+      max-width: 260px;
+    }
+
+    background: $bg-light;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.12),
+        0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    // White bar to hide the status bar (black pill, red dot)
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12%;
+      background: linear-gradient(to bottom, $bg-light 60%, transparent);
+      z-index: 2;
+      pointer-events: none;
+    }
+  }
+
+  &__screenshot {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

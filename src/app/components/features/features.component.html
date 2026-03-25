@@ -2,9 +2,9 @@
   <div class="features__container">
     <!-- Header -->
     <div class="features__header">
-      <span class="features__tag">Dein Weg zum Sieg</span>
-      <h2 class="features__title">So wirst du zum <span class="highlight">Campus-Champion</span></h2>
-      <p class="features__subtitle">Vergiss langweiliges Auswendiglernen. Bei uns lernst du durch Competition.</p>
+      <span class="features__tag">{{ 'features.tag' | translate }}</span>
+      <h2 class="features__title" [innerHTML]="'features.title' | translate"></h2>
+      <p class="features__subtitle">{{ 'features.subtitle' | translate }}</p>
     </div>
 
     <!-- 3 Steps -->
@@ -28,9 +28,9 @@
           <div class="step__number">1</div>
         </div>
         <div class="step__content">
-          <h3 class="step__title">Skript hochladen</h3>
+          <h3 class="step__title">{{ 'features.step1.title' | translate }}</h3>
           <p class="step__description">
-            Zieh dein PDF rein – fertig. Mathe, BWL, Jura... egal welches Fach.
+            {{ 'features.step1.desc' | translate }}
           </p>
         </div>
       </div>
@@ -49,9 +49,9 @@
           <div class="step__number">2</div>
         </div>
         <div class="step__content">
-          <h3 class="step__title">KI erstellt dein Quiz</h3>
+          <h3 class="step__title">{{ 'features.step2.title' | translate }}</h3>
           <p class="step__description">
-            In Sekunden werden prüfungsrelevante Fragen aus deinem Stoff generiert.
+            {{ 'features.step2.desc' | translate }}
           </p>
         </div>
       </div>
@@ -70,9 +70,9 @@
           <div class="step__number">3</div>
         </div>
         <div class="step__content">
-          <h3 class="step__title">Fordere deine Leute heraus</h3>
+          <h3 class="step__title">{{ 'features.step3.title' | translate }}</h3>
           <p class="step__description">
-            1v1 Duelle gegen Kommilitonen. Wer mehr weiß, gewinnt. So einfach.
+            {{ 'features.step3.desc' | translate }}
           </p>
         </div>
       </div>
@@ -82,27 +82,27 @@
     <div class="features__stats">
       <div class="stat-item">
         <span class="stat-item__value">10K+</span>
-        <span class="stat-item__label">Duelle gespielt</span>
+        <span class="stat-item__label">{{ 'features.stat1' | translate }}</span>
       </div>
       <div class="stat-item">
         <span class="stat-item__value">500+</span>
-        <span class="stat-item__label">Vorlesungen</span>
+        <span class="stat-item__label">{{ 'features.stat2' | translate }}</span>
       </div>
       <div class="stat-item">
         <span class="stat-item__value">50+</span>
-        <span class="stat-item__label">Unis & Hochschulen</span>
+        <span class="stat-item__label">{{ 'features.stat3' | translate }}</span>
       </div>
     </div>
 
     <!-- CTA -->
     <div class="features__cta">
       <a href="#" class="features__cta-button features__cta-button--primary">
-        Jetzt kostenlos starten
+        {{ 'features.cta' | translate }}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
-      <span class="features__cta-hint">Keine Kreditkarte nötig</span>
+      <span class="features__cta-hint">{{ 'features.cta.hint' | translate }}</span>
     </div>
   </div>
 </section>

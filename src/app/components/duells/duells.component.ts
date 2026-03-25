@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChildren, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface Duell {
   id: number;
@@ -54,7 +56,7 @@ const AVATAR_IMAGES = [
 @Component({
   selector: 'app-duells',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './duells.component.html',
   styleUrl: './duells.component.scss'
 })
@@ -64,7 +66,9 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
   private observer!: IntersectionObserver;
 
   // Typewriter
-  words = ['Student:innen', 'Diggis'];
+  get words(): string[] {
+    return [this.ts.t('duells.word1'), this.ts.t('duells.word2')];
+  }
   currentWordIndex = 0;
   displayedText = '';
   private typewriterInterval: any;
@@ -73,11 +77,13 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
   // Filter
   activeFilter = 'aktiv';
 
-  filterTabs: FilterTab[] = [
-    { key: 'aktiv', label: 'Aktiv', count: 3, dotColor: '#3BC09C' },
-    { key: 'warten', label: 'Warten', count: 2, dotColor: '#F59E0B' },
-    { key: 'beendet', label: 'Beendet', count: null, dotColor: '#6B7280' },
-  ];
+  get filterTabs(): FilterTab[] {
+    return [
+      { key: 'aktiv', label: this.ts.t('duells.filterActive'), count: 3, dotColor: '#3BC09C' },
+      { key: 'warten', label: this.ts.t('duells.filterWaiting'), count: 2, dotColor: '#F59E0B' },
+      { key: 'beendet', label: this.ts.t('duells.filterCompleted'), count: null, dotColor: '#6B7280' },
+    ];
+  }
 
   // ========================================
   // Walkthrough / Interactive Duel State
@@ -94,30 +100,39 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   get sideTextTitle(): string {
     switch (this.walkthroughPhase) {
-      case 'list': return 'Deine Duelle auf einen Blick';
-      case 'arena': return 'Wissen ist deine Waffe';
-      case 'result': return 'Jedes Duell macht dich besser';
+      case 'list': return this.ts.t('duells.sideTitle.list');
+      case 'arena': return this.ts.t('duells.sideTitle.arena');
+      case 'result': return this.ts.t('duells.sideTitle.result');
       default: return '';
     }
   }
 
   get sideTextBody(): string {
     switch (this.walkthroughPhase) {
-      case 'list': return 'Sieh, wer dich herausfordert. Fordere zurück. Jede Runde zählt, jeder Punkt bringt dich weiter. Bist du bereit?';
-      case 'arena': return 'Tick, tack. 10 Sekunden pro Frage. Dein Gegner antwortet gleichzeitig. Wer schneller und schlauer ist, gewinnt die Runde.';
-      case 'result': return 'Sofort sehen, was du richtig hattest und was nicht. Aus Fehlern lernen, beim nächsten Mal dominieren.';
+      case 'list': return this.ts.t('duells.sideBody.list');
+      case 'arena': return this.ts.t('duells.sideBody.arena');
+      case 'result': return this.ts.t('duells.sideBody.result');
       default: return '';
     }
   }
 
   get sideTextAccent(): string {
     switch (this.walkthroughPhase) {
-      case 'list': return 'Klicke auf ein aktives Duell!';
-      case 'arena': return 'Beantworte die Fragen!';
-      case 'result': return 'So sieht Fortschritt aus.';
+      case 'list': return this.ts.t('duells.sideAccent.list');
+      case 'arena': return this.ts.t('duells.sideAccent.arena');
+      case 'result': return this.ts.t('duells.sideAccent.result');
       default: return '';
     }
   }
+
+  // Confetti pieces for result CTA
+  confettiPieces = Array.from({ length: 40 }, () => ({
+    x: Math.random() * 100,
+    delay: Math.random() * 2000,
+    duration: 2 + Math.random() * 2,
+    color: ['#3BC09C', '#0EA5E9', '#F59E0B', '#F97316', '#8B5CF6', '#EC4899'][Math.floor(Math.random() * 6)],
+    shape: (['rect', 'circle', 'strip'] as const)[Math.floor(Math.random() * 3)],
+  }));
 
   // Transition
   transitionActive = false;
@@ -142,29 +157,31 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
   private nextQuestionTimeout: any;
 
   // Mock questions for the duel
-  duelQuestions: DuelQuestion[] = [
-    {
-      question: 'Welche Stadt ist die Hauptstadt von Australien?',
-      answers: ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'],
-      correct: 2,
-      botAnswer: 2,
-      botDelay: 2500,
-    },
-    {
-      question: 'Wie viele Planeten hat unser Sonnensystem?',
-      answers: ['7', '8', '9', '10'],
-      correct: 1,
-      botAnswer: 2,
-      botDelay: 1800,
-    },
-    {
-      question: 'Wer malte die Mona Lisa?',
-      answers: ['Michelangelo', 'Leonardo da Vinci', 'Raphael', 'Donatello'],
-      correct: 1,
-      botAnswer: 1,
-      botDelay: 3200,
-    },
-  ];
+  get duelQuestions(): DuelQuestion[] {
+    return [
+      {
+        question: this.ts.t('duells.question1'),
+        answers: ['Sydney', 'Melbourne', 'Canberra', 'Brisbane'],
+        correct: 2,
+        botAnswer: 2,
+        botDelay: 2500,
+      },
+      {
+        question: this.ts.t('duells.question2'),
+        answers: ['7', '8', '9', '10'],
+        correct: 1,
+        botAnswer: 2,
+        botDelay: 1800,
+      },
+      {
+        question: this.ts.t('duells.question3'),
+        answers: ['Michelangelo', 'Leonardo da Vinci', 'Raphael', 'Donatello'],
+        correct: 1,
+        botAnswer: 1,
+        botDelay: 3200,
+      },
+    ];
+  }
 
   // All duels across different statuses
   allDuels: Duell[] = [
@@ -264,7 +281,7 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   ];
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, public ts: TranslationService) {}
 
   get filteredDuels(): Duell[] {
     return this.allDuels.filter(d => d.status === this.activeFilter);
@@ -279,15 +296,15 @@ export class DuellsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get resultTitle(): string {
-    if (this.playerScore > this.botScore) return 'Gewonnen!';
-    if (this.playerScore < this.botScore) return 'Verloren!';
-    return 'Unentschieden!';
+    if (this.playerScore > this.botScore) return this.ts.t('duells.resultWon');
+    if (this.playerScore < this.botScore) return this.ts.t('duells.resultLost');
+    return this.ts.t('duells.resultDraw');
   }
 
   get resultSubtitle(): string {
-    if (this.playerScore > this.botScore) return 'Starke Leistung! Du hast das Duell dominiert.';
-    if (this.playerScore < this.botScore) return 'Knapp! Nächstes Mal holst du dir den Sieg.';
-    return 'Ein ausgeglichenes Duell!';
+    if (this.playerScore > this.botScore) return this.ts.t('duells.resultWonSub');
+    if (this.playerScore < this.botScore) return this.ts.t('duells.resultLostSub');
+    return this.ts.t('duells.resultDrawSub');
   }
 
   get answerLetters(): string[] {

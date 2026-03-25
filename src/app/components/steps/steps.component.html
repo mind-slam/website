@@ -1,0 +1,38 @@
+<section class="steps">
+  @for (step of steps; track step.number; let i = $index; let isOdd = $odd) {
+    <div class="steps__row" [class.steps__row--reversed]="isOdd" [attr.data-step]="i">
+      <div class="steps__text">
+        <div class="steps__finn">
+          <img
+            [src]="step.finnAvatar"
+            alt="Finn"
+            class="steps__finn-img"
+          />
+          <div class="steps__speech-bubble">
+            <span class="steps__tag">{{ step.tagKey | translate }}</span>
+          </div>
+        </div>
+        <h2 class="steps__title">{{ step.titleKey | translate }}</h2>
+        <p class="steps__desc">{{ step.descKey | translate }}</p>
+      </div>
+
+      <div class="steps__visual">
+        <div class="steps__phone">
+          @if (step.video) {
+            <video
+              [src]="step.video"
+              class="steps__screenshot"
+              autoplay
+              loop
+              muted
+              playsinline
+              preload="auto"
+            ></video>
+          } @else {
+            <img [src]="step.image" [alt]="step.imageAlt" class="steps__screenshot" />
+          }
+        </div>
+      </div>
+    </div>
+  }
+</section>

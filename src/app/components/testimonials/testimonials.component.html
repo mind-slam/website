@@ -12,12 +12,11 @@
   <div class="testimonials__container">
     <!-- Header -->
     <div class="testimonials__header">
-      <span class="testimonials__badge">Testimonials</span>
-      <h2 class="testimonials__title">
-        Was Studierende über <span class="text-gradient">DiggiDuell</span> sagen
+      <span class="testimonials__badge">{{ 'testimonials.badge' | translate }}</span>
+      <h2 class="testimonials__title" [innerHTML]="'testimonials.title' | translate">
       </h2>
       <p class="testimonials__subtitle">
-        Tausende Studierende nutzen bereits DiggiDuell zum Lernen. Hier sind ihre Erfahrungen.
+        {{ 'testimonials.subtitle' | translate }}
       </p>
     </div>
 
@@ -32,17 +31,17 @@
             </svg>
           }
         </div>
-        <span class="stat__label">App Store Rating</span>
+        <span class="stat__label">{{ 'testimonials.stat.rating' | translate }}</span>
       </div>
       <div class="stat__divider"></div>
       <div class="stat">
         <span class="stat__number">10K+</span>
-        <span class="stat__label">Aktive Nutzer</span>
+        <span class="stat__label">{{ 'testimonials.stat.users' | translate }}</span>
       </div>
       <div class="stat__divider"></div>
       <div class="stat">
         <span class="stat__number">TU Dresden</span>
-        <span class="stat__label">Erfolgreich gelauncht</span>
+        <span class="stat__label">{{ 'testimonials.stat.launch' | translate }}</span>
       </div>
     </div>
 
@@ -105,9 +104,9 @@
 
     <!-- CTA -->
     <div class="testimonials__cta">
-      <p class="testimonials__cta-text">Werde Teil der Community!</p>
+      <p class="testimonials__cta-text">{{ 'testimonials.cta.text' | translate }}</p>
       <a href="#" class="testimonials__cta-button">
-        <span>Jetzt kostenlos starten</span>
+        <span>{{ 'testimonials.cta.button' | translate }}</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>

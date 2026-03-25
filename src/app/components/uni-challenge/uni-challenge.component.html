@@ -1,0 +1,16 @@
+<section class="uni-challenge" [class.uni-challenge--visible]="isVisible">
+  <canvas #confettiCanvas class="uni-challenge__confetti"></canvas>
+  <div class="uni-challenge__container">
+    <!-- Finn with speech bubble -->
+    <div class="uni-challenge__finn">
+      <div class="uni-challenge__speech-bubble">
+        <p class="uni-challenge__speech-text">{{ 'uniChallenge.speech' | translate }}</p>
+      </div>
+      <img src="avatars/finn_excited.png" alt="Finn" class="uni-challenge__finn-img">
+    </div>
+
+    <h2 class="uni-challenge__heading">
+      <span class="uni-challenge__typed">{{ displayedText }}</span><span class="uni-challenge__cursor" [class.uni-challenge__cursor--hidden]="typingDone">|</span>
+    </h2>
+  </div>
+</section>

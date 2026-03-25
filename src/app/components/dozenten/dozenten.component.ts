@@ -2,11 +2,13 @@ import { Component, ElementRef, QueryList, ViewChildren, AfterViewInit } from '@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
   selector: 'app-dozenten',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, TranslatePipe],
   templateUrl: './dozenten.component.html',
   styleUrl: './dozenten.component.scss'
 })
@@ -20,7 +22,7 @@ export class DozentenComponent implements AfterViewInit {
   submitSuccess = false;
   submitError = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, public ts: TranslationService) {}
   contactForm = {
     name: '',
     email: '',
@@ -81,38 +83,16 @@ export class DozentenComponent implements AfterViewInit {
     });
   }
 
-  benefits = [
-    {
-      icon: '📄',
-      title: 'PDF hochladen – fertig',
-      description: 'Laden Sie Ihr Vorlesungsskript als PDF hoch. Unsere KI generiert automatisch Quizfragen daraus – nach Themen sortiert.'
-    },
-    {
-      icon: '🎓',
-      title: 'Eigenes Klassenzimmer',
-      description: 'Erstellen Sie ein Klassenzimmer für Ihre Vorlesung. Studierende treten bei und spielen mit den Fragen aus Ihrem Skript.'
-    },
-    {
-      icon: '📊',
-      title: 'Statistiken pro Student',
-      description: 'Sehen Sie, wie viele Quizze jeder Studierende gespielt hat, ihre Trefferquote und Punkte – alles im Dashboard.'
-    },
-    {
-      icon: '⚔️',
-      title: 'Duelle im Klassenzimmer',
-      description: 'Studierende fordern sich gegenseitig zu Quiz-Duellen heraus. Sie sehen aktive, wartende und beendete Duelle.'
-    },
-    {
-      icon: '🔒',
-      title: 'Geschlossener Kursraum',
-      description: 'Ihr Klassenzimmer ist privat. Nur Studierende, die beitreten, haben Zugang zu Ihren Materialien und Fragen.'
-    },
-    {
-      icon: '🧠',
-      title: 'Spaced Repetition inklusive',
-      description: 'Im Einzelspieler-Modus lernen Studierende mit wissenschaftlich fundierter Wiederholung – der Stoff bleibt hängen.'
-    }
-  ];
+  get benefits() {
+    return [
+      { icon: '📄', title: this.ts.t('dozenten.benefit1.title'), description: this.ts.t('dozenten.benefit1.desc') },
+      { icon: '🎓', title: this.ts.t('dozenten.benefit2.title'), description: this.ts.t('dozenten.benefit2.desc') },
+      { icon: '📊', title: this.ts.t('dozenten.benefit3.title'), description: this.ts.t('dozenten.benefit3.desc') },
+      { icon: '⚔️', title: this.ts.t('dozenten.benefit4.title'), description: this.ts.t('dozenten.benefit4.desc') },
+      { icon: '🔒', title: this.ts.t('dozenten.benefit5.title'), description: this.ts.t('dozenten.benefit5.desc') },
+      { icon: '🧠', title: this.ts.t('dozenten.benefit6.title'), description: this.ts.t('dozenten.benefit6.desc') },
+    ];
+  }
 
   stats: { value: string; label: string }[] = [];
 

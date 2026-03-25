@@ -3,12 +3,11 @@
 
     <!-- Header -->
     <div class="lifetime__header">
-      <span class="lifetime__tag">Limited Offer</span>
+      <span class="lifetime__tag">{{ 'lifetime.tag' | translate }}</span>
       <h2 class="lifetime__title">
         <span class="typewriter">{{ displayedText }}</span><span class="cursor">|</span>
       </h2>
-      <p class="lifetime__subtitle">
-        Die ersten <strong>1.000 User</strong> sichern sich das Lifetime Abo – für immer Zugang zu allem.
+      <p class="lifetime__subtitle" [innerHTML]="'lifetime.subtitle' | translate">
       </p>
     </div>
 
@@ -18,7 +17,7 @@
         <!-- Verbleibende Plätze -->
         <div class="counter-card__remaining">
           <span class="counter-card__number">{{ displayedRemaining }}</span>
-          <span class="counter-card__label">Plätze übrig</span>
+          <span class="counter-card__label">{{ 'lifetime.slotsLeft' | translate }}</span>
         </div>
 
         <!-- Progress Bar -->
@@ -30,15 +29,15 @@
             ></div>
           </div>
           <div class="counter-card__progress-labels">
-            <span>{{ claimedSlots }} vergeben</span>
-            <span>{{ totalSlots }} gesamt</span>
+            <span>{{ claimedSlots }} {{ 'lifetime.claimed' | translate }}</span>
+            <span>{{ totalSlots }} {{ 'lifetime.total' | translate }}</span>
           </div>
         </div>
 
         <!-- Urgency Badge -->
         <div class="counter-card__urgency">
           <span class="urgency-dot"></span>
-          Plätze werden gerade vergeben
+          {{ 'lifetime.urgency' | translate }}
         </div>
       </div>
     </div>

@@ -1,170 +1,192 @@
 <section class="hero">
-  <!-- Simple Gradient Background -->
   <div class="hero__bg"></div>
 
-  <div class="hero__container">
-    <!-- Main Content -->
-    <div class="hero__main">
-      <!-- Left: Text Content -->
-      <div class="hero__text">
-        <!-- Logo & App Title -->
-        <div class="hero__branding">
-          <img src="DiggiDuell_App_Logo.svg" alt="DiggiDuell Logo" class="hero__logo">
-          <div class="hero__app-info">
-            <span class="hero__app-badge">Die neue Lern-App</span>
-            <h2 class="hero__app-name">DiggiDuell</h2>
-          </div>
-        </div>
-
-        <h1 class="hero__headline hero__typewriter">
-          {{ displayedText }}<span class="hero__cursor" [class.typing]="isTyping">|</span>
+  <div class="hero__content">
+    <!-- LEFT — sticky text -->
+    <div class="hero__left">
+      <div class="hero__left-inner">
+        <span class="hero__live-badge">{{ 'hero.liveBadge' | translate }}</span>
+        <h1 class="hero__headline">
+          {{ 'hero.headline.play' | translate }} <span class="hero__headline-accent">DiggiDuell</span><br>
+          {{ 'hero.headline.minutes' | translate }}
         </h1>
-
-        <p class="hero__description">
-          Duelle dich mit Freunden, spiel dich durch deine Vorlesungen und besteh jede Prüfung - ohne stundenlang zu büffeln.
+        <p class="hero__typewriter-line">
+          <span class="hero__typewriter">{{ typewriterText() }}<span class="hero__cursor">|</span></span>
+        </p>
+        <p class="hero__subtext">
+          {{ 'hero.subtext' | translate }}
         </p>
 
-        <!-- Feature Highlights -->
-        <div class="hero__highlights">
-          <div class="highlight">
-            <span class="highlight__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-              </svg>
-            </span>
-            <span class="highlight__text">KI-Fragen aus deinem Skript</span>
+        <div class="hero__social-proof">
+          <div class="hero__avatars">
+            @for (avatar of avatarPreviews; track $index) {
+              <img [src]="avatar" alt="Student" class="hero__avatar" [style.z-index]="avatarPreviews.length - $index">
+            }
           </div>
-          <div class="highlight">
-            <span class="highlight__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </span>
-            <span class="highlight__text">Duelle gegen Kommilitonen</span>
-          </div>
-          <div class="highlight">
-            <span class="highlight__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </span>
-            <span class="highlight__text">10 Min. am Tag reichen</span>
-          </div>
+          <span class="hero__join-text">{{ 'hero.joinText' | translate }}</span>
         </div>
 
-        <!-- Store Buttons -->
-        <div class="hero__stores">
-          <a [href]="appStoreUrl" target="_blank" rel="noopener" class="store-badge">
-            <div class="store-badge__icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-              </svg>
+        <a href="https://apps.apple.com/app/mind-slam/id6739498631" target="_blank" class="hero__cta">
+          {{ 'hero.cta' | translate }}
+          <svg class="hero__cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT — StudySmarter-style grid -->
+    <div class="hero__grid">
+      <!-- Row 1: Intro — Quiz-Duell-Battles -->
+      <div class="tile tile--1 tile--duell-green tile--step">
+        <div class="tile__text-side">
+          <div class="tile__finn">
+            <div class="tile__finn-avatar-wrap">
+              <img src="avatars/finn_excited.png" alt="Finn" class="tile__finn-img" />
+              <span class="tile__finn-badge">{{ 'hero.finn.badge' | translate }}</span>
             </div>
-            <div class="store-badge__text">
-              <span class="store-badge__label">Laden im</span>
-              <span class="store-badge__name">App Store</span>
+            <div class="tile__finn-bubble">
+              <span class="tile__finn-text">{{ 'hero.tile1.bubble' | translate }}</span>
             </div>
-          </a>
-          <a [href]="playStoreUrl" target="_blank" rel="noopener" class="store-badge">
-            <div class="store-badge__icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-              </svg>
-            </div>
-            <div class="store-badge__text">
-              <span class="store-badge__label">Jetzt bei</span>
-              <span class="store-badge__name">Google Play</span>
-            </div>
-          </a>
+          </div>
+          <p class="tile__tagline">{{ 'hero.tile1.tagline' | translate }}</p>
+        </div>
+        <div class="tile__video-side">
+          <video class="tile__video" autoplay loop muted playsinline>
+            <source src="step-videos/step5_play_quiz.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
 
-      <!-- Right: TikTok Video -->
-      <div class="hero__video-wrapper">
-        <div class="hero__phone" (click)="toggleVideo()">
-          <!-- Phone Frame -->
-          <div class="phone">
-            <div class="phone__screen">
-              <!-- Video -->
-              <video
-                #heroVideo
-                class="phone__video"
-                [class.playing]="videoPlaying"
-                muted
-                playsinline
-                loop
-                preload="auto"
-              >
-                <source [src]="currentVideo.src" type="video/mp4">
-              </video>
+      <!-- Row 2: Step 1 + Step 2 -->
+      <div class="tile tile--2 tile--purple tile--step">
+        <span class="tile__step-badge">Step 1</span>
+        <div class="tile__finn tile__finn--inline">
+          <img src="avatars/finn_happy.png" alt="Finn" class="tile__finn-img" />
+          <div class="tile__finn-bubble">
+            <span class="tile__finn-text">{{ 'hero.step1.bubble' | translate }}</span>
+          </div>
+        </div>
+        <p class="tile__tagline">{{ 'hero.step1.tagline' | translate }}</p>
+        <video class="tile__video tile__video--card" autoplay loop muted playsinline>
+          <source src="step-videos/step1_joinUniversity.MP4" type="video/mp4" />
+        </video>
+      </div>
 
-              <!-- Play Overlay -->
-              @if (!videoPlaying) {
-                <div class="phone__play">
-                  <div class="play-btn">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                </div>
-              }
+      <div class="tile tile--3 tile--teal tile--step">
+        <span class="tile__step-badge">Step 2</span>
+        <div class="tile__finn tile__finn--inline">
+          <img src="avatars/finn_happy.png" alt="Finn" class="tile__finn-img" />
+          <div class="tile__finn-bubble">
+            <span class="tile__finn-text">{{ 'hero.step2.bubble' | translate }}</span>
+          </div>
+        </div>
+        <p class="tile__tagline">{{ 'hero.step2.tagline' | translate }}</p>
+        <video class="tile__video tile__video--card" autoplay loop muted playsinline>
+          <source src="step-videos/step2_joinCourse.MP4" type="video/mp4" />
+        </video>
+      </div>
 
-              <!-- TikTok UI -->
-              <div class="phone__ui">
-                <div class="phone__ui-bottom">
-                  <span class="phone__username">@diggiduell</span>
-                  <p class="phone__caption">{{ currentVideo.caption }}</p>
-                </div>
-                <div class="phone__ui-side">
-                  <div class="phone__action">
-                    <span>❤️</span>
-                    <span>{{ currentVideo.likes }}</span>
-                  </div>
-                  <div class="phone__action">
-                    <span>💬</span>
-                    <span>{{ currentVideo.comments }}</span>
-                  </div>
-                </div>
+      <!-- Row 2b: CTA + Hörsaal-Bild -->
+      <div class="tile tile--4 tile--green">
+        <div class="tile__finn tile__finn--inline">
+          <img src="avatars/finn_happy.png" alt="Finn" class="tile__finn-img" />
+          <div class="tile__finn-bubble">
+            <span class="tile__finn-text">{{ 'hero.tile4.bubble' | translate }}</span>
+          </div>
+        </div>
+        <p class="tile__tagline">{{ 'hero.tile4.tagline' | translate }}</p>
+      </div>
+
+      <div class="tile tile--4b tile--img">
+        <img src="student_playing_mind-slam.png" alt="Studenten im Hörsaal" class="tile__photo">
+      </div>
+
+      <!-- RAG Engine — full width -->
+      <div class="tile tile--5 tile--dark tile--rag">
+        <div class="tile__rag-header">
+          <svg class="tile__rag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span class="tile__rag-label">{{ 'hero.rag.label' | translate }}</span>
+        </div>
+        <div class="tile__finn tile__finn--inline tile__finn--rag">
+          <img src="avatars/finn_excited.png" alt="Finn" class="tile__finn-img" />
+          <div class="tile__finn-bubble">
+            <span class="tile__finn-text">{{ 'hero.rag.bubble' | translate }}</span>
+          </div>
+        </div>
+        <p class="tile__tagline tile__tagline--sm">{{ 'hero.rag.tagline' | translate }}</p>
+        <div class="tile__model-select" (click)="modelDropdownOpen = !modelDropdownOpen">
+          <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini" class="tile__model-logo">
+          <span class="tile__model-name">Gemini</span>
+          <svg class="tile__model-chevron" [class.open]="modelDropdownOpen" viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+          </svg>
+          @if (modelDropdownOpen) {
+            <div class="tile__model-dropdown">
+              <div class="tile__model-option tile__model-option--active">
+                <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini" class="tile__model-option-logo">
+                <span>Gemini</span>
+                <span class="tile__model-check">&#10003;</span>
+              </div>
+              <div class="tile__model-option tile__model-option--soon">
+                <span class="tile__model-option-icon">🔮</span>
+                <span>More models coming soon</span>
               </div>
             </div>
-          </div>
+          }
+        </div>
+      </div>
 
-          <!-- Glow -->
-          <div class="hero__glow"></div>
+      <!-- Step 3 — Skript uploaden -->
+      <div class="tile tile--step3 tile--teal-dark tile--step">
+        <div class="tile__text-side">
+          <span class="tile__step-badge">Step 3</span>
+          <div class="tile__finn">
+            <img src="avatars/finn_excited.png" alt="Finn" class="tile__finn-img" />
+            <div class="tile__finn-bubble">
+              <span class="tile__finn-text">{{ 'hero.step3.bubble' | translate }}</span>
+            </div>
+          </div>
+          <p class="tile__tagline">{{ 'hero.step3.tagline' | translate }}</p>
+        </div>
+        <div class="tile__video-side">
+          <video class="tile__video" autoplay loop muted playsinline>
+            <source src="step-videos/step3_upload_material.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <!-- Row 4: App Store full width -->
+      <div class="tile tile--8 tile--dark tile--8-full">
+        <p class="tile__tagline tile__tagline--sm">{{ 'hero.appRow.tagline' | translate }}</p>
+        <div class="tile__badges">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" class="tile__badge">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="tile__badge">
+        </div>
+      </div>
+
+      <!-- Row 5: Step 4 — Duell Arena -->
+      <div class="tile tile--11 tile--dark tile--step">
+        <div class="tile__text-side">
+          <span class="tile__step-badge">Step 4</span>
+          <div class="tile__finn">
+            <img src="avatars/finn_excited.png" alt="Finn" class="tile__finn-img" />
+            <div class="tile__finn-bubble">
+              <span class="tile__finn-text">{{ 'hero.step4.bubble' | translate }}</span>
+            </div>
+          </div>
+          <p class="tile__tagline">{{ 'hero.step4.tagline' | translate }}</p>
+          <a href="https://apps.apple.com/app/mind-slam/id6739498631" target="_blank" class="tile__btn">{{ 'hero.step4.cta' | translate }}</a>
+        </div>
+        <div class="tile__video-side">
+          <video class="tile__video" autoplay loop muted playsinline>
+            <source src="step-videos/step4-duell-arena.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Notebook Paper Holes Transition (Spiral Binding) -->
-  <div class="hero__paper-edge">
-    <!-- Kariertes Papier oben (Hero-Seite) -->
-    <div class="grid-paper grid-paper--top"></div>
-    <!-- Ringe hinter dem Papier -->
-    <div class="spiral-rings spiral-rings--back">
-      @for (ring of [1,2,3,4,5,6,7,8,9,10,11,12]; track ring) {
-        <div class="spiral-ring"></div>
-      }
-    </div>
-    <!-- Das Papier mit Löchern -->
-    <div class="paper-strip">
-      <div class="paper-holes">
-        @for (hole of [1,2,3,4,5,6,7,8,9,10,11,12]; track hole) {
-          <div class="paper-hole"></div>
-        }
-      </div>
-    </div>
-    <!-- Ringe vor dem Papier -->
-    <div class="spiral-rings spiral-rings--front">
-      @for (ring of [1,2,3,4,5,6,7,8,9,10,11,12]; track ring) {
-        <div class="spiral-ring"></div>
-      }
-    </div>
-    <!-- Kariertes Papier unten (nächste Sektion) -->
-    <div class="grid-paper grid-paper--bottom"></div>
   </div>
 </section>

@@ -1,5 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface SlideDuel {
   id: number;
@@ -34,11 +36,13 @@ const AVATAR_IMAGES = [
 @Component({
   selector: 'app-quiz-cards',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './quiz-cards.html',
   styleUrls: ['./quiz-cards.scss']
 })
 export class QuizCardsComponent implements OnDestroy {
+  constructor(public ts: TranslationService) {}
+
   topRow: SlideDuel[] = [
     { id: 1, player: { name: 'Eli', image: AVATAR_IMAGES[0] }, opponent: { name: 'Lisa', image: AVATAR_IMAGES[1] }, course: 'Statistik I', chapter: 'Wahrscheinlichkeitsrechnung', score1: 2, score2: 1, status: 'aktiv', testimonial: 'Dank DiggiDuell habe ich Statistik endlich verstanden!', university: 'TU Dresden', studiengang: 'Informatik' },
     { id: 2, player: { name: 'Davide', image: AVATAR_IMAGES[2] }, opponent: { name: 'Tim', image: AVATAR_IMAGES[3] }, course: 'BWL Grundlagen', chapter: 'Marketing Mix', score1: 1, score2: 1, status: 'aktiv', testimonial: 'Die Duelle motivieren mich, jeden Tag am Ball zu bleiben.', university: 'TU Dresden', studiengang: 'Wirtschaftswissenschaften' },
@@ -59,10 +63,10 @@ export class QuizCardsComponent implements OnDestroy {
 
   getStatusLabel(duel: SlideDuel): string {
     if (duel.status === 'aktiv') return duel.course;
-    if (duel.status === 'warten') return 'Warte auf ' + duel.opponent.name + ' ...';
-    if (duel.result === 'win') return 'Gewonnen!';
-    if (duel.result === 'loss') return 'Verloren';
-    return 'Unentschieden';
+    if (duel.status === 'warten') return this.ts.t('quizCards.waitingFor') + ' ' + duel.opponent.name + ' ...';
+    if (duel.result === 'win') return this.ts.t('quizCards.won');
+    if (duel.result === 'loss') return this.ts.t('quizCards.lost');
+    return this.ts.t('quizCards.draw');
   }
 
   ngOnDestroy(): void {}

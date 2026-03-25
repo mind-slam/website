@@ -1,5 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../services/translation.service';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 interface Milestone {
   title: string;
@@ -18,7 +20,7 @@ interface BudgetItem {
 @Component({
   selector: 'app-roadmap',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './roadmap.component.html',
   styleUrl: './roadmap.component.scss'
 })
@@ -87,6 +89,8 @@ export class RoadmapComponent implements OnInit {
       description: 'resilientes RAG-System + skalierbarer Code'
     }
   ];
+
+  constructor(public ts: TranslationService) {}
 
   ngOnInit(): void {
     this.setupScrollAnimation();

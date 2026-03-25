@@ -2,9 +2,7 @@
   <div class="header__container">
     <!-- Logo -->
     <a href="#" class="header__logo">
-      <!-- Weißes Logo für farbigen Hintergrund -->
       <img src="DiggiDuell_Logo_White.svg" alt="DiggiDuell Logo" class="header__logo-icon header__logo-icon--white">
-      <!-- Farbiges Logo für weißen Hintergrund nach Scroll -->
       <img src="DiggiDuell_App_Logo.svg" alt="DiggiDuell Logo" class="header__logo-icon header__logo-icon--color">
       <span class="header__logo-text">DiggiDuell</span>
     </a>
@@ -12,13 +10,26 @@
     <!-- Desktop Navigation -->
     <nav class="header__nav">
       @for (item of navItems; track item.label) {
-        <a [href]="item.href" class="header__nav-link">{{ item.label }}</a>
+        @if (!item.hidden) {
+          @if (item.isRoute) {
+            <a [routerLink]="item.href" class="header__nav-link">{{ item.label }}</a>
+          } @else {
+            <a [href]="item.href" class="header__nav-link">{{ item.label }}</a>
+          }
+        }
       }
     </nav>
 
+    <!-- Language Toggle -->
+    <div class="header__lang-toggle" [attr.aria-label]="ts.lang() === 'de' ? 'Switch to English' : 'Auf Deutsch wechseln'">
+      <span class="header__lang-option" [class.active]="ts.lang() === 'de'" (click)="ts.lang() !== 'de' && ts.toggleLang()">DE</span>
+      <span class="header__lang-option" [class.active]="ts.lang() === 'en'" (click)="ts.lang() !== 'en' && ts.toggleLang()">EN</span>
+      <span class="header__lang-slider" [class.right]="ts.lang() === 'en'"></span>
+    </div>
+
     <!-- CTA Button -->
     <a routerLink="/get-mind-slam" class="btn btn-primary header__cta">
-      App herunterladen
+      {{ 'header.cta' | translate }}
     </a>
 
     <!-- Mobile Menu Button -->
@@ -26,7 +37,7 @@
       class="header__mobile-toggle"
       (click)="toggleMobileMenu()"
       [class.active]="isMobileMenuOpen"
-      aria-label="Menü öffnen">
+      [attr.aria-label]="'header.menu' | translate">
       <span></span>
       <span></span>
       <span></span>
@@ -37,12 +48,26 @@
   <div class="header__mobile-menu" [class.open]="isMobileMenuOpen">
     <nav class="header__mobile-nav">
       @for (item of navItems; track item.label) {
-        <a [href]="item.href" class="header__mobile-link" (click)="closeMobileMenu()">
-          {{ item.label }}
-        </a>
+        @if (!item.hidden) {
+          @if (item.isRoute) {
+            <a [routerLink]="item.href" class="header__mobile-link" (click)="closeMobileMenu()">
+              {{ item.label }}
+            </a>
+          } @else {
+            <a [href]="item.href" class="header__mobile-link" (click)="closeMobileMenu()">
+              {{ item.label }}
+            </a>
+          }
+        }
       }
+      <!-- Mobile Language Toggle -->
+      <div class="header__lang-toggle header__lang-toggle--mobile">
+        <span class="header__lang-option" [class.active]="ts.lang() === 'de'" (click)="ts.lang() !== 'de' && ts.toggleLang()">DE</span>
+        <span class="header__lang-option" [class.active]="ts.lang() === 'en'" (click)="ts.lang() !== 'en' && ts.toggleLang()">EN</span>
+        <span class="header__lang-slider" [class.right]="ts.lang() === 'en'"></span>
+      </div>
       <a routerLink="/get-mind-slam" class="btn btn-primary" (click)="closeMobileMenu()">
-        App herunterladen
+        {{ 'header.cta' | translate }}
       </a>
     </nav>
   </div>

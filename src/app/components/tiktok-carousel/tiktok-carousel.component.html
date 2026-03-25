@@ -2,17 +2,17 @@
   <div class="tiktok-section__container">
     <div class="tiktok-section__header">
       <h2 class="tiktok-section__title">
-        Das sagt die Community
+        {{ 'tiktok.title' | translate }}
       </h2>
       <p class="tiktok-section__subtitle">
-        Echte Reaktionen von echten Studierenden.
+        {{ 'tiktok.subtitle' | translate }}
       </p>
     </div>
 
     <div class="tiktok-carousel-wrapper">
       <!-- Chalk Text -->
       <div class="tiktok-chalk">
-        <span class="tiktok-chalk__text">DiggiDuell bald auch auf deinem Campus!?</span>
+        <span class="tiktok-chalk__text">{{ 'tiktok.chalk' | translate }}</span>
       </div>
 
       <!-- Left Arrow -->
@@ -20,7 +20,7 @@
         class="tiktok-nav tiktok-nav--left"
         [class.hidden]="currentVideoIndex === 0"
         (click)="navigatePrev()"
-        aria-label="Vorheriges Video"
+        [attr.aria-label]="'tiktok.prevVideo' | translate"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M15 18l-6-6 6-6"/>
@@ -32,7 +32,7 @@
         class="tiktok-nav tiktok-nav--right"
         [class.hidden]="currentVideoIndex === videoStates.length - 1"
         (click)="navigateNext()"
-        aria-label="Nächstes Video"
+        [attr.aria-label]="'tiktok.nextVideo' | translate"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M9 18l6-6-6-6"/>
